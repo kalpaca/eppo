@@ -1,4 +1,3 @@
-<!-- Stored in resources/views/child.blade.php -->
 @extends('layouts.master')
 @section('title','PPO Index')
 @section('content')

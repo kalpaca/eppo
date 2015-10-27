@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Regimen;
+use App\DiagnosisPrimaryCategory;
 
-class RegimensController extends Controller
+class DiagnosisPrimaryCategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +18,8 @@ class RegimensController extends Controller
      */
     public function index()
     {
-        $regimens = Regimen::all();
-        return view('regimens.index', compact('regimens'));
+        $cats = DiagnosisPrimaryCategory::all();
+        return view('diagnosis_primary_categories.index', compact('cats'));
     }
 
     /**
@@ -29,7 +29,7 @@ class RegimensController extends Controller
      */
     public function create()
     {
-        return view('regimens.create');
+        return view('diagnosis_primary_categories.create');
     }
 
     /**
@@ -44,9 +44,9 @@ class RegimensController extends Controller
             'name' => 'required',
         ]);
         $input = $request->all();
-        Regimen::create( $input );
+        DiagnosisPrimaryCategory::create( $input );
 
-        return redirect()->route('regimens.index')->with('success-message', 'Regimen created');
+        return redirect()->route('diagnosisprimarycategories.index')->with('success-message', 'Diagnosis primary category created');
     }
 
     /**
@@ -57,8 +57,8 @@ class RegimensController extends Controller
      */
     public function show($id)
     {
-        $regimens = Regimen::findOrFail($id);
-        return view('regimens.show', compact('regimens'));
+        $diagnosisPrimaryCategory = DiagnosisPrimaryCategory::findOrFail($id);
+        return view('diagnosis_primary_categories.show', compact('diagnosisPrimaryCategory'));
     }
 
     /**
@@ -69,8 +69,8 @@ class RegimensController extends Controller
      */
     public function edit($id)
     {
-        $regimen = Regimen::findOrFail($id);
-        return view('regimens.edit', compact('regimen'));
+        $diagnosisPrimaryCategory = DiagnosisPrimaryCategory::findOrFail($id);
+        return view('diagnosis_primary_categories.edit', compact('diagnosisPrimaryCategory'));
     }
 
     /**
@@ -83,10 +83,10 @@ class RegimensController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->all();
-        $regimen = Regimen::findOrFail($id);
-        $regimen->update( $input );
+        $cat = DiagnosisPrimaryCategory::findOrFail($id);
+        $cat->update( $input );
 
-        return redirect()->route('regimens.index')->with('success-message', 'Regimen updated');
+        return redirect()->route('diagnosisprimarycategories.index')->with('success-message', 'Diagnosis primary category updated');
     }
 
     /**
@@ -97,9 +97,9 @@ class RegimensController extends Controller
      */
     public function destroy($id)
     {
-        $regimen = Regimen::findOrFail($id);
-        $regimen->delete();
+        $diagnosis = DiagnosisPrimaryCategory::findOrFail($id);
+        $diagnosis->delete();
 
-        return redirect()->route('regimens.index')->with('success-message', 'Regimen deleted.');
+        return redirect()->route('diagnosisprimarycategories.index')->with('success-message', 'Diagosis primary category deleted.');
     }
 }

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
+use App\DoseCalculationType;
 
 class DoseCalculationTypesController extends Controller
 {
@@ -15,8 +18,8 @@ class DoseCalculationTypesController extends Controller
      */
     public function index()
     {
-        $doseCalculationTypes = DoseCalculationType::all();
-        return view('dose_calculations_types.index', compact('doseCalculationTypes'));
+        $types = DoseCalculationType::all();
+        return view('dosecalculationtypes.index', compact('types'));
     }
 
     /**
@@ -26,7 +29,7 @@ class DoseCalculationTypesController extends Controller
      */
     public function create()
     {
-        return view('dose_calculation_types.create');
+        return view('dosecalculationtypes.create');
     }
 
     /**
@@ -37,7 +40,13 @@ class DoseCalculationTypesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+        $input = $request->all();
+        DoseCalculationType::create( $input );
+
+        return redirect()->route('dosecalculationtypes.index')->with('success-message', 'Dose Calculation Type created');
     }
 
     /**
@@ -48,8 +57,8 @@ class DoseCalculationTypesController extends Controller
      */
     public function show($id)
     {
-        $doseCalculationType = DoseCalculationType::find($id);
-        return view('dose_calculation_types.show', compact('doseCalculationType'));
+        $types = DoseCalculationType::findOrFail($id);
+        return view('dosecalculationtypes.show', compact('types'));
     }
 
     /**
@@ -60,8 +69,8 @@ class DoseCalculationTypesController extends Controller
      */
     public function edit($id)
     {
-        $doseCalculationType = DoseCalculationType::find($id);
-        return view('dose_calculation_types.edit', compact('doseCalculationType'));
+        $type = DoseCalculationType::findOrFail($id);
+        return view('dosecalculationtypes.edit', compact('type'));
     }
 
     /**
@@ -73,7 +82,11 @@ class DoseCalculationTypesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $type = DoseCalculationType::findOrFail($id);
+        $type->update( $input );
+
+        return redirect()->route('dosecalculationtypes.index')->with('success-message', 'Dose Calculation Type updated');
     }
 
     /**
@@ -84,6 +97,9 @@ class DoseCalculationTypesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $type = DoseCalculationType::findOrFail($id);
+        $type->delete();
+
+        return redirect()->route('dosecalculationtypes.index')->with('success-message', 'Dose Calculation Type deleted.');
     }
 }

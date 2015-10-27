@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
+use App\Medication;
 
 class MedicationsController extends Controller
 {
@@ -37,7 +40,13 @@ class MedicationsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+        $input = $request->all();
+        Medication::create( $input );
+
+        return redirect()->route('medications.index')->with('success-message', 'Medication created');
     }
 
     /**
@@ -48,6 +57,7 @@ class MedicationsController extends Controller
      */
     public function show($id)
     {
+        $medications = Medication::findOrFail($id);
         return view('medications.show', compact('medications'));
     }
 
@@ -59,7 +69,8 @@ class MedicationsController extends Controller
      */
     public function edit($id)
     {
-        return view('medications.edit', compact('medications'));
+        $medication = Medication::findOrFail($id);
+        return view('medications.edit', compact('medication'));
     }
 
     /**
@@ -71,7 +82,11 @@ class MedicationsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $medication = Medication::findOrFail($id);
+        $medication->update( $input );
+
+        return redirect()->route('medications.index')->with('success-message', 'Medication updated');
     }
 
     /**
@@ -82,6 +97,9 @@ class MedicationsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $medication = Medication::findOrFail($id);
+        $medication->delete();
+
+        return redirect()->route('medications.index')->with('success-message', 'Medication deleted.');
     }
 }

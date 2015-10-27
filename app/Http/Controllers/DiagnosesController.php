@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
+use App\Diagnosis;
+use App\DiagnosisSecondaryCategory;
+
 
 class DiagnosesController extends Controller
 {
@@ -15,7 +20,7 @@ class DiagnosesController extends Controller
      */
     public function index()
     {
-        $diagnoses = Diagnosis::all();
+        $diagnoses = Diagnosis::with('primaryCat','secondaryCat')->get();
         return view('diagnoses.index', compact('diagnoses'));
     }
 
@@ -26,7 +31,8 @@ class DiagnosesController extends Controller
      */
     public function create()
     {
-        return view('diagnoses.create');
+        $cats = DiagnosisSecondaryCategory::lists('name', 'id');
+        return view('diagnoses.create', compact('cats'));
     }
 
     /**
@@ -37,7 +43,18 @@ class DiagnosesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+        if($request->has('diagnosis_secondary_category_id')){
+            $diagnosis_primary_category_id = DiagnosisSecondaryCategory::find($request->diagnosis_secondary_category_id)->diagnosis_primary_category_id;
+            $request->merge( array( 'diagnosis_primary_category_id' => $diagnosis_primary_category_id ) );
+        }
+        //$diagnosisPrimaryCategory = DiagnosisPrimaryCategory::all();
+        $input = $request->all();
+        Diagnosis::create( $input );
+
+        return redirect()->route('diagnoses.index')->with('success-message', 'Diagnosis created');
     }
 
     /**
@@ -48,7 +65,7 @@ class DiagnosesController extends Controller
      */
     public function show($id)
     {
-        $diagnosis = Diagnosis::find($id);
+        $diagnosis = Diagnosis::findOrFail($id);
         return view('diagnoses.show', compact('diagnosis'));
     }
 
@@ -60,8 +77,9 @@ class DiagnosesController extends Controller
      */
     public function edit($id)
     {
-        $diagnosis = Diagnosis::find($id);
-        return view('diagnoses.edit', compact('diagnosis'));
+        $diagnosis = Diagnosis::findOrFail($id);
+        $cats = DiagnosisSecondaryCategory::lists("name","id");
+        return view('diagnoses.edit', compact('diagnosis','cats'));
     }
 
     /**
@@ -73,7 +91,18 @@ class DiagnosesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+        if($request->has('diagnosis_secondary_category_id')){
+            $diagnosis_primary_category_id = DiagnosisSecondaryCategory::find($request->diagnosis_secondary_category_id)->diagnosis_primary_category_id;
+            $request->merge( array( 'diagnosis_primary_category_id' => $diagnosis_primary_category_id ) );
+        }
+        $input = $request->all();
+        $diagnosis = Diagnosis::findOrFail($id);
+        $diagnosis->update( $input );
+
+        return redirect()->route('diagnoses.index')->with('success-message', 'Diagnosis updated');
     }
 
     /**
@@ -84,6 +113,9 @@ class DiagnosesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $diagnosis = Diagnosis::findOrFail($id);
+        $diagnosis->delete();
+
+        return redirect()->route('diagnoses.index')->with('success-message', 'Diagnosis deleted.');
     }
 }

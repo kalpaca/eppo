@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Regimen;
+use App\DiagnosisPrimaryCategory;
+use App\DiagnosisSecondaryCategory;
 
-class RegimensController extends Controller
+class DiagnosisSecondaryCategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +19,8 @@ class RegimensController extends Controller
      */
     public function index()
     {
-        $regimens = Regimen::all();
-        return view('regimens.index', compact('regimens'));
+        $cats = DiagnosisSecondaryCategory::with('primaryCat')->get();
+        return view('diagnosis_secondary_categories.index', compact('cats'));
     }
 
     /**
@@ -29,7 +30,8 @@ class RegimensController extends Controller
      */
     public function create()
     {
-        return view('regimens.create');
+        $primaryCats = DiagnosisPrimaryCategory::lists('name', 'id');
+        return view('diagnosis_secondary_categories.create', compact('primaryCats'));
     }
 
     /**
@@ -44,9 +46,10 @@ class RegimensController extends Controller
             'name' => 'required',
         ]);
         $input = $request->all();
-        Regimen::create( $input );
+        //var_dump($input);
+        DiagnosisSecondaryCategory::create( $input );
 
-        return redirect()->route('regimens.index')->with('success-message', 'Regimen created');
+        return redirect()->route('diagnosissecondarycategories.index')->with('success-message', 'Diagnosis secondary category created');
     }
 
     /**
@@ -57,8 +60,8 @@ class RegimensController extends Controller
      */
     public function show($id)
     {
-        $regimens = Regimen::findOrFail($id);
-        return view('regimens.show', compact('regimens'));
+        $diagnosisSecondaryCategory = DiagnosisSecondaryCategory::findOrFail($id);
+        return view('diagnosis_secondary_categories.show', compact('diagnosisSecondaryCategory'));
     }
 
     /**
@@ -69,8 +72,9 @@ class RegimensController extends Controller
      */
     public function edit($id)
     {
-        $regimen = Regimen::findOrFail($id);
-        return view('regimens.edit', compact('regimen'));
+        $diagnosisSecondaryCategory = DiagnosisSecondaryCategory::findOrFail($id);
+        $primaryCats = DiagnosisPrimaryCategory::lists('name', 'id');
+        return view('diagnosis_secondary_categories.edit', compact('diagnosisSecondaryCategory','primaryCats'));
     }
 
     /**
@@ -83,10 +87,10 @@ class RegimensController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->all();
-        $regimen = Regimen::findOrFail($id);
-        $regimen->update( $input );
+        $cat = DiagnosisSecondaryCategory::findOrFail($id);
+        $cat->update( $input );
 
-        return redirect()->route('regimens.index')->with('success-message', 'Regimen updated');
+        return redirect()->route('diagnosissecondarycategories.index')->with('success-message', 'Diagnosis secondary category updated');
     }
 
     /**
@@ -97,9 +101,9 @@ class RegimensController extends Controller
      */
     public function destroy($id)
     {
-        $regimen = Regimen::findOrFail($id);
-        $regimen->delete();
+        $diagnosis = DiagnosisSecondaryCategory::findOrFail($id);
+        $diagnosis->delete();
 
-        return redirect()->route('regimens.index')->with('success-message', 'Regimen deleted.');
+        return redirect()->route('diagnosissecondarycategories.index')->with('success-message', 'Diagosis secondary category deleted.');
     }
 }

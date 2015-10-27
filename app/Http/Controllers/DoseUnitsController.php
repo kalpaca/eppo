@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
+use App\DoseUnit;
 
 class DoseUnitsController extends Controller
 {
@@ -15,8 +18,8 @@ class DoseUnitsController extends Controller
      */
     public function index()
     {
-        $doseUnits = DoseUnit::all();
-        return view('dose_units.index', compact('doseUnits'));
+        $units = DoseUnit::all();
+        return view('doseunits.index', compact('units'));
     }
 
     /**
@@ -26,7 +29,7 @@ class DoseUnitsController extends Controller
      */
     public function create()
     {
-        return view('dose_units.create');
+        return view('doseunits.create');
     }
 
     /**
@@ -37,7 +40,13 @@ class DoseUnitsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+        $input = $request->all();
+        DoseUnit::create( $input );
+
+        return redirect()->route('doseunits.index')->with('success-message', 'Dose Unit created');
     }
 
     /**
@@ -48,8 +57,8 @@ class DoseUnitsController extends Controller
      */
     public function show($id)
     {
-        $doseUnit = DoseUnit::find($id);
-        return view('dose_units.show', compact('doseUnit'));
+        $units = DoseUnit::findOrFail($id);
+        return view('doseunits.show', compact('units'));
     }
 
     /**
@@ -60,8 +69,8 @@ class DoseUnitsController extends Controller
      */
     public function edit($id)
     {
-        $doseUnit = DoseUnit::find($id);
-        return view('dose_units.edit', compact('doseUnit'));
+        $unit = DoseUnit::findOrFail($id);
+        return view('doseunits.edit', compact('unit'));
     }
 
     /**
@@ -73,7 +82,11 @@ class DoseUnitsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $unit = DoseUnit::findOrFail($id);
+        $unit->update( $input );
+
+        return redirect()->route('doseunits.index')->with('success-message', 'Dose Unit updated');
     }
 
     /**
@@ -84,6 +97,9 @@ class DoseUnitsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $unit = DoseUnit::findOrFail($id);
+        $unit->delete();
+
+        return redirect()->route('doseunits.index')->with('success-message', 'Dose Unit deleted.');
     }
 }

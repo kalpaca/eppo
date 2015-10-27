@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\DoseModicationReason;
+
 class DoseModicationReasonsController extends Controller
 {
     public function index()
     {
-        $doseModicationReasons = DoseModicationReason::all();
-        return view('dose_modication_reasons.index', compact('doseModicationReasons'));
+        $reasons = DoseModicationReason::all();
+        return view('dosemodicationreasons.index', compact('reasons'));
     }
 
     /**
@@ -21,7 +23,7 @@ class DoseModicationReasonsController extends Controller
      */
     public function create()
     {
-        return view('dose_modication_reasons.create');
+        return view('dosemodicationreasons.create');
     }
 
     /**
@@ -32,7 +34,13 @@ class DoseModicationReasonsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+        $input = $request->all();
+        DoseModicationReason::create( $input );
+
+        return redirect()->route('dosemodicationreasons.index')->with('success-message', 'Dose Calculation Type created');
     }
 
     /**
@@ -43,8 +51,8 @@ class DoseModicationReasonsController extends Controller
      */
     public function show($id)
     {
-        $doseModicationReason = DoseModicationReason::find($id);
-        return view('dose_modication_reasons.show', compact('doseModicationReason'));
+        $reason = DoseModicationReason::findOrFail($id);
+        return view('dosemodicationreasons.show', compact('reason'));
     }
 
     /**
@@ -55,8 +63,8 @@ class DoseModicationReasonsController extends Controller
      */
     public function edit($id)
     {
-        $doseModicationReason = DoseModicationReason::find($id);
-        return view('dose_modication_reasons.edit', compact('doseModicationReason'));
+        $reason = DoseModicationReason::findOrFail($id);
+        return view('dosemodicationreasons.edit', compact('reason'));
     }
 
     /**
@@ -68,7 +76,11 @@ class DoseModicationReasonsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $reason = DoseModicationReason::findOrFail($id);
+        $reason->update( $input );
+
+        return redirect()->route('dosemodicationreasons.index')->with('success-message', 'Dose Calculation Type updated');
     }
 
     /**
@@ -79,6 +91,9 @@ class DoseModicationReasonsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $reason = DoseModicationReason::findOrFail($id);
+        $reason->delete();
+
+        return redirect()->route('dosemodicationreasons.index')->with('success-message', 'Dose Calculation Type deleted.');
     }
 }

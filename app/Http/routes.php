@@ -15,6 +15,8 @@ Route::get('/', function () {
      return 'Hello World';
 });
 Route::resource('diagnoses', 'DiagnosesController');
+Route::resource('diagnosisprimarycategories', 'DiagnosisPrimaryCategoriesController');
+Route::resource('diagnosissecondarycategories', 'DiagnosisSecondaryCategoriesController');
 Route::resource('regimens', 'RegimensController');
 Route::resource('medications', 'MedicationsController');
 Route::resource('prescriptions', 'PrescriptionsController');
@@ -27,6 +29,7 @@ Route::resource('dosingschedules', 'DosingSchedulesController');
 Route::resource('dosecalculationtypes', 'DoseCalculationTypesController');
 Route::resource('doseroutes', 'DoseRoutesController');
 Route::resource('doseunits', 'DoseUnitsController');
+Route::resource('mitteunits', 'MitteUnitsController');
 Route::resource('dosemodicationreasons', 'DoseModicationReasonsController');
 Route::resource('ppos.dosingschedules', 'DosingSchedulesController');
 

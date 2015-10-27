@@ -37,7 +37,10 @@ class PposController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all;
+        Ppo::create( $input );
+
+        return Redirect::route('pposs.index')->with('message', 'PPO created');
     }
 
     /**
@@ -73,7 +76,11 @@ class PposController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all;
+        $ppo = Ppo::findOrFail($id);
+        $ppo->update( $input );
+
+        return Redirect::route('ppos.index')->with('message', 'PPO updated');
     }
 
     /**

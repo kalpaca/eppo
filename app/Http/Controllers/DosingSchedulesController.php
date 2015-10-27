@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
+use App\DosingSchedule;
 
 class DosingSchedulesController extends Controller
 {
@@ -15,8 +18,8 @@ class DosingSchedulesController extends Controller
      */
     public function index()
     {
-        $dosingSchedules = DosingSchedule::all();
-        return view('dosing_schedules.index', compact('dosingSchedules'));
+        $schedules = DosingSchedule::all();
+        return view('doseschedules.index', compact('schedules'));
     }
 
     /**
@@ -26,7 +29,7 @@ class DosingSchedulesController extends Controller
      */
     public function create()
     {
-        return view('dose_schedules.create');
+        return view('doseschedules.create');
     }
 
     /**
@@ -37,7 +40,13 @@ class DosingSchedulesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+        $input = $request->all();
+        DosingSchedule::create( $input );
+
+        return redirect()->route('doseschedules.index')->with('success-message', 'Dose Unit created');
     }
 
     /**
@@ -48,8 +57,8 @@ class DosingSchedulesController extends Controller
      */
     public function show($id)
     {
-        $dosingSchedule = DosingSchedule::find($id);
-        return view('dose_schedules.show', compact('dosingSchedule'));
+        $schedules = DosingSchedule::findOrFail($id);
+        return view('doseschedules.show', compact('schedules'));
     }
 
     /**
@@ -60,8 +69,8 @@ class DosingSchedulesController extends Controller
      */
     public function edit($id)
     {
-        $dosingSchedule = DosingSchedule::find($id);
-        return view('dosing_schedules.edit', compact('dosingSchedule'));
+        $schedule = DosingSchedule::findOrFail($id);
+        return view('doseschedules.edit', compact('schedule'));
     }
 
     /**
@@ -73,7 +82,11 @@ class DosingSchedulesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $schedule = DosingSchedule::findOrFail($id);
+        $schedule->update( $input );
+
+        return redirect()->route('doseschedules.index')->with('success-message', 'Dose Unit updated');
     }
 
     /**
@@ -84,6 +97,9 @@ class DosingSchedulesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $schedule = DosingSchedule::findOrFail($id);
+        $schedule->delete();
+
+        return redirect()->route('doseschedules.index')->with('success-message', 'Dose Unit deleted.');
     }
 }

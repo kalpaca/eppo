@@ -15,8 +15,8 @@ class DoseRoutesController extends Controller
      */
     public function index()
     {
-        $doseRoutes = DoseRoute::all();
-        return view('dose_routes.index', compact('doseRoutes'));
+        $routes = DoseRoute::all();
+        return view('doseroutes.index', compact('routes'));
     }
 
     /**
@@ -26,7 +26,7 @@ class DoseRoutesController extends Controller
      */
     public function create()
     {
-        return view('dose_routes.create');
+        return view('doseroutes.create');
     }
 
     /**
@@ -37,7 +37,13 @@ class DoseRoutesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+        $input = $request->all();
+        DoseRoute::create( $input );
+
+        return redirect()->route('doseroutes.index')->with('success-message', 'Dose Route created');
     }
 
     /**
@@ -48,8 +54,8 @@ class DoseRoutesController extends Controller
      */
     public function show($id)
     {
-        $doseRoute = DoseRoute::find($id);
-        return view('dose_routes.show', compact('doseRoute'));
+        $route = DoseRoute::find($id);
+        return view('doseroutes.show', compact('route'));
     }
 
     /**
@@ -60,8 +66,8 @@ class DoseRoutesController extends Controller
      */
     public function edit($id)
     {
-        $doseRoute = DoseRoute::find($id);
-        return view('dose_routes.edit', compact('doseRoute'));
+        $route = DoseRoute::find($id);
+        return view('doseroutes.edit', compact('route'));
     }
 
     /**
@@ -73,7 +79,11 @@ class DoseRoutesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $reason = DoseRoute::findOrFail($id);
+        $reason->update( $input );
+
+        return redirect()->route('doseroutes.index')->with('success-message', 'Dose Route updated');
     }
 
     /**
@@ -84,6 +94,9 @@ class DoseRoutesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $reason = DoseRoute::findOrFail($id);
+        $reason->delete();
+
+        return redirect()->route('doseroutes.index')->with('success-message', 'Dose Route deleted.');
     }
 }

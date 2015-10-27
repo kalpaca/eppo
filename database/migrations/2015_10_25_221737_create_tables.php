@@ -22,16 +22,17 @@ class CreateTables extends Migration
             $table->increments('id');
             $table->string('name')->default('');
             $table->timestamps();
-        });       
+        });
         Schema::create('patients', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->default('');
             $table->date('dob');
             $table->timestamps();
-        });        
+        });
         Schema::create('regimens', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->default('');
+            $table->string('code')->default('');
             $table->timestamps();
         });
         Schema::create('lucodes', function (Blueprint $table) {
@@ -41,9 +42,22 @@ class CreateTables extends Migration
             $table->integer('medication_id')->unsigned()->default(0);
             $table->timestamps();
         });
+        Schema::create('diagnosis_primary_categories', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->default('');
+            $table->timestamps();
+        });
+        Schema::create('diagnosis_secondary_categories', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->default('');
+            $table->integer('diagnosis_primary_category_id')->unsigned()->default(0);
+            $table->timestamps();
+        });
         Schema::create('diagnoses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->default('');
+            $table->integer('diagnosis_secondary_category_id')->unsigned()->default(0);
+            $table->integer('diagnosis_primary_category_id')->unsigned()->default(0);
             $table->timestamps();
         });
         Schema::create('dose_units', function (Blueprint $table) {
@@ -80,7 +94,7 @@ class CreateTables extends Migration
             $table->foreign('regimen_id')->references('id')->on('regimens')->onDelete('cascade');
             $table->boolean('is_start_date')->default(true);
             $table->timestamps();
-        }); 
+        });
         Schema::create('ppos_dose_modification_reasons', function(Blueprint $table)
         {
             $table->increments('id');
@@ -120,7 +134,7 @@ class CreateTables extends Migration
             $table->string('mitte_unit');
             $table->boolean('is_repeat_input')->default(true);
             $table->timestamps();
-        }); 
+        });
         Schema::create('dosing_schedule_lucodes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('dosing_schedule_id')->unsigned()->default(0);
@@ -148,7 +162,7 @@ class CreateTables extends Migration
             $table->boolean('is_allergies')->default(false);
             $table->boolean('is_final')->default(false);
             $table->timestamps();
-        }); 
+        });
         Schema::create('prescription_operation_records', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('prescription_id')->unsigned()->default(0);
@@ -156,7 +170,7 @@ class CreateTables extends Migration
             $table->string('reason');
             $table->boolean('done')->default(false);
             $table->timestamps();
-        }); 
+        });
         Schema::create('prescriptions_dose_modification_reasons', function(Blueprint $table)
         {
             $table->increments('id');
@@ -199,7 +213,7 @@ class CreateTables extends Migration
             $table->boolean('is_dose_notation')->default(false);
             $table->boolean('is_frequency_notation')->default(false);
             $table->timestamps();
-        }); 
+        });
     }
 
     /**
@@ -229,5 +243,7 @@ class CreateTables extends Migration
         Schema::drop('ppo_sections');
         Schema::drop('medications');
         Schema::drop('lucodes');
+        Schema::drop('diagnosis_secondary_categories');
+        Schema::drop('diagnosis_primary_categories');
     }
 }
