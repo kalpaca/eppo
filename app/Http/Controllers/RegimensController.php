@@ -8,14 +8,10 @@ use App\Http\Controllers\Controller;
 
 class RegimensController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $regimen = Regimen::all();
+        return view('regimens.index', compact('regimen'));
     }
 
     /**
@@ -25,7 +21,7 @@ class RegimensController extends Controller
      */
     public function create()
     {
-        //
+        return view('regimens.create');
     }
 
     /**
@@ -47,7 +43,8 @@ class RegimensController extends Controller
      */
     public function show($id)
     {
-        //
+        $regimen = Regimen::find($id);
+        return view('regimens.show', compact('regimen'));
     }
 
     /**
@@ -58,7 +55,8 @@ class RegimensController extends Controller
      */
     public function edit($id)
     {
-        //
+        $regimen = Regimen::find($id);
+        return view('regimens.edit', compact('regimen'));
     }
 
     /**

@@ -15,7 +15,8 @@ class MedicationsController extends Controller
      */
     public function index()
     {
-        //
+        $medications = Medication::all();
+        return view('medications.index', compact('medications'));
     }
 
     /**
@@ -25,7 +26,7 @@ class MedicationsController extends Controller
      */
     public function create()
     {
-        //
+        return view('medications.create');
     }
 
     /**
@@ -47,7 +48,7 @@ class MedicationsController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('medications.show', compact('medications'));
     }
 
     /**
@@ -58,7 +59,7 @@ class MedicationsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('medications.edit', compact('medications'));
     }
 
     /**

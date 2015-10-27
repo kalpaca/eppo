@@ -15,7 +15,8 @@ class PpoSectionsController extends Controller
      */
     public function index()
     {
-        //
+        $ppoSections = PpoSection::all();
+        return view('ppo_sections.index', compact('ppoSections'));
     }
 
     /**
@@ -25,7 +26,7 @@ class PpoSectionsController extends Controller
      */
     public function create()
     {
-        //
+        return view('ppo_sections.create');
     }
 
     /**
@@ -47,7 +48,8 @@ class PpoSectionsController extends Controller
      */
     public function show($id)
     {
-        //
+        $ppoSection = PpoSection::find($id);
+        return view('ppo_sections.show', compact('ppoSection'));
     }
 
     /**
@@ -58,7 +60,8 @@ class PpoSectionsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ppoSection = PpoSection::find($id);
+        return view('ppo_sections.edit', compact('ppoSection'));
     }
 
     /**

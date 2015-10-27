@@ -15,7 +15,8 @@ class DiagnosesController extends Controller
      */
     public function index()
     {
-        //
+        $diagnoses = Diagnosis::all();
+        return view('diagnoses.index', compact('diagnoses'));
     }
 
     /**
@@ -25,7 +26,7 @@ class DiagnosesController extends Controller
      */
     public function create()
     {
-        //
+        return view('diagnoses.create');
     }
 
     /**
@@ -47,7 +48,8 @@ class DiagnosesController extends Controller
      */
     public function show($id)
     {
-        //
+        $diagnosis = Diagnosis::find($id);
+        return view('diagnoses.show', compact('diagnosis'));
     }
 
     /**
@@ -58,7 +60,8 @@ class DiagnosesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $diagnosis = Diagnosis::find($id);
+        return view('diagnoses.edit', compact('diagnosis'));
     }
 
     /**

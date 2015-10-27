@@ -15,7 +15,8 @@ class DoseUnitsController extends Controller
      */
     public function index()
     {
-        //
+        $doseUnits = DoseUnit::all();
+        return view('dose_units.index', compact('doseUnits'));
     }
 
     /**
@@ -25,7 +26,7 @@ class DoseUnitsController extends Controller
      */
     public function create()
     {
-        //
+        return view('dose_units.create');
     }
 
     /**
@@ -47,7 +48,8 @@ class DoseUnitsController extends Controller
      */
     public function show($id)
     {
-        //
+        $doseUnit = DoseUnit::find($id);
+        return view('dose_units.show', compact('doseUnit'));
     }
 
     /**
@@ -58,7 +60,8 @@ class DoseUnitsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $doseUnit = DoseUnit::find($id);
+        return view('dose_units.edit', compact('doseUnit'));
     }
 
     /**

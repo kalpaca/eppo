@@ -15,7 +15,8 @@ class DoseCalculationTypesController extends Controller
      */
     public function index()
     {
-        //
+        $doseCalculationTypes = DoseCalculationType::all();
+        return view('dose_calculations_types.index', compact('doseCalculationTypes'));
     }
 
     /**
@@ -25,7 +26,7 @@ class DoseCalculationTypesController extends Controller
      */
     public function create()
     {
-        //
+        return view('dose_calculation_types.create');
     }
 
     /**
@@ -47,7 +48,8 @@ class DoseCalculationTypesController extends Controller
      */
     public function show($id)
     {
-        //
+        $doseCalculationType = DoseCalculationType::find($id);
+        return view('dose_calculation_types.show', compact('doseCalculationType'));
     }
 
     /**
@@ -58,7 +60,8 @@ class DoseCalculationTypesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $doseCalculationType = DoseCalculationType::find($id);
+        return view('dose_calculation_types.edit', compact('doseCalculationType'));
     }
 
     /**

@@ -15,7 +15,8 @@ class LucodesController extends Controller
      */
     public function index()
     {
-        //
+        $lucodes = Lucode::all();
+        return view('lucodes.index', compact('lucodes'));
     }
 
     /**
@@ -25,7 +26,7 @@ class LucodesController extends Controller
      */
     public function create()
     {
-        //
+        return view('lucodes.create');
     }
 
     /**
@@ -47,7 +48,7 @@ class LucodesController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('lucodes.show', compact('lucodes'));
     }
 
     /**
@@ -58,7 +59,7 @@ class LucodesController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('lucodes.edit', compact('lucodes'));
     }
 
     /**

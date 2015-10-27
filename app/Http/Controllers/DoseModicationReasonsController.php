@@ -8,14 +8,10 @@ use App\Http\Controllers\Controller;
 
 class DoseModicationReasonsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $doseModicationReasons = DoseModicationReason::all();
+        return view('dose_modication_reasons.index', compact('doseModicationReasons'));
     }
 
     /**
@@ -25,7 +21,7 @@ class DoseModicationReasonsController extends Controller
      */
     public function create()
     {
-        //
+        return view('dose_modication_reasons.create');
     }
 
     /**
@@ -47,7 +43,8 @@ class DoseModicationReasonsController extends Controller
      */
     public function show($id)
     {
-        //
+        $doseModicationReason = DoseModicationReason::find($id);
+        return view('dose_modication_reasons.show', compact('doseModicationReason'));
     }
 
     /**
@@ -58,7 +55,8 @@ class DoseModicationReasonsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $doseModicationReason = DoseModicationReason::find($id);
+        return view('dose_modication_reasons.edit', compact('doseModicationReason'));
     }
 
     /**

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Ppo;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -15,7 +15,8 @@ class PposController extends Controller
      */
     public function index()
     {
-        return view('ppos.index');
+        $ppos = Ppo::with('diagnoses','regimen','author')->get();
+        return view('ppos.index', compact('ppos'));
     }
 
     /**
@@ -25,7 +26,7 @@ class PposController extends Controller
      */
     public function create()
     {
-        //
+        return view('ppos.create');
     }
 
     /**
@@ -47,7 +48,8 @@ class PposController extends Controller
      */
     public function show($id)
     {
-        //
+        $ppo = Ppo::find($id)->with('ppoSections','diagnoses','regimen','author','dosingSchedule','doseModificationReasons')->get();
+        return view('ppos.show', compact('ppo'));
     }
 
     /**
@@ -58,7 +60,8 @@ class PposController extends Controller
      */
     public function edit($id)
     {
-        //
+       $ppo = Ppo::find($id)->with('ppoSections','diagnoses','regimen','author','dosingSchedule','doseModificationReasons')->get();
+        return view('ppos.edit', compact('ppo'));
     }
 
     /**

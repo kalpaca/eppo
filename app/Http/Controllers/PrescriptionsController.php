@@ -8,14 +8,10 @@ use App\Http\Controllers\Controller;
 
 class PrescriptionsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $prescription = Prescription::all();
+        return view('prescriptions.index', compact('prescription'));
     }
 
     /**
@@ -25,7 +21,7 @@ class PrescriptionsController extends Controller
      */
     public function create()
     {
-        //
+        return view('prescriptions.create');
     }
 
     /**
@@ -47,7 +43,8 @@ class PrescriptionsController extends Controller
      */
     public function show($id)
     {
-        //
+        $prescription = Prescription::find($id);
+        return view('prescriptions.show', compact('prescription'));
     }
 
     /**
@@ -58,7 +55,8 @@ class PrescriptionsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $prescription = Prescription::find($id);
+        return view('prescriptions.edit', compact('prescription'));
     }
 
     /**

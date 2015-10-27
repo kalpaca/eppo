@@ -15,7 +15,8 @@ class DoseRoutesController extends Controller
      */
     public function index()
     {
-        //
+        $doseRoutes = DoseRoute::all();
+        return view('dose_routes.index', compact('doseRoutes'));
     }
 
     /**
@@ -25,7 +26,7 @@ class DoseRoutesController extends Controller
      */
     public function create()
     {
-        //
+        return view('dose_routes.create');
     }
 
     /**
@@ -47,7 +48,8 @@ class DoseRoutesController extends Controller
      */
     public function show($id)
     {
-        //
+        $doseRoute = DoseRoute::find($id);
+        return view('dose_routes.show', compact('doseRoute'));
     }
 
     /**
@@ -58,7 +60,8 @@ class DoseRoutesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $doseRoute = DoseRoute::find($id);
+        return view('dose_routes.edit', compact('doseRoute'));
     }
 
     /**
