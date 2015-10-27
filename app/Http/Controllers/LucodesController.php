@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Lucode;
+
 class LucodesController extends Controller
 {
     /**
@@ -37,7 +39,13 @@ class LucodesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+        $input = $request->all();
+        Lucode::create( $input );
+
+        return redirect()->route('lucodes.index')->with('success-message', 'Lucode created');
     }
 
     /**
@@ -48,6 +56,7 @@ class LucodesController extends Controller
      */
     public function show($id)
     {
+        $lucodes = Lucode::findOrFail($id);
         return view('lucodes.show', compact('lucodes'));
     }
 
@@ -59,7 +68,8 @@ class LucodesController extends Controller
      */
     public function edit($id)
     {
-        return view('lucodes.edit', compact('lucodes'));
+        $lucode = Lucode::findOrFail($id);
+        return view('lucodes.edit', compact('lucode'));
     }
 
     /**
@@ -71,7 +81,11 @@ class LucodesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $lucode = Lucode::findOrFail($id);
+        $lucode->update( $input );
+
+        return redirect()->route('lucodes.index')->with('success-message', 'Lucode updated');
     }
 
     /**
@@ -82,6 +96,9 @@ class LucodesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $lucode = Lucode::findOrFail($id);
+        $lucode->delete();
+
+        return redirect()->route('lucodes.index')->with('success-message', 'Lucode deleted.');
     }
 }
