@@ -3,17 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\DoseModicationReason;
+use App\MitteUnit;
 
-class DoseModicationReasonsController extends Controller
+class MitteUnitsController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $reasons = DoseModicationReason::all();
-        return view('dosemodicationreasons.index', compact('reasons'));
+        $units = MitteUnit::all();
+        return view('mitteunits.index', compact('units'));
     }
 
     /**
@@ -23,7 +29,7 @@ class DoseModicationReasonsController extends Controller
      */
     public function create()
     {
-        return view('dosemodicationreasons.create');
+        return view('mitteunits.create');
     }
 
     /**
@@ -38,9 +44,9 @@ class DoseModicationReasonsController extends Controller
             'name' => 'required',
         ]);
         $input = $request->all();
-        DoseModicationReason::create( $input );
+        MitteUnit::create( $input );
 
-        return redirect()->route('dosemodicationreasons.index')->with('success-message', 'Dose Calculation Type created');
+        return redirect()->route('mitteunits.index')->with('success-message', 'Mitte Unit created');
     }
 
     /**
@@ -51,8 +57,8 @@ class DoseModicationReasonsController extends Controller
      */
     public function show($id)
     {
-        $reason = DoseModicationReason::findOrFail($id);
-        return view('dosemodicationreasons.show', compact('reason'));
+        $units = MitteUnit::findOrFail($id);
+        return view('mitteunits.show', compact('units'));
     }
 
     /**
@@ -63,8 +69,8 @@ class DoseModicationReasonsController extends Controller
      */
     public function edit($id)
     {
-        $reason = DoseModicationReason::findOrFail($id);
-        return view('dosemodicationreasons.edit', compact('reason'));
+        $unit = MitteUnit::findOrFail($id);
+        return view('mitteunits.edit', compact('unit'));
     }
 
     /**
@@ -77,10 +83,10 @@ class DoseModicationReasonsController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->all();
-        $reason = DoseModicationReason::findOrFail($id);
-        $reason->update( $input );
+        $unit = MitteUnit::findOrFail($id);
+        $unit->update( $input );
 
-        return redirect()->route('dosemodicationreasons.index')->with('success-message', 'Dose Calculation Type updated');
+        return redirect()->route('mitteunits.index')->with('success-message', 'Mitte Unit updated');
     }
 
     /**
@@ -91,9 +97,9 @@ class DoseModicationReasonsController extends Controller
      */
     public function destroy($id)
     {
-        $reason = DoseModicationReason::findOrFail($id);
-        $reason->delete();
+        $unit = MitteUnit::findOrFail($id);
+        $unit->delete();
 
-        return redirect()->route('dosemodicationreasons.index')->with('success-message', 'Dose Calculation Type deleted.');
+        return redirect()->route('mitteunits.index')->with('success-message', 'Mitte Unit deleted.');
     }
 }

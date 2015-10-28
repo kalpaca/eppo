@@ -17,22 +17,22 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="ppos">PPOs</a></li>
-            <li><a href="dosingschedules">Dosing Schedules</a></li>
+            <li><a href="{{ route('ppos.index') }}">PPOs</a></li>
+            <li><a href="{{ route('dosingschedules.index') }}">Dosing Schedules</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="diagnoses">Diagnoses</a></li>         
-            <li><a href="regimens">Regimens</a></li>
-            <li><a href="medications">Medications</a></li>
+            <li><a href="{{ route('diagnoses.index') }}">Diagnoses</a></li>
+            <li><a href="{{ route('regimens.index') }}">Regimens</a></li>
+            <li><a href="{{ route('medications.index') }}">Medications</a></li>
             <li role="separator" class="divider"></li>
             <li class="dropdown-header">Misc.</li>
-            <li><a href="lucodes">LU Codes</a></li>
-            <li><a href="doseunits">Dose Units</a></li>
-            <li><a href="doseroutes">Dose Routes</a></li>
-            <li><a href="dosecalculationtypes">Dose Calculation Types</a></li>
-            <li><a href="dosemodificationreasons">Dose Modification Reasons</a></li>
-            <li><a href="mitteunits">Mitte Units</a></li>
-            <li><a href="diagnosisprimarycategories">Diagnosis Primary Categories</a></li>
-            <li><a href="diagnosissecondarycategories">Diagnosis Secondary Categories</a></li>
+            <li><a href="{{ route('lucodes.index') }}">LU Codes</a></li>
+            <li><a href="{{ route('doseunits.index') }}">Dose Units</a></li>
+            <li><a href="{{ route('doseroutes.index') }}">Dose Routes</a></li>
+            <li><a href="{{ route('dosecalculationtypes.index') }}">Dose Calculation Types</a></li>
+            <li><a href="{{ route('dosemodificationreasons.index') }}">Dose Modification Reasons</a></li>
+            <li><a href="{{ route('mitteunits.index') }}">Mitte Units</a></li>
+            <li><a href="{{ route('diagnosisprimarycategories.index') }}">Diagnosis Primary Categories</a></li>
+            <li><a href="{{ route('diagnosissecondarycategories.index') }}">Diagnosis Secondary Categories</a></li>
           </ul>
         </li>
       </ul>
@@ -43,4 +43,5 @@
       </ul>
       </div><!--/.nav-collapse -->
     </div>
-  </nav>
+  </div>
+</nav>

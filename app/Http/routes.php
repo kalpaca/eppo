@@ -30,6 +30,6 @@ Route::resource('dosecalculationtypes', 'DoseCalculationTypesController');
 Route::resource('doseroutes', 'DoseRoutesController');
 Route::resource('doseunits', 'DoseUnitsController');
 Route::resource('mitteunits', 'MitteUnitsController');
-Route::resource('dosemodicationreasons', 'DoseModicationReasonsController');
+Route::resource('dosemodificationreasons', 'DoseModificationReasonsController');
 Route::resource('ppos.dosingschedules', 'DosingSchedulesController');
 
