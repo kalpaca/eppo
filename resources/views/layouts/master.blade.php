@@ -19,7 +19,7 @@
         {!! Html::script('bower_components/bootstrap/dist/js/bootstrap.min.js')!!}
     </head>
     <body>
-        @show
+        @include('partials.navbar')
         <div class="container">
             @include('partials.errors')
             @if (Session::has('success-message'))
