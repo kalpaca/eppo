@@ -8,6 +8,6 @@
         $regimen->id],
         'class'=>'col-md-6'
     ]) !!}
-    @include('regimens/partials/_form_body');
+    @include('regimens/partials/_form_body')
 {!! Form::close() !!}
 @endsection

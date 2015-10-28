@@ -20,7 +20,7 @@ class DiagnosesController extends Controller
      */
     public function index()
     {
-        $diagnoses = Diagnosis::with('primaryCat','secondaryCat')->get();
+        $diagnoses = Diagnosis::with('secondaryCat')->get();
         return view('diagnoses.index', compact('diagnoses'));
     }
 
@@ -46,11 +46,7 @@ class DiagnosesController extends Controller
         $this->validate($request, [
             'name' => 'required',
         ]);
-        if($request->has('diagnosis_secondary_category_id')){
-            $diagnosis_primary_category_id = DiagnosisSecondaryCategory::find($request->diagnosis_secondary_category_id)->diagnosis_primary_category_id;
-            $request->merge( array( 'diagnosis_primary_category_id' => $diagnosis_primary_category_id ) );
-        }
-        //$diagnosisPrimaryCategory = DiagnosisPrimaryCategory::all();
+
         $input = $request->all();
         Diagnosis::create( $input );
 
@@ -94,10 +90,7 @@ class DiagnosesController extends Controller
         $this->validate($request, [
             'name' => 'required',
         ]);
-        if($request->has('diagnosis_secondary_category_id')){
-            $diagnosis_primary_category_id = DiagnosisSecondaryCategory::find($request->diagnosis_secondary_category_id)->diagnosis_primary_category_id;
-            $request->merge( array( 'diagnosis_primary_category_id' => $diagnosis_primary_category_id ) );
-        }
+
         $input = $request->all();
         $diagnosis = Diagnosis::findOrFail($id);
         $diagnosis->update( $input );

@@ -1,10 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Ppo;
+
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
+use App\Ppo;
+use App\Regimen;
+use App\Diagnosis;
+use App\DoseModificationReason;
 
 class PposController extends Controller
 {
@@ -26,7 +31,10 @@ class PposController extends Controller
      */
     public function create()
     {
-        return view('ppos.create');
+        $regimens = Regimen::lists('name','id');
+        $diagnoses = Diagnosis::lists('name','id');
+        $reasons = DoseModificationReason::lists('name','id');
+        return view('ppos.create', compact('regimens','diagnoses','reasons'));
     }
 
     /**
@@ -37,10 +45,17 @@ class PposController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all;
-        Ppo::create( $input );
+        $this->validate($request, [
+            'regimen_id' => 'required',
+        ]);
+        $input = $request->all();
+        $ppo = Ppo::create( $input );
+        if(isset($request->diagnoses))
+        {
+            $ppo->diagnoses()->sync($request->diagnoses);
+        }
 
-        return Redirect::route('pposs.index')->with('message', 'PPO created');
+        return redirect()->route('ppos.index')->with('message', 'PPO created');
     }
 
     /**
@@ -63,8 +78,11 @@ class PposController extends Controller
      */
     public function edit($id)
     {
-       $ppo = Ppo::find($id)->with('ppoSections','diagnoses','regimen','author','dosingSchedule','doseModificationReasons')->get();
-        return view('ppos.edit', compact('ppo'));
+        $ppo = Ppo::findOrFail($id);
+        $regimens = Regimen::lists('name','id');
+        $diagnoses = Diagnosis::lists('name','id');
+        $reasons = DoseModificationReason::lists('name','id');
+        return view('ppos.edit', compact('ppo','regimens','diagnoses','reasons'));
     }
 
     /**
@@ -76,11 +94,17 @@ class PposController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $input = $request->all;
+        $this->validate($request, [
+            'regimen_id' => 'required',
+        ]);
+        $input = $request->all();
         $ppo = Ppo::findOrFail($id);
         $ppo->update( $input );
-
-        return Redirect::route('ppos.index')->with('message', 'PPO updated');
+        if(isset($request->diagnoses))
+        {
+            $ppo->diagnoses()->sync($request->diagnoses);
+        }
+        return redirect()->route('ppos.index')->with('message', 'PPO updated');
     }
 
     /**
@@ -91,6 +115,9 @@ class PposController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ppo = Ppo::findOrFail($id);
+        $ppo->delete();
+
+        return redirect()->route('ppos.index')->with('success-message', 'PPO deleted.');
     }
 }

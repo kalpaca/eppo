@@ -8,6 +8,6 @@
         $diagnosisSecondaryCategory->id],
         'class'=>'col-md-6'
     ]) !!}
-    @include('diagnosis_secondary_categories/partials/_form_body');
+    @include('diagnosis_secondary_categories/partials/_form_body')
 {!! Form::close() !!}
 @endsection

@@ -8,6 +8,6 @@
         $diagnosis->id],
         'class'=>'col-md-6'
     ]) !!}
-    @include('diagnoses/partials/_form_body');
+    @include('diagnoses/partials/_form_body')
 {!! Form::close() !!}
 @endsection

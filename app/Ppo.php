@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ppo extends Model
 {
+    protected $fillable = ['regimen_id','version','is_start_date'];
     public function author()
 	{
     	return $this->belongsTo('App\User');
@@ -16,7 +17,7 @@ class Ppo extends Model
 	}
     public function diagnoses()
 	{
-    	return $this->hasMany('App\Diagnosis');
+    	return $this->belongsToMany('App\Diagnosis','ppo_diagnoses','ppo_id','diagnosis_id');
 	}
 	public function dosingSchedules()
 	{

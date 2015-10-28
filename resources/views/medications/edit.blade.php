@@ -8,6 +8,6 @@
         $medication->id],
         'class'=>'col-md-6'
     ]) !!}
-    @include('medications/partials/_form_body');
+    @include('medications/partials/_form_body')
 {!! Form::close() !!}
 @endsection

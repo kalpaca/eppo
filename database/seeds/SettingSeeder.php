@@ -1,19 +1,11 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Model;
 
-class DatabaseSeeder extends Seeder
-{
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
+class SettingSeeder extends Seeder {
+
     public function run()
     {
-        Model::unguard();
-
         // Uncomment the below to wipe the table clean before populating
         DB::table('dose_units')->delete();
 
@@ -44,7 +36,7 @@ class DatabaseSeeder extends Seeder
         );
 
         // Uncomment the below to run the seeder
-        DB::table('mitte_units')->insert($data);
+        DB::table('dose_units')->insert($data);
 
         // Uncomment the below to wipe the table clean before populating
         DB::table('dose_routes')->delete();
@@ -72,7 +64,7 @@ class DatabaseSeeder extends Seeder
         DB::table('ppo_sections')->insert($data);
 
         // Uncomment the below to wipe the table clean before populating
-        DB::table('diagnosis_primary_categories')->delete();
+        DB::table('diagnosis_primary_category')->delete();
 
         $data = array(
             ['id' => 1, 'name' => 'Adrenal', 'created_at' => new DateTime, 'updated_at' => new DateTime],
@@ -91,10 +83,10 @@ class DatabaseSeeder extends Seeder
         );
 
         // Uncomment the below to run the seeder
-        DB::table('diagnosis_primary_categories')->insert($data);
+        DB::table('diagnosis_primary_category')->insert($data);
 
         // Uncomment the below to wipe the table clean before populating
-        DB::table('diagnosis_secondary_categories')->delete();
+        DB::table('diagnosis_secondary_category')->delete();
 
         $data = array(
             ['id' => 1, 'name' => 'Adrenal', 'diagnosis_primary_category_id'=> 1, 'created_at' => new DateTime, 'updated_at' => new DateTime],
@@ -119,7 +111,7 @@ class DatabaseSeeder extends Seeder
         );
 
         // Uncomment the below to run the seeder
-        DB::table('diagnosis_secondary_categories')->insert($data);
+        DB::table('diagnosis_secondary_category')->insert($data);
 
         // Uncomment the below to wipe the table clean before populating
         DB::table('dose_calculation_types')->delete();
@@ -153,24 +145,7 @@ class DatabaseSeeder extends Seeder
 
         // Uncomment the below to run the seeder
         DB::table('dose_modification_reasons')->insert($data);
-
-
-                // Uncomment the below to wipe the table clean before populating
-        DB::table('regimens')->delete();
-
-        $tasks = array(
-            ['id' => 1, 'name' => 'capecitabine , gemcitabine', 'code' => 'CAPEGEMC', 'created_at' => new DateTime, 'updated_at' => new DateTime],
-            ['id' => 2, 'name' => 'mitotane', 'code' => 'MTTN', 'created_at' => new DateTime, 'updated_at' => new DateTime],
-            ['id' => 3, 'name' => 'capecitabine', 'code' => 'CAPE', 'created_at' => new DateTime, 'updated_at' => new DateTime],
-            ['id' => 4, 'name' => 'capecitabine , trastuzumab', 'code' => 'CAPE+TRAS', 'created_at' => new DateTime, 'updated_at' => new DateTime],
-            ['id' => 5, 'name' => 'epirubicin, cisplatin, capecitabine', 'code' => 'ECX', 'created_at' => new DateTime, 'updated_at' => new DateTime],
-            ['id' => 6, 'name' => 'imatinib', 'code' => 'IMAT', 'created_at' => new DateTime, 'updated_at' => new DateTime],
-            ['id' => 7, 'name' => 'dexamethasone', 'code' => 'DEXA(HD)', 'created_at' => new DateTime, 'updated_at' => new DateTime],
-        );
-
-        //// Uncomment the below to run the seeder
-        DB::table('regimens')->insert($tasks);
-
-        Model::reguard();
     }
+
 }
+

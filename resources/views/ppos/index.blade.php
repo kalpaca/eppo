@@ -1,7 +1,8 @@
 @extends('layouts.master')
-@section('title','PPO Index')
+@section('title','PPO')
 @section('content')
 <h2>PPOs</h2>
+<p>{!! link_to_route('ppos.create', 'Create PPO') !!}</p>
 @if(!$ppos->count())
 <p>You have no ppo</p>
 @else
@@ -14,7 +15,9 @@
             <th>PPO Diagnoses</th>
             <th>PPO Version</th>
             <th>Created Date</th>
-            <th>Modified Date</th>
+            <th>Updated Date</th>
+            <th>Update</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -22,11 +25,25 @@
         <tr>
         <td>{{ $ppo->is_active }}</td>
         <td>{{ $ppo->id }}</td>
-        <td>{{ $ppo->regimen }}</td>
-        <td></td>
+        <td>{{ $ppo->regimen->code }}</td>
+        <td>
+        @if(isset($ppo->diagnoses))
+            @foreach($ppo->diagnoses as $diagnosis)
+                <p>{{ $diagnosis->name }}</p>
+            @endforeach
+        @endif
+        </td>
         <td>{{ $ppo->version }}</td>
         <td>{{ $ppo->created_at }}</td>
         <td>{{ $ppo->updated_at }}</td>
+        <td>
+        {!! link_to_route('ppos.edit', 'Update', $ppo->id, array('class' => 'btn btn-info')) !!}
+        </td>
+        <td>
+        {!! Form::open(array('class' => 'form-inline', 'method' => 'DELETE', 'route' => array('ppos.destroy', $ppo->id))) !!}
+            {!! Form::submit('Delete', array('class' => 'btn btn-danger')) !!}
+        {!! Form::close() !!}
+        </td>
         </tr>
         @endforeach
     </tbody>
