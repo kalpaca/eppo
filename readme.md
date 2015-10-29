@@ -4,7 +4,7 @@
 
 
 
-"Allow oncologists/Hematologists and Nurse Practitioners to use an electronic tool, to enter, per the approved SMH PrePrinted Orders (PPOs) , prescribed medications based on disease, regimen for the patient to take at home. 
+"Allow oncologists/Hematologists and Nurse Practitioners to use an electronic tool, to enter, per the CancerCare Ontario PrePrinted Orders (PPOs) , prescribed medications based on disease, regimen for the patient to take at home. 
 
 The e-tool will generate a hard copy of the patient’s prescribed medications (i.e. take- at-home medications) for the patient to take to a pharmacy to dispense the medications."
 
