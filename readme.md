@@ -1,9 +1,5 @@
 ## ePPO 
 
-[![Build Status]
-[![Total Downloads]
-[![Latest Stable Version]
-[![Latest Unstable Version]
 [![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
 
 
