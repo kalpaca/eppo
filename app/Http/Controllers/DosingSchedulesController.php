@@ -19,7 +19,7 @@ class DosingSchedulesController extends Controller
     public function index()
     {
         $schedules = DosingSchedule::all();
-        return view('doseschedules.index', compact('schedules'));
+        return view('dose_schedules.index', compact('schedules'));
     }
 
     /**
@@ -29,7 +29,7 @@ class DosingSchedulesController extends Controller
      */
     public function create()
     {
-        return view('doseschedules.create');
+        return view('dose_schedules.create');
     }
 
     /**
@@ -58,7 +58,7 @@ class DosingSchedulesController extends Controller
     public function show($id)
     {
         $schedules = DosingSchedule::findOrFail($id);
-        return view('doseschedules.show', compact('schedules'));
+        return view('dose_schedules.show', compact('schedules'));
     }
 
     /**
@@ -70,7 +70,7 @@ class DosingSchedulesController extends Controller
     public function edit($id)
     {
         $schedule = DosingSchedule::findOrFail($id);
-        return view('doseschedules.edit', compact('schedule'));
+        return view('dose_schedules.edit', compact('schedule'));
     }
 
     /**

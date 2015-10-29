@@ -19,7 +19,7 @@ class MitteUnitsController extends Controller
     public function index()
     {
         $units = MitteUnit::all();
-        return view('mitteunits.index', compact('units'));
+        return view('mitte_units.index', compact('units'));
     }
 
     /**
@@ -29,7 +29,7 @@ class MitteUnitsController extends Controller
      */
     public function create()
     {
-        return view('mitteunits.create');
+        return view('mitte_units.create');
     }
 
     /**
@@ -58,7 +58,7 @@ class MitteUnitsController extends Controller
     public function show($id)
     {
         $units = MitteUnit::findOrFail($id);
-        return view('mitteunits.show', compact('units'));
+        return view('mitte_units.show', compact('units'));
     }
 
     /**
@@ -70,7 +70,7 @@ class MitteUnitsController extends Controller
     public function edit($id)
     {
         $unit = MitteUnit::findOrFail($id);
-        return view('mitteunits.edit', compact('unit'));
+        return view('mitte_units.edit', compact('unit'));
     }
 
     /**

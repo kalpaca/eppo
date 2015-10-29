@@ -21,27 +21,16 @@
                     "{{ asset('bower_components/console-polyfill/index.js') }}",
                     "{{ asset('bower_components/html5shiv/dist/html5shiv.js') }}",
                     "{{ asset('bower_components/respond/dest/respond.min.js') }}",
-                    "{{ asset('js/selectivizr.min.js') }}"             
+                    "{{ asset('js/selectivizr.min.js') }}"
                     ]
             });
         </script>
-        
-        
     </head>
     <body>
         @include('partials.navbar')
         <div class="container">
             @include('partials.errors')
-            @if (Session::has('success-message'))
-            <div class="alert alert-success">
-                <p>{{ Session::get('success-message') }}</p>
-            </div>
-            @endif
-            @if (Session::has('warning-message'))
-            <div class="alert alert-warning">
-                <p>{{ Session::get('warning-message') }}</p>
-            </div>
-            @endif
+            @include('partials.session_message')
             @yield('content')
         </div>
     </body>

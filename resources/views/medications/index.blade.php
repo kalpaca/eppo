@@ -2,7 +2,7 @@
 @section('title','Medications')
 @section('content')
 <h2>Medications</h2>
-<p>{!! link_to_route('medications.create', 'Create Medication') !!}</p>
+<p>{!! link_to_route('medications.create', 'Add a New Medication') !!}</p>
 @if(!$medications->count())
 <p>No medication in database.</p>
 @else

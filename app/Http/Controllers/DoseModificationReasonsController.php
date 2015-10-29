@@ -13,7 +13,7 @@ class DoseModificationReasonsController extends Controller
     public function index()
     {
         $reasons = DoseModificationReason::all();
-        return view('dosemodificationreasons.index', compact('reasons'));
+        return view('dose_modification_reasons.index', compact('reasons'));
     }
 
     /**
@@ -23,7 +23,7 @@ class DoseModificationReasonsController extends Controller
      */
     public function create()
     {
-        return view('dosemodificationreasons.create');
+        return view('dose_modification_reasons.create');
     }
 
     /**
@@ -40,7 +40,7 @@ class DoseModificationReasonsController extends Controller
         $input = $request->all();
         DoseModificationReason::create( $input );
 
-        return redirect()->route('dosemodificationreasons.index')->with('success-message', 'Dose Calculation Type created');
+        return redirect()->route('dosemodificationreasons.index')->with('success-message', 'Dose Modification Reason created');
     }
 
     /**
@@ -52,7 +52,7 @@ class DoseModificationReasonsController extends Controller
     public function show($id)
     {
         $reason = DoseModificationReason::findOrFail($id);
-        return view('dosemodificationreasons.show', compact('reason'));
+        return view('dose_modification_reasons.show', compact('reason'));
     }
 
     /**
@@ -64,7 +64,7 @@ class DoseModificationReasonsController extends Controller
     public function edit($id)
     {
         $reason = DoseModificationReason::findOrFail($id);
-        return view('dosemodificationreasons.edit', compact('reason'));
+        return view('dose_modification_reasons.edit', compact('reason'));
     }
 
     /**
@@ -80,7 +80,7 @@ class DoseModificationReasonsController extends Controller
         $reason = DoseModificationReason::findOrFail($id);
         $reason->update( $input );
 
-        return redirect()->route('dosemodificationreasons.index')->with('success-message', 'Dose Calculation Type updated');
+        return redirect()->route('dosemodificationreasons.index')->with('success-message', 'Dose Modification Reason updated');
     }
 
     /**

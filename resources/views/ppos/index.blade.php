@@ -14,6 +14,9 @@
             <th>PPO Regimen</th>
             <th>PPO Diagnoses</th>
             <th>PPO Version</th>
+            <th>Cycle Input</th>
+            <th>Reason Input</th>
+            <th>Start Date Input</th>
             <th>Created Date</th>
             <th>Updated Date</th>
             <th>Update</th>
@@ -34,6 +37,9 @@
         @endif
         </td>
         <td>{{ $ppo->version }}</td>
+        <td>{{ $ppo->is_cycle }}</td>
+        <td>{{ $ppo->is_dose_reason }}</td>
+        <td>{{ $ppo->is_start_date }}</td>
         <td>{{ $ppo->created_at }}</td>
         <td>{{ $ppo->updated_at }}</td>
         <td>

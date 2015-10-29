@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ppo extends Model
 {
-    protected $fillable = ['regimen_id','version','is_start_date'];
+    protected $fillable = ['regimen_id','version','is_active','is_start_date','is_cycle','is_dose_reason'];
     public function author()
 	{
     	return $this->belongsTo('App\User');

@@ -41,6 +41,7 @@ class LucodesController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+            'code' => 'required',
         ]);
         $input = $request->all();
         Lucode::create( $input );

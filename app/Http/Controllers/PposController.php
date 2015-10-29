@@ -49,8 +49,11 @@ class PposController extends Controller
         $this->validate($request, [
             'regimen_id' => 'required',
         ]);
+
         $input = $request->all();
+
         $ppo = Ppo::create( $input );
+
         if(isset($request->diagnoses))
         {
             $ppo->diagnoses()->sync($request->diagnoses);
@@ -83,7 +86,7 @@ class PposController extends Controller
         $regimens = Regimen::lists('name','id');
         $diagnoses = Diagnosis::lists('name','id');
         $reasons = DoseModificationReason::lists('name','id');
-        $diagnosesSelected = $ppo->diagnoses;
+        $diagnosesSelected = $ppo->diagnoses->pluck('id')->all();
         return view('ppos.edit', compact('ppo','regimens','diagnosesSelected','diagnoses','reasons'));
     }
 
@@ -100,6 +103,7 @@ class PposController extends Controller
             'regimen_id' => 'required',
         ]);
         $input = $request->all();
+
         $ppo = Ppo::findOrFail($id);
         $ppo->update( $input );
         if(isset($request->diagnoses))

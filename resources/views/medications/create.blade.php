@@ -1,6 +1,6 @@
 @extends('layouts.form')
 @section('title','Medication')
-@section('formTitle','Add New Medication')
+@section('formTitle','Add a New Medication')
 @section('formContent')
 {!! Form::model(new App\Medication, [
     'route'=>'medications.store',
