@@ -4,7 +4,7 @@
 
 
 
-"Allow oncologists/Hematologists and Nurse Practitioners to use an electronic tool, to enter, per the CancerCare Ontario PrePrinted Orders (PPOs) , prescribed medications based on disease, regimen for the patient to take to a pharmacy to dispense the medications."
+This tool is made for oncologists/Hematologists and Nurse Practitioners to enter, per the CancerCare Ontario PrePrinted Orders (PPOs) , prescribed medications based on disease, regimen for the patient to take to a pharmacy to dispense the medications.
 
 ### What are PrePrinted Orders (PPOs)?
 
