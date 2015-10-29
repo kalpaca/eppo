@@ -34,7 +34,8 @@ class PposController extends Controller
         $regimens = Regimen::lists('name','id');
         $diagnoses = Diagnosis::lists('name','id');
         $reasons = DoseModificationReason::lists('name','id');
-        return view('ppos.create', compact('regimens','diagnoses','reasons'));
+        $diagnosesSelected = null;
+        return view('ppos.create', compact('regimens','diagnosesSelected','diagnoses','reasons'));
     }
 
     /**
@@ -82,7 +83,8 @@ class PposController extends Controller
         $regimens = Regimen::lists('name','id');
         $diagnoses = Diagnosis::lists('name','id');
         $reasons = DoseModificationReason::lists('name','id');
-        return view('ppos.edit', compact('ppo','regimens','diagnoses','reasons'));
+        $diagnosesSelected = $ppo->diagnoses;
+        return view('ppos.edit', compact('ppo','regimens','diagnosesSelected','diagnoses','reasons'));
     }
 
     /**

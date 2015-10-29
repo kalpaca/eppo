@@ -41,7 +41,6 @@
         <li class="active"><a href="./">Static top <span class="sr-only">(current)</span></a></li>
         <li><a href="../navbar-fixed-top/">Fixed top</a></li>
       </ul>
-      </div><!--/.nav-collapse -->
-    </div>
+    </div><!--/.nav-collapse -->
   </div>
 </nav>

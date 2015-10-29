@@ -1,4 +1,5 @@
 <?php
+var_dump($ppo);
 $isCycle = isset($ppo->is_cycle) ? $ppo->is_cycle : true;
 $isReason = isset($ppo->is_reason) ? $ppo->is_reason : true;
 $isStartDate = isset($ppo->is_start_date) ? $ppo->is_start_date : true;
@@ -11,7 +12,7 @@ $isStartDate = isset($ppo->is_start_date) ? $ppo->is_start_date : true;
 
 <div class="form-group">
     {!! Form::label('diagnoses[]','Diagnoses: ',['class' => 'control-label']) !!}
-    {!! Form::select('diagnoses[]',$diagnoses, null, ['class'=>'form-control','multiple'=>'multiple']) !!}
+    {!! Form::select('diagnoses[]',$diagnoses, $diagnosesSelected, ['class'=>'form-control','multiple'=>'multiple']) !!}
 </div>
 
 <div class="form-group">
