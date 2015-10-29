@@ -2,7 +2,7 @@
 @section('title','Dose Route')
 @section('formTitle','Add a New Dose Route')
 @section('formContent')
-{!! Form::model(new App\DoseRoute, [
+{!! Form::model(new eppo\DoseRoute, [
     'route'=>'doseroutes.store',
     'class'=>'col-md-6'])
     !!}

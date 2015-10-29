@@ -1,13 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace eppo\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use eppo\Http\Requests;
+use eppo\Http\Controllers\Controller;
 
-use App\DosingSchedule;
+use eppo\DosingSchedule;
+use eppo\Medication;
+use eppo\Ppo;
+use eppo\PpoSection;
+use eppo\DoseUnit;
+use eppo\DoseRoute;
+use eppo\MitteUnit;
+use eppo\DoseCalculationType;
 
 class DosingSchedulesController extends Controller
 {
@@ -18,8 +25,8 @@ class DosingSchedulesController extends Controller
      */
     public function index()
     {
-        $schedules = DosingSchedule::all();
-        return view('dose_schedules.index', compact('schedules'));
+        $schedules = DosingSchedule::with('doseRoute','doseUnit','doseCalculationType','mitteUnit','ppo','medication','ppoSection')->get();
+        return view('dosing_schedules.index', compact('schedules'));
     }
 
     /**
@@ -29,7 +36,15 @@ class DosingSchedulesController extends Controller
      */
     public function create()
     {
-        return view('dose_schedules.create');
+        $medications = Medication::lists('name','id');
+        $ppoSections = PpoSection::lists('name','id');
+        $ppos = Ppo::lists('name','id');
+        $doseCalculationTypes = DoseCalculationType::lists('name','id');
+        $doseUnits = DoseUnit::lists('name','id');
+        $doseRoutes = DoseRoute::lists('name','id');
+        $mitteUnits = MitteUnit::lists('name','id');
+
+        return view('dosing_schedules.create', compact('medications','ppoSections','ppos','doseCalculationTypes','doseUnits','doseRoutes','mitteUnits'));
     }
 
     /**
@@ -41,12 +56,14 @@ class DosingSchedulesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'ppo_id' => 'required',
+            'medication_id' => 'required',
+            'ppo_section_id' => 'required',
         ]);
         $input = $request->all();
         DosingSchedule::create( $input );
 
-        return redirect()->route('doseschedules.index')->with('success-message', 'Dose Unit created');
+        return redirect()->route('dosingschedules.index')->with('success-message', 'Dose Schedule created');
     }
 
     /**
@@ -57,8 +74,8 @@ class DosingSchedulesController extends Controller
      */
     public function show($id)
     {
-        $schedules = DosingSchedule::findOrFail($id);
-        return view('dose_schedules.show', compact('schedules'));
+        $schedules = DosingSchedule::with('doseRoute','doseUnit','doseCalculationType','mitteUnit','ppo','medication','ppoSection')->findOrFail($id);
+        return view('dosing_schedules.show', compact('schedules'));
     }
 
     /**
@@ -70,7 +87,16 @@ class DosingSchedulesController extends Controller
     public function edit($id)
     {
         $schedule = DosingSchedule::findOrFail($id);
-        return view('dose_schedules.edit', compact('schedule'));
+
+        $medications = Medication::lists('name','id');
+        $ppoSections = PpoSection::lists('name','id');
+        $ppos = Ppo::lists('name','id');
+        $doseCalculationTypes = DoseCalculationType::lists('name','id');
+        $doseUnits = DoseUnit::lists('name','id');
+        $doseRoutes = DoseRoute::lists('name','id');
+        $mitteUnits = MitteUnit::lists('name','id');
+
+        return view('dosing_schedules.edit', compact('schedule','medications','ppoSections','ppos','doseCalculationTypes','doseUnits','doseRoutes','mitteUnits'));
     }
 
     /**
@@ -86,7 +112,7 @@ class DosingSchedulesController extends Controller
         $schedule = DosingSchedule::findOrFail($id);
         $schedule->update( $input );
 
-        return redirect()->route('doseschedules.index')->with('success-message', 'Dose Unit updated');
+        return redirect()->route('dosingschedules.index')->with('success-message', 'Dose Schedule updated');
     }
 
     /**
@@ -100,6 +126,6 @@ class DosingSchedulesController extends Controller
         $schedule = DosingSchedule::findOrFail($id);
         $schedule->delete();
 
-        return redirect()->route('doseschedules.index')->with('success-message', 'Dose Unit deleted.');
+        return redirect()->route('dosingschedules.index')->with('success-message', 'Dose Schedule deleted.');
     }
 }

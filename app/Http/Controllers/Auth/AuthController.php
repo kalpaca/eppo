@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace eppo\Http\Controllers\Auth;
 
-use App\User;
+use eppo\User;
 use Validator;
-use App\Http\Controllers\Controller;
+use eppo\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace eppo\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use eppo\Http\Requests;
+use eppo\Http\Controllers\Controller;
 
-use App\DoseModificationReason;
+use eppo\DoseModificationReason;
 
 class DoseModificationReasonsController extends Controller
 {

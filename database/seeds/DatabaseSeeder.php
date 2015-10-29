@@ -170,6 +170,41 @@ class DatabaseSeeder extends Seeder
 
         //// Uncomment the below to run the seeder
         DB::table('regimens')->insert($tasks);
+        // Uncomment the below to wipe the table clean before populating
+        DB::table('medications')->delete();
+
+        $data = array(
+            ['id' => 1, 'name' => 'capecitabine', 'created_at' => new DateTime, 'updated_at' => new DateTime],
+            ['id' => 2, 'name' => 'prochlorperazine', 'created_at' => new DateTime, 'updated_at' => new DateTime],
+            ['id' => 3, 'name' => 'loperamide', 'created_at' => new DateTime, 'updated_at' => new DateTime],
+            ['id' => 4, 'name' => 'aprepitant', 'created_at' => new DateTime, 'updated_at' => new DateTime],
+            ['id' => 5, 'name' => 'dexamethasone', 'created_at' => new DateTime, 'updated_at' => new DateTime],
+            ['id' => 6, 'name' => 'goserelin', 'created_at' => new DateTime, 'updated_at' => new DateTime],
+            ['id' => 7, 'name' => '5-HT&#8323;', 'created_at' => new DateTime, 'updated_at' => new DateTime],
+            ['id' => 8, 'name' => 'calcium', 'created_at' => new DateTime, 'updated_at' => new DateTime],
+            ['id' => 9, 'name' => 'vitamin D', 'created_at' => new DateTime, 'updated_at' => new DateTime],
+            ['id' => 10, 'name' => 'imatinib', 'created_at' => new DateTime, 'updated_at' => new DateTime],
+            ['id' => 11, 'name' => 'mitotane', 'created_at' => new DateTime, 'updated_at' => new DateTime],
+            ['id' => 12, 'name' => 'glucocorticoid', 'created_at' => new DateTime, 'updated_at' => new DateTime],
+            ['id' => 13, 'name' => 'fludrocortisone', 'created_at' => new DateTime, 'updated_at' => new DateTime],
+        );
+
+        // Uncomment the below to run the seeder
+        DB::table('medications')->insert($data);
+
+        DB::table('diagnoses')->delete();
+
+        $data = array(
+            ['id' => 1, 'name' => 'Adrenal Cancer', 'diagnosis_secondary_category_id'=> 1, 'created_at' => new DateTime, 'updated_at' => new DateTime],
+            ['id' => 2, 'name' => 'Breast Cancer', 'diagnosis_secondary_category_id'=> 2, 'created_at' => new DateTime, 'updated_at' => new DateTime],
+            ['id' => 3, 'name' => 'Gastroesophageal Cancer', 'diagnosis_secondary_category_id'=> 4, 'created_at' => new DateTime, 'updated_at' => new DateTime],
+            ['id' => 4, 'name' => 'Gastrointestinal Stromal Tumour', 'diagnosis_secondary_category_id'=> 5, 'created_at' => new DateTime, 'updated_at' => new DateTime],
+            ['id' => 5, 'name' => 'Chronic Lymphocytic Leukemia', 'diagnosis_secondary_category_id'=> 8, 'created_at' => new DateTime, 'updated_at' => new DateTime],
+        );
+
+        // Uncomment the below to run the seeder
+        DB::table('diagnoses')->insert($data);
+
 
         Model::reguard();
     }

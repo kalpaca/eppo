@@ -2,7 +2,7 @@
 @section('title','Dose Calculation Type')
 @section('formTitle','Add a New Dose Calculation Type')
 @section('formContent')
-{!! Form::model(new App\DoseCalculationType, [
+{!! Form::model(new eppo\DoseCalculationType, [
     'route'=>'dosecalculationtypes.store',
     'class'=>'col-md-6'])
     !!}

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace eppo;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,10 +10,10 @@ class DiagnosisPrimaryCategory extends Model
 
     public function secondaryCats()
     {
-        return $this->hasMany('App\DiagnosisSecondaryCategory');
+        return $this->hasMany('eppo\DiagnosisSecondaryCategory');
     }
     public function diagnoses()
     {
-        return $this->hasMany('App\Diagnosis');
+        return $this->hasMany('eppo\Diagnosis');
     }
 }

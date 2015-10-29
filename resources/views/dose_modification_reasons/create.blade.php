@@ -2,7 +2,7 @@
 @section('title','Dose Modification Reasons')
 @section('formTitle','Add a NewDose Modification Reason')
 @section('formContent')
-{!! Form::model(new App\DiagnosisPrimaryCategory, [
+{!! Form::model(new eppo\DiagnosisPrimaryCategory, [
     'route'=>'dosemodificationreasons.store',
     'class'=>'col-md-6'])
     !!}

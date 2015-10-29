@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace eppo;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,13 +12,13 @@ class Diagnosis extends Model
 
     public function secondaryCat()
     {
-        return $this->belongsTo('App\DiagnosisSecondaryCategory','diagnosis_secondary_category_id');
+        return $this->belongsTo('eppo\DiagnosisSecondaryCategory','diagnosis_secondary_category_id');
     }
 
     public function primaryCat()
     {
         $secondaryCat = $this->secondaryCat;
         return $secondaryCat->primaryCat();
-        //return $secondaryCat->belongsTo('App\DiagnosisPrimaryCategory','diagnosis_primary_category_id');
+        //return $secondaryCat->belongsTo('eppo\DiagnosisPrimaryCategory','diagnosis_primary_category_id');
     }
 }

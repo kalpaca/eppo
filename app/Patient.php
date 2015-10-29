@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace eppo;
 
 use Illuminate\Database\Eloquent\Model;
 

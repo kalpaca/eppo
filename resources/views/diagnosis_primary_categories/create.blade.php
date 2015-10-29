@@ -2,7 +2,7 @@
 @section('title','Diagnosis Primary Category')
 @section('formTitle','Add a New Diagnosis Primary Category')
 @section('formContent')
-{!! Form::model(new App\DiagnosisPrimaryCategory, [
+{!! Form::model(new eppo\DiagnosisPrimaryCategory, [
     'route'=>'diagnosisprimarycategories.store',
     'class'=>'col-md-6'])
     !!}

@@ -2,7 +2,7 @@
 @section('title','Mitte Unit')
 @section('formTitle','Add a New Mitte Unit')
 @section('formContent')
-{!! Form::model(new App\MitteUnit, [
+{!! Form::model(new eppo\MitteUnit, [
     'route'=>'mitteunits.store',
     'class'=>'col-md-6'])
     !!}

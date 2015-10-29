@@ -3,7 +3,7 @@
     {!! Form::text('name',null,['class'=>'form-control']) !!}
 </div>
 <div class="form-group">
-    {!! Form::label('instruction','Instruction: ',['class' => 'control-label']) !!}
+    {!! Form::label('instruction','Universal instruction: ',['class' => 'control-label']) !!}
     {!! Form::text('instruction',null,['class'=>'form-control']) !!}
 </div>
 

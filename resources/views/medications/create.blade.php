@@ -2,7 +2,7 @@
 @section('title','Medication')
 @section('formTitle','Add a New Medication')
 @section('formContent')
-{!! Form::model(new App\Medication, [
+{!! Form::model(new eppo\Medication, [
     'route'=>'medications.store',
     'class'=>'col-md-6'])
     !!}

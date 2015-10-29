@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace eppo;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,6 +11,6 @@ class Regimen extends Model
     ];
 	public function Ppos()
 	{
-    	return $this->hasMany('App\Ppo');
+    	return $this->hasMany('eppo\Ppo');
 	}
 }

@@ -1,0 +1,11 @@
+.form-control {
+    height: 26px;
+    padding: 0px 4px;
+}
+.width_100_percent {
+    width: 100%;
+    display: block;
+}
+.form-inline .form-group {
+    margin-bottom: 10px !important;
+}

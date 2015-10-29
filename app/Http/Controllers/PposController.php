@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace eppo\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use eppo\Http\Requests;
+use eppo\Http\Controllers\Controller;
 
-use App\Ppo;
-use App\Regimen;
-use App\Diagnosis;
-use App\DoseModificationReason;
+use eppo\Ppo;
+use eppo\Regimen;
+use eppo\Diagnosis;
+use eppo\DoseModificationReason;
 
 class PposController extends Controller
 {

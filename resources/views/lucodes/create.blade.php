@@ -2,7 +2,7 @@
 @section('title','LU Code')
 @section('formTitle','Add a New LU Code')
 @section('formContent')
-{!! Form::model(new App\Lucode, [
+{!! Form::model(new eppo\Lucode, [
     'route'=>'lucodes.store',
     'class'=>'col-md-6'])
     !!}

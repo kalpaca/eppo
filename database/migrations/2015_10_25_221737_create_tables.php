@@ -14,31 +14,31 @@ class CreateTables extends Migration
     {
         Schema::create('medications', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->default('');
+            $table->string('name')->unique();
             $table->string('instruction')->default('');
             $table->timestamps();
         });
         Schema::create('ppo_sections', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->default('');
+            $table->string('name')->unique();
             $table->timestamps();
         });
         Schema::create('patients', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->default('');
+            $table->string('name')->unique();
             $table->date('dob');
             $table->timestamps();
         });
         Schema::create('regimens', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->default('');
-            $table->string('code')->default('');
+            $table->string('code')->unique();
             $table->timestamps();
         });
         Schema::create('lucodes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('code');
-            $table->string('name')->default('');
+            $table->string('name')->unique();
             $table->integer('medication_id')->unsigned()->default(0);
             $table->timestamps();
         });
@@ -49,44 +49,45 @@ class CreateTables extends Migration
         });
         Schema::create('diagnosis_secondary_categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->default('');
+            $table->string('name')->unique();
             $table->integer('diagnosis_primary_category_id')->unsigned()->default(0);
             $table->timestamps();
         });
         Schema::create('diagnoses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->default('');
+            $table->string('name')->unique();
             $table->integer('diagnosis_secondary_category_id')->unsigned()->default(0);
             $table->integer('diagnosis_primary_category_id')->unsigned()->default(0);
             $table->timestamps();
         });
         Schema::create('dose_units', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->default('');
+            $table->string('name')->unique();
             $table->timestamps();
         });
         Schema::create('mitte_units', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->default('');
+            $table->string('name')->unique();
             $table->timestamps();
         });
         Schema::create('dose_routes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->default('');
+            $table->string('name')->unique();
             $table->timestamps();
         });
         Schema::create('dose_calculation_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->default('');
+            $table->string('name')->unique();
             $table->timestamps();
         });
         Schema::create('dose_modification_reasons', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->default('');
+            $table->string('name')->unique();
             $table->timestamps();
         });
         Schema::create('ppos', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name')->unique();
             $table->integer('user_id')->unsigned()->default(0);
             $table->string('version')->default('1');
             $table->boolean('is_active')->default(false);
@@ -122,7 +123,7 @@ class CreateTables extends Migration
             $table->decimal('dose_base',7,2);
             $table->integer('dose_unit_id');
             $table->integer('dose_route_id');
-            $table->integer('dose_calulation_type_id');
+            $table->integer('dose_calculation_type_id');
             $table->integer('ppo_section_id');
             $table->decimal('fixed_dose_result',7,2);
             $table->string('instruction');
@@ -131,7 +132,7 @@ class CreateTables extends Migration
             $table->boolean('is_duration_input')->default(false);
             $table->boolean('is_frequency_input')->default(false);
             $table->boolean('is_mitte_input')->default(true);
-            $table->string('mitte_unit');
+            $table->integer('mitte_unit_id');
             $table->boolean('is_repeat_input')->default(true);
             $table->timestamps();
         });

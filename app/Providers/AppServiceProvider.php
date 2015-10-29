@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace eppo\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

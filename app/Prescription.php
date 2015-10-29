@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace eppo;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -8,30 +8,30 @@ class Prescription extends Model
 {
     public function patient()
 	{
-    	return $this->belongsTo('App\Patient');
+    	return $this->belongsTo('eppo\Patient');
 	}
     public function author()
 	{
-    	return $this->belongsTo('App\User');
+    	return $this->belongsTo('eppo\User');
 	}
    	public function regimen()
 	{
-    	return $this->belongsTo('App\Regimen');
+    	return $this->belongsTo('eppo\Regimen');
 	}
     public function diagnosis()
 	{
-    	return $this->belongsTo('App\Diagnosis');
+    	return $this->belongsTo('eppo\Diagnosis');
 	}
 	public function items()
 	{
-    	return $this->hasMany('App\PrescriptionItem');
+    	return $this->hasMany('eppo\PrescriptionItem');
 	}
 	public function doseModificationReasons()
 	{
-		return $this->hasMany('App\DoseModificationReason');
+		return $this->hasMany('eppo\DoseModificationReason');
 	}
 	public function operationRecords()
 	{
-		return $this->hasMany('App\PrescriptionOperationRecord');
+		return $this->hasMany('eppo\PrescriptionOperationRecord');
 	}
 }

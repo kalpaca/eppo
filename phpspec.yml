@@ -1,5 +1,5 @@
 suites:
     main:
-        namespace: App
-        psr4_prefix: App
+        namespace: eppo
+        psr4_prefix: eppo
         src_path: app

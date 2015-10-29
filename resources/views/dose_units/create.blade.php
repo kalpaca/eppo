@@ -2,7 +2,7 @@
 @section('title','Dose Unit')
 @section('formTitle','Add a New Dose Unit')
 @section('formContent')
-{!! Form::model(new App\DoseUnit, [
+{!! Form::model(new eppo\DoseUnit, [
     'route'=>'doseunits.store',
     'class'=>'col-md-6'])
     !!}

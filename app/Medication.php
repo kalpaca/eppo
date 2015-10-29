@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace eppo;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,6 +11,6 @@ class Medication extends Model
     ];
     public function dosingSchedules()
 	{
-    	return $this->hasMany('App\DosingSchedule');
+    	return $this->hasMany('eppo\DosingSchedule');
 	}
 }

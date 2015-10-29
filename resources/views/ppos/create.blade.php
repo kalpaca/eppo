@@ -2,7 +2,7 @@
 @section('title','ppo')
 @section('formTitle','Add a New PPO')
 @section('formContent')
-{!! Form::model(new App\ppo, [
+{!! Form::model(new eppo\ppo, [
     'route'=>'ppos.store',
     'class'=>'col-md-6'])
     !!}

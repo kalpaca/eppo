@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace eppo\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use eppo\Http\Requests;
+use eppo\Http\Controllers\Controller;
 
-use App\DiagnosisPrimaryCategory;
-use App\DiagnosisSecondaryCategory;
+use eppo\DiagnosisPrimaryCategory;
+use eppo\DiagnosisSecondaryCategory;
 
 class DiagnosisSecondaryCategoriesController extends Controller
 {

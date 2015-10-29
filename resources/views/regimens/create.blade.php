@@ -2,7 +2,7 @@
 @section('title','Regimen')
 @section('formTitle','Add a New Regimen')
 @section('formContent')
-{!! Form::model(new App\Regimen, [
+{!! Form::model(new eppo\Regimen, [
     'route'=>'regimens.store',
     'class'=>'col-md-6'])
     !!}
