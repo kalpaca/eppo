@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-     return 'Hello World';
+     return view('welcome');
 });
 Route::resource('diagnoses', 'DiagnosesController');
 Route::resource('diagnosisprimarycategories', 'DiagnosisPrimaryCategoriesController');
