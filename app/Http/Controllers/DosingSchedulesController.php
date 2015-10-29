@@ -108,6 +108,11 @@ class DosingSchedulesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'ppo_id' => 'required',
+            'medication_id' => 'required',
+            'ppo_section_id' => 'required',
+        ]);
         $input = $request->all();
         $schedule = DosingSchedule::findOrFail($id);
         $schedule->update( $input );

@@ -2,9 +2,9 @@
 $isActive = isset($schedule->is_active) ? $schedule->is_active : true;
 $isMitteInput = isset($schedule->is_mitte_reason) ? $schedule->is_mitte_reason : true;
 $isRepeatInput = isset($schedule->is_repeat_input) ? $schedule->is_repeat_input : true;
-$defaultSelection = collect([null=>'Please Select']);
-$medications = $medications->merge($defaultSelection);
-$ppos = $defaultSelection->merge($ppos);
+$defaultSelection = [''=>'Please Select'];
+$medications = $defaultSelection + $medications->toArray();
+$ppos = $defaultSelection + $ppos->toArray();
 ?>
 <div class="form-group col-md-6">
     {!! Form::hidden('is_active', false) !!}
