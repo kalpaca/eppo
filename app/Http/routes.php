@@ -14,6 +14,9 @@
 Route::get('/', function () {
      return view('welcome');
 });
+Route::get('/about', function () {
+     return view('about');
+});
 Route::resource('diagnoses', 'DiagnosesController');
 Route::resource('diagnosisprimarycategories', 'DiagnosisPrimaryCategoriesController');
 Route::resource('diagnosissecondarycategories', 'DiagnosisSecondaryCategoriesController');
