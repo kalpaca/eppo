@@ -2,15 +2,15 @@
 $index = isset($index)? $index : 0;
 $modelIndex = 'PrescriptionItem.'.$index.'.';
 
-$section = $item->ppoSection->name;
-$mutualExClass = 'mutualEx-' . $section . $item->medication_id;
-$spanClass = 'ppo-item-detail '.$section . $index;
+$mutualExClass = 'mutualEx-' . $item->ppoSection->name . $item->medication_id;
+
+$spanClass = 'ppo-item-detail '.$item->ppoSection->name . $index;
 $itemLineClass = $spanClass.' col-md-12 margin_bottom_10';
-$itemFirstLineClass = 'start-'.$spanClass.' col-md-12 margin_bottom_10';
+$itemStartLineClass = 'start-'.$spanClass.' col-md-12 margin_bottom_10';
 ?>
 <fieldset>
-<div class="ppo-item clearfix" id="{{ $section.$index.'Div' }}">
-
+<div class="ppo-item clearfix" id="{{ $item->ppoSection->name.$index.'Div' }}">
+	<!--start: ppo item hidden input-->
 	{!! Form::hidden($modelIndex.'id', null) !!}
 	{!! Form::hidden($modelIndex.'ppo_section_id', $item->ppoSection->id) !!}
 	{!! Form::hidden($modelIndex.'ppo_item_id', $item->id) !!}
@@ -23,29 +23,27 @@ $itemFirstLineClass = 'start-'.$spanClass.' col-md-12 margin_bottom_10';
 	{!! Form::hidden($modelIndex.'is_repeat_input', $item->is_repeat_input) !!}
 	{!! Form::hidden($modelIndex.'is_start_date', $item->is_start_input) !!}
 	{!! Form::hidden($modelIndex.'is_instruction_input', $item->is_instruction_input) !!}
-
-	<div class="{{ $itemFirstLineClass }}">
-		{!! Form::checkbox($modelIndex.'is_selected', null, null, ['class' => $mutualExClass.' item-checkbox']) !!}
+	<!--end: ppo item hidden input-->
+	<div class="{{ $itemStartLineClass }}">
+		{!! Form::checkbox($modelIndex.'is_selected', null, null, ['class' => $mutualExClass.' ppo-item-checkbox']) !!}
 		{!! Form::label($modelIndex.'is_selected', $item->medication->name, ['class'=>'control-label']) !!} 
 		<span class = "{{ $spanClass }}"> 
 			
 			@if($item->dose_calculation_type_id == 1) {{-- Percentage --}}
-				{{ $item->dose_base }} {{ $item->doseUnit->name }} x 
+				{{ $item->dose_base . $item->doseUnit->name }} x 
 				{!! Form::text($modelIndex.'dose_percentage', null, ['class'=>'form-control integer-field', 'size' => 2]) !!}
 				 % * = 
 			@elseif($item->dose_calculation_type_id == 2) {{-- Percentage and BSA --}}
-				{{ $item->dose_base }} {{ $item->doseUnit->name }}
+				{{ $item->dose_base . $item->doseUnit->name }}
 				/m<sup>2</sup> x <span class='bsa_value'>BSA</span> x 
 				{!! Form::text($modelIndex.'dose_percentage', null, ['class'=>'form-control integer-field', 'size' => 2]) !!}
 				 % * = 		
 			@elseif($item->dose_calculation_type_id == 4) {{-- Fixed dose --}}
-				{{ $item->dose_base }} {{ $item->doseUnit->name }}
+				{{ $item->dose_base . $item->doseUnit->name }}
 				{!! Form::hidden ( $modelIndex.'dose_result', $fixed_dose_result) !!}
 			@endif
 			{!! Form::text($modelIndex.'dose_result', null, ['class'=>'form-control decimal-field', 'size' => 6 ]) !!}
-			 {{ $item->doseUnit->name }} {{ $item->instruction }}
-
-
+			 {{ $item->doseUnit->name . $item->instruction }}
 		</span>
 
 		@if($item->is_frequency_input)

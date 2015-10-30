@@ -2,14 +2,14 @@
 @section('title','PPO Items')
 @section('content')
 <h2>PPO Items</h2>
-<p>{!! link_to_route('ppoitems.create', 'Create a new item') !!}</p>
+<p>{!! link_to_route('ppoitems.create', 'Create a new PPO item') !!}</p>
 @if(!$items->count())
 <p>No data.</p>
 @else
     <div class='form-inline'>
         @foreach($items as $item)
             <div class="col-md-12 margin_bottom_10 bs-callout">
-                @include('partials/ppo_item')    
+                @include('partials/ppo_item_inputs')    
                 <div class="col-md-12">
                     <small>Schedule #</small>
                     <span>{{ $item->id }}</span>
