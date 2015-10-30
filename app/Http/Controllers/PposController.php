@@ -69,8 +69,8 @@ class PposController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        $ppo = Ppo::find($id)->with('ppoSections','diagnoses','regimen','author','dosingSchedule','doseModificationReasons')->get();
+    {//'doseModificationReasons'
+        $ppo = Ppo::with('diagnoses','regimen','author','ppoItems')->findOrFail($id);
         return view('ppos.show', compact('ppo'));
     }
 

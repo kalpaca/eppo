@@ -19,6 +19,7 @@
             <th>Start Date Input</th>
             <th>Created Date</th>
             <th>Updated Date</th>
+            <th>View</th>
             <th>Update</th>
             <th>Delete</th>
         </tr>
@@ -42,6 +43,9 @@
         <td>{{ $ppo->is_start_date }}</td>
         <td>{{ $ppo->created_at }}</td>
         <td>{{ $ppo->updated_at }}</td>
+        <td>
+        {!! link_to_route('ppos.show', 'View', $ppo->id, array('class' => 'btn btn-success')) !!}
+        </td>
         <td>
         {!! link_to_route('ppos.edit', 'Update', $ppo->id, array('class' => 'btn btn-info')) !!}
         </td>

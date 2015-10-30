@@ -25,7 +25,7 @@ class PpoItemsController extends Controller
      */
     public function index()
     {
-        $items = PpoItem::with('doseRoute','doseUnit','mitteUnit','ppo','medication','ppoSection')->get();
+        $items = PpoItem::with('doseUnit','mitteUnit','ppo','medication')->get();
         return view('ppo_items.index', compact('items'));
     }
 
@@ -74,7 +74,7 @@ class PpoItemsController extends Controller
      */
     public function show($id)
     {
-        $item = PpoItem::with('doseRoute','doseUnit','doseCalculationType','mitteUnit','ppo','medication','ppoSection')->findOrFail($id);
+        $item = PpoItem::with('doseUnit','mitteUnit','ppo','medication')->findOrFail($id);
         return view('ppo_items.show', compact('item'));
     }
 

@@ -14,23 +14,16 @@
 .form-control {
     height: 26px;
     padding: 0px 4px;
+    margin: 5px 0px;
 }
 .form-inline .form-group {
     margin-bottom: 10px !important;
 }
-
-
-@media screen and (min-width: 320px) {
-    .ppo-item .form-control {
-        display: inline-block;
-        width: auto;
-    }
+.form-inline .width_100_percent {
+    width: 100%;
+    display: block;
 }
-
-
-
-
-
+/* PPO item css */
 .ppo-item {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -39,11 +32,17 @@
     text-indent: 10px;
 }
 .ppo-item-line {
-    margin-bottom: 5px;
+    margin-bottom: 0px;
 }
 .ppo-item-is-selected {
 	opacity: 1;
 	color: #222;
 	background-color: #ffc;
 }
+@media screen and (min-width: 320px) {
+    .ppo-item .form-control {
+        display: inline-block;
+        width: auto;
+    }
 
+}

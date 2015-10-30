@@ -5,7 +5,7 @@
   <div class="container">
     <h1>ePPO</h1>
     <p>Pre-Printed Orders for Take-Home Chemotherapy</p>
-    <p>Web application developed by Steven Song Wang</p>
+    <p>Developed by Steven Song Wang</p>
   </div>
 </div>
 <div class="container">

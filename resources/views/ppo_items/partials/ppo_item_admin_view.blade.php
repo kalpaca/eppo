@@ -1,4 +1,4 @@
-<div class="col-md-12 margin_bottom_10 callout">
+<div class="margin_bottom_10">
     @include('ppo_items/partials/ppo_item_inputs')
     <div class="col-md-12">
         <small>Item #</small>
@@ -9,13 +9,10 @@
         <span>{{ $item->ppoSection->name }}</span>
     </div>
     <div class="col-md-12 margin_bottom_10">
-
         <small>Created at</small>
         <span>{{ $item->created_at }}</span>
         <small>Updated at</small>
         <span>{{ $item->updated_at }}</span>
-    </div>
-    <div class="col-md-12 margin_bottom_10">
     {!! link_to_route('ppoitems.edit', 'Update', $item->id, array('class' => 'btn btn-xs btn-primary')) !!}
     </div>
 </div>

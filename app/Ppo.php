@@ -20,16 +20,14 @@ class Ppo extends Model
 	{
     	return $this->belongsToMany('eppo\Diagnosis','ppo_diagnoses','ppo_id','diagnosis_id');
 	}
-	public function dosingSchedules()
+	public function ppoItems()
 	{
     	return $this->hasMany('eppo\PpoItem');
 	}
-    public function ppoSections()
-	{
-    	return $this->hasMany('eppo\PpoSection');
-	}
+    /*
 	public function doseModificationReasons()
 	{
 		return $this->hasMany('eppo\DoseModificationReason');
 	}
+    */
 }

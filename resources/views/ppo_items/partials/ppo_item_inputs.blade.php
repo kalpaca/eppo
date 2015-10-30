@@ -75,5 +75,9 @@ $itemLineClass = 'ppo-item-line col-md-12';
 			{!! Form::text($postDataIndex.'repeat', null, ['class'=>'form-control integer-field', 'size' => 4]) !!}
 		@endif
 	</div>
+	<div class="col-md-12">
+		{{-- TO DO: implement user role --}}
+		{!! link_to_route('ppoitems.edit', 'Update', $item->id, array('class' => 'btn btn-xs btn-primary')) !!}
+	</div>
 </div>
 </fieldset>

@@ -95,6 +95,8 @@ class CreateTables extends Migration
             $table->boolean('is_start_date')->default(true);
             $table->boolean('is_cycle')->default(true);
             $table->boolean('is_dose_reason')->default(true);
+            $table->boolean('is_bsa')->default(true);
+            $table->integer('cycle_days');
             $table->timestamps();
         });
         Schema::create('ppo_dose_modification_reasons', function(Blueprint $table)
@@ -103,8 +105,7 @@ class CreateTables extends Migration
             $table->integer('ppo_id')->unsigned()->default(0);
             $table->foreign('ppo_id')->references('id')->on('ppos')->onDelete('cascade');
             $table->integer('dose_modification_reason_id')->unsigned()->default(0);
-            $table->foreign('dose_modification_reason_id')->references('id')->on('dose_modification_reasons')->onDelete('cascade');
-            $table->timestamps();
+            $table->foreign('dose_modification_reason_id')->references('id');
         });
         Schema::create('ppo_diagnoses', function(Blueprint $table)
         {
@@ -154,6 +155,7 @@ class CreateTables extends Migration
             $table->integer('regimen_text')->unsigned()->default(0);
             $table->integer('diagnosis_text')->unsigned()->default(0);
             $table->boolean('is_start_date')->default(true);
+            $table->boolean('is_bsa')->default(true);
             $table->boolean('is_cycle')->default(true);
             $table->boolean('is_dose_reason')->default(true);
             $table->integer('cycle_id');

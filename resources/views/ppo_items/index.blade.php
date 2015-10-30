@@ -7,8 +7,10 @@
 <p>No data.</p>
 @else
     <div class='form-inline'>
+        <?php $index = 0;?>
         @foreach($items as $item)
-            @include('ppo_items/partials/ppo_item_admin_view')
+            @include('ppo_items/partials/ppo_item_admin_view', compact('index'))
+            <?php $index++; ?>
         @endforeach
     </div>
 @endif
