@@ -6,35 +6,30 @@
 @if(!$schedules->count())
 <p>No data.</p>
 @else
-<table class="table">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Created</th>
-            <th>Updated</th>
-            <th>Update</th>
-            <th>Delete</th>
-        </tr>
-    </thead>
-    <tbody>
+    <div class='form-inline'>
         @foreach($schedules as $schedule)
-        <tr>
-        <td>{{ $schedule->id }}</td>
-        <td>{{ $schedule->medication }}</td>
-        <td>{{ $schedule->created_at }}</td>
-        <td>{{ $schedule->updated_at }}</td>
-        <td>
-        {!! link_to_route('dosingschedules.edit', 'Update', $schedule->id, array('class' => 'btn btn-info')) !!}
-        </td>
-        <td>
-        {!! Form::open(array('class' => 'form-inline', 'method' => 'DELETE', 'route' => array('dosingschedules.destroy', $schedule->id))) !!}
-            {!! Form::submit('Delete', array('class' => 'btn btn-danger')) !!}
-        {!! Form::close() !!}
-        </td>
-        </tr>
+            <div class="col-md-12 margin_bottom_10 bs-callout">
+                @include('partials/ppo_item')    
+                <div class="col-md-12">
+                    <small>Schedule #</small>
+                    <span>{{ $schedule->id }}</span>
+                    <small>PPO ID</small>
+                    <span>{{ $schedule->ppo_id }}</span> - 
+                    <span>{!! link_to_route('ppos.show', $schedule->ppo->name, $schedule->ppo_id, array('class' => '')) !!}</span> - 
+                    <span>{{ $schedule->ppoSection->name }}</span>
+                </div>
+                <div class="col-md-12 margin_bottom_10">
+                
+                    <small>Created at</small>
+                    <span>{{ $schedule->created_at }}</span>
+                    <small>Updated at</small>
+                    <span>{{ $schedule->updated_at }}</span>
+                </div>
+                <div class="col-md-12 margin_bottom_10">
+                {!! link_to_route('dosingschedules.edit', 'Update', $schedule->id, array('class' => 'btn btn-xs btn-primary')) !!}
+                </div>
+            </div>
         @endforeach
-    </tbody>
-</table>
+    </div>
 @endif
 @endsection

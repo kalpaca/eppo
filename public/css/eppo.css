@@ -9,3 +9,24 @@
 .form-inline .form-group {
     margin-bottom: 10px !important;
 }
+.margin_bottom_10 {
+	margin-bottom: 10px;
+}
+.ppo-item-is-selected {
+	opacity: 1;
+	color: #222;
+	background-color: #ffc;
+}
+.ppo-item-detail {
+	text-indent: 10px;
+}
+.ppo-item {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.bs-callout {
+    padding: 0;
+    margin: 10px 0;
+    border-bottom: 1px solid #eee;
+    border-left: 5px solid #eee;
+}

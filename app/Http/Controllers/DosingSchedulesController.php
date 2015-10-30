@@ -74,8 +74,8 @@ class DosingSchedulesController extends Controller
      */
     public function show($id)
     {
-        $schedules = DosingSchedule::with('doseRoute','doseUnit','doseCalculationType','mitteUnit','ppo','medication','ppoSection')->findOrFail($id);
-        return view('dosing_schedules.show', compact('schedules'));
+        $schedule = DosingSchedule::with('doseRoute','doseUnit','doseCalculationType','mitteUnit','ppo','medication','ppoSection')->findOrFail($id);
+        return view('dosing_schedules.show', compact('schedule'));
     }
 
     /**
