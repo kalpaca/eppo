@@ -25,11 +25,11 @@ Route::resource('lucodes', 'LucodesController');
 Route::resource('patients', 'PatientsController');
 Route::resource('pposections', 'PpoSectionsController');
 Route::resource('prescriptionoperationrecords', 'PrescriptionOperationRecordsController');
-Route::resource('dosingschedules', 'DosingSchedulesController');
+Route::resource('ppoitems', 'PpoItemsController');
 Route::resource('dosecalculationtypes', 'DoseCalculationTypesController');
 Route::resource('doseroutes', 'DoseRoutesController');
 Route::resource('doseunits', 'DoseUnitsController');
 Route::resource('mitteunits', 'MitteUnitsController');
 Route::resource('dosemodificationreasons', 'DoseModificationReasonsController');
-Route::resource('ppos.dosingschedules', 'DosingSchedulesController');
+Route::resource('ppos.ppoitems', 'PpoItemsController');
 

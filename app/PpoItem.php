@@ -4,7 +4,7 @@ namespace eppo;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DosingSchedule extends Model
+class PpoItem extends Model
 {
     protected $fillable = [
     'name',

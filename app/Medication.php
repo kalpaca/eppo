@@ -11,6 +11,6 @@ class Medication extends Model
     ];
     public function dosingSchedules()
 	{
-    	return $this->hasMany('eppo\DosingSchedule');
+    	return $this->hasMany('eppo\PpoItem');
 	}
 }

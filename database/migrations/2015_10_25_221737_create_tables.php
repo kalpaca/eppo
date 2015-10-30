@@ -114,7 +114,7 @@ class CreateTables extends Migration
             $table->integer('diagnosis_id')->unsigned()->default(0);
             $table->foreign('diagnosis_id')->references('id')->on('diagnosis')->onDelete('cascade');
         });
-        Schema::create('dosing_schedules', function (Blueprint $table) {
+        Schema::create('ppo_items', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('is_active')->default(false);
             $table->integer('ppo_id')->unsigned()->default(0);
@@ -136,10 +136,10 @@ class CreateTables extends Migration
             $table->boolean('is_repeat_input')->default(true);
             $table->timestamps();
         });
-        Schema::create('dosing_schedule_lucodes', function (Blueprint $table) {
+        Schema::create('ppo_item_lucodes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('dosing_schedule_id')->unsigned()->default(0);
-            $table->foreign('dosing_schedule_id')->references('id')->on('dosing_schedules')->onDelete('cascade');
+            $table->integer('ppo_item_id')->unsigned()->default(0);
+            $table->foreign('ppo_item_id')->references('id')->on('ppo_items')->onDelete('cascade');
             $table->integer('lucode_id')->unsigned()->default(0);
             $table->foreign('lucode_id')->references('id')->on('lucodes')->onDelete('cascade');
             $table->timestamps();
@@ -193,7 +193,7 @@ class CreateTables extends Migration
             $table->foreign('prescription_id')->references('id')->on('prescriptions')->onDelete('cascade');
             $table->integer('ppo_id');
             $table->integer('ppo_section_id');
-            $table->integer('dosing_schedule_id');
+            $table->integer('ppo_item_id');
             $table->integer('medication_id');
             $table->string('medication_name');
             $table->string('medication_common_instruction');
@@ -234,8 +234,8 @@ class CreateTables extends Migration
         Schema::drop('prescription_operation_records');
         Schema::drop('prescriptions');
         Schema::drop('ppo_dose_modification_reasons');
-        Schema::drop('dosing_schedule_lucodes');
-        Schema::drop('dosing_schedules');
+        Schema::drop('ppo_item_lucodes');
+        Schema::drop('ppo_items');
         Schema::drop('ppo_diagnoses');
         Schema::drop('ppos');
         Schema::drop('dose_modification_reasons');

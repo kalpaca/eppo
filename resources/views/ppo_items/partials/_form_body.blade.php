@@ -1,7 +1,7 @@
 <?php
-$isActive = isset($schedule->is_active) ? $schedule->is_active : true;
-$isMitteInput = isset($schedule->is_mitte_reason) ? $schedule->is_mitte_reason : true;
-$isRepeatInput = isset($schedule->is_repeat_input) ? $schedule->is_repeat_input : true;
+$isActive = isset($item->is_active) ? $item->is_active : true;
+$isMitteInput = isset($item->is_mitte_reason) ? $item->is_mitte_reason : true;
+$isRepeatInput = isset($item->is_repeat_input) ? $item->is_repeat_input : true;
 $defaultSelection = [''=>'Please Select'];
 $medications = $defaultSelection + $medications->toArray();
 $ppos = $defaultSelection + $ppos->toArray();
