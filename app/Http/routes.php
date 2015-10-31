@@ -17,12 +17,13 @@ Route::get('/', function () {
 Route::get('/about', function () {
      return view('about');
 });
+Route::get('ppos/{id}/prescriptions/create/', array('uses' => 'PrescriptionsController@create', 'as' => 'prescriptions.create'));
 Route::resource('diagnoses', 'DiagnosesController');
 Route::resource('diagnosisprimarycategories', 'DiagnosisPrimaryCategoriesController');
 Route::resource('diagnosissecondarycategories', 'DiagnosisSecondaryCategoriesController');
 Route::resource('regimens', 'RegimensController');
 Route::resource('medications', 'MedicationsController');
-Route::resource('prescriptions', 'PrescriptionsController');
+Route::resource('prescriptions', 'PrescriptionsController', array('except' => array('create')));
 Route::resource('ppos', 'PposController');
 Route::resource('lucodes', 'LucodesController');
 Route::resource('patients', 'PatientsController');

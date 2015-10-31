@@ -5,7 +5,8 @@ namespace eppo\Http\Controllers;
 use Illuminate\Http\Request;
 use eppo\Http\Requests;
 use eppo\Http\Controllers\Controller;
-
+use eppo\Prescription;
+use eppo\Ppo;
 class PrescriptionsController extends Controller
 {
     public function index()
@@ -19,9 +20,10 @@ class PrescriptionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($ppoId)
     {
-        return view('prescriptions.create');
+        $ppo = Ppo::with('diagnoses','regimen','author','ppoItems')->findOrFail($ppoId);
+        return view('prescriptions.create', compact('ppo'));
     }
 
     /**
