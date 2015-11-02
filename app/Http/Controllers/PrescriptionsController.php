@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use eppo\Http\Requests;
 use eppo\Http\Controllers\Controller;
 use eppo\Prescription;
+use eppo\PrescriptionItem;
 use eppo\Ppo;
 use eppo\Diagnosis;
 class PrescriptionsController extends Controller
@@ -50,14 +51,15 @@ class PrescriptionsController extends Controller
         {
             foreach($request->prescriptionItems as $item)
             {
-                $prescription->items()->create($item);
+                if(isset($item['is_selected']) && $item['is_selected'])
+                    $prescription->prescriptionItems()->create($item);
             }
         }
         if(isset($request->reasons))
         {
             $prescription->reasons()->sync($request->reasons);
         }
-        return redirect()->route('prescriptions.show')->with('message', 'Prescription created');
+        return redirect()->route('prescriptions.show', [$prescription->id])->with('message', 'Prescription created');
     }
 
     /**
@@ -68,7 +70,7 @@ class PrescriptionsController extends Controller
      */
     public function show($id)
     {
-        $prescription = Prescription::with('diagnoses','regimen','author','prescriptionItems')->findOrFail($id);
+        $prescription = Prescription::with('diagnosis','regimen','author','prescriptionItems','reasons')->findOrFail($id);
         return view('prescriptions.show', compact('prescription'));
     }
 
@@ -80,7 +82,7 @@ class PrescriptionsController extends Controller
      */
     public function edit($id)
     {
-        $prescription = Prescription::with('diagnoses','regimen','author','prescriptionItems')->findOrFail($id);
+        $prescription = Prescription::with('diagnosis','regimen','author','prescriptionItems','reasons')->findOrFail($id);
         return view('prescriptions.edit', compact('prescription'));
     }
 
@@ -94,9 +96,6 @@ class PrescriptionsController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'diagnosis_id' => 'required',
-            'regimen_id' => 'required',
-            'ppo_id' => 'required',
         ]);
         $input = $request->all();
 
@@ -105,15 +104,16 @@ class PrescriptionsController extends Controller
 
         if(isset($request->prescriptionItems))
         {
+            $prescription->prescriptionItems()->delete();
             foreach($request->prescriptionItems as $item)
-                $theItem = Prescription::findOrFail($item['id']);
-                $theItem->update($item);
+                if(isset($item['is_selected']) && $item['is_selected'])
+                    $prescription->prescriptionItems()->create($item);
         }
         if(isset($request->reasons))
         {
             $prescription->reasons()->sync($request->reasons);
         }
-        return redirect()->route('prescriptions.show')->with('message', 'Prescription created');
+        return redirect()->route('prescriptions.show', [$prescription->id])->with('message', 'Prescription created');
     }
 
     /**

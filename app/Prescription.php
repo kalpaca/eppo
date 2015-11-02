@@ -45,7 +45,11 @@ class Prescription extends Model
 	{
     	return $this->belongsTo('eppo\Diagnosis');
 	}
-	public function items()
+    public function ppo()
+    {
+        return $this->belongsTo('eppo\Ppo');
+    }
+	public function prescriptionItems()
 	{
     	return $this->hasMany('eppo\PrescriptionItem');
 	}

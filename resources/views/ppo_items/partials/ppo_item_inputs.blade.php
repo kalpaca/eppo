@@ -10,9 +10,15 @@ $itemLineClass = 'ppo-item-line col-md-12';
 	{!! Form::hidden($postDataIndex.'id]', null) !!}
 	{!! Form::hidden($postDataIndex.'ppo_section_id]', $item->ppoSection->id) !!}
 	{!! Form::hidden($postDataIndex.'ppo_item_id]', $item->id) !!}
+	{!! Form::hidden($postDataIndex.'dose_base]', $item->dose_base) !!}
+	{!! Form::hidden($postDataIndex.'dose_unit_id]', $item->dose_unit_id) !!}
+	{!! Form::hidden($postDataIndex.'mitte_unit_id]', $item->mitte_unit_id) !!}
+	{!! Form::hidden($postDataIndex.'dose_calculation_type_id]', $item->dose_calculation_type_id) !!}
+	{!! Form::hidden($postDataIndex.'dose_route_id]', $item->dose_route_id) !!}
 	{!! Form::hidden($postDataIndex.'medication_id]', $item->medication->id) !!}
 	{!! Form::hidden($postDataIndex.'medication_name]', $item->medication->name) !!}
 	{!! Form::hidden($postDataIndex.'medication_common_instruction]', $item->medication->instruction) !!}
+	{!! Form::hidden($postDataIndex.'instruction]', $item->instruction) !!}
 	{!! Form::hidden($postDataIndex.'is_duration_input]', $item->is_duration_input) !!}
 	{!! Form::hidden($postDataIndex.'is_frequency_input]', $item->is_frequency_input) !!}
 	{!! Form::hidden($postDataIndex.'is_mitte_input]', $item->is_mitte_input) !!}
