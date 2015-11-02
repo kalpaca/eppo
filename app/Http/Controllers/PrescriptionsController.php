@@ -13,8 +13,8 @@ class PrescriptionsController extends Controller
 {
     public function index()
     {
-        $prescription = Prescription::with('diagnoses','regimen')->get();
-        return view('prescriptions.index', compact('prescription'));
+        $prescriptions = Prescription::with('diagnosis','regimen')->get();
+        return view('prescriptions.index', compact('prescriptions'));
     }
 
     /**
