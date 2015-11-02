@@ -37,15 +37,19 @@ $isStartDate = isset($ppo->is_start_date) ? $ppo->is_start_date : true;
 </div>
 
 <div class="form-group">
+    {!! Form::hidden('is_start_date', false) !!}
+    {!! Form::checkbox('is_start_date', null, $isStartDate) !!}
+    {!! Form::label('is_start_date','Show start date input ', ['class' => 'control-label']) !!}
+</div>
+
+<div class="form-group">
     {!! Form::hidden('is_dose_reason', false) !!}
     {!! Form::checkbox('is_dose_reason', null, $isReason) !!}
     {!! Form::label('is_reason','Show Dose modification reasons selection ', ['class' => 'control-label']) !!}
 </div>
 
 <div class="form-group">
-    {!! Form::hidden('is_start_date', false) !!}
-    {!! Form::checkbox('is_start_date', null, $isStartDate) !!}
-    {!! Form::label('is_start_date','Show start date input ', ['class' => 'control-label']) !!}
+    {!! Form::label('reasons[]','Reasons: ',['class' => 'control-label']) !!}
+    {!! Form::select('reasons[]',$reasons, $reasonsSelected, ['class'=>'form-control','multiple'=>'multiple']) !!}
 </div>
-
 {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}

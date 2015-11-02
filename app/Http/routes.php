@@ -17,6 +17,7 @@ Route::get('/', function () {
 Route::get('/about', function () {
      return view('about');
 });
+Route::get('ppos/explore/', array('uses' => 'PposController@explore', 'as' => 'ppos.explore'));
 Route::get('ppos/{id}/prescriptions/create/', array('uses' => 'PrescriptionsController@create', 'as' => 'prescriptions.create'));
 Route::resource('diagnoses', 'DiagnosesController');
 Route::resource('diagnosisprimarycategories', 'DiagnosisPrimaryCategoriesController');

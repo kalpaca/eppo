@@ -23,11 +23,10 @@ class Ppo extends Model
 	public function ppoItems()
 	{
     	return $this->hasMany('eppo\PpoItem');
-	}
-    /*
-	public function doseModificationReasons()
+	}   
+	public function reasons()
 	{
-		return $this->hasMany('eppo\DoseModificationReason');
+		return $this->belongsToMany('eppo\DoseModificationReason','ppo_dose_modification_reasons');
 	}
-    */
+    
 }

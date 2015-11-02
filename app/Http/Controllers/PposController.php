@@ -10,6 +10,8 @@ use eppo\Ppo;
 use eppo\Regimen;
 use eppo\Diagnosis;
 use eppo\DoseModificationReason;
+use eppo\DiagnosisSecondaryCategory;
+use eppo\DiagnosisPrimaryCategory;
 
 class PposController extends Controller
 {
@@ -25,6 +27,19 @@ class PposController extends Controller
     }
 
     /**
+     * Select a ppo based on regimen and diagnosis.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function explore()
+    {
+        $primaryCats = DiagnosisPrimaryCategory::with('secondaryCats')->get();
+        $secondaryCats = DiagnosisSecondaryCategory::lists('diagnosis_primary_category_id','id');
+        $ppos = Ppo::with('diagnoses','regimen')->get();
+        return view('ppos.explore', compact('primaryCats','secondaryCats','ppos'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -35,9 +50,9 @@ class PposController extends Controller
         $diagnoses = Diagnosis::lists('name','id');
         $reasons = DoseModificationReason::lists('name','id');
         $diagnosesSelected = null;
-        return view('ppos.create', compact('regimens','diagnosesSelected','diagnoses','reasons'));
+        $reasonsSelected = null;
+        return view('ppos.create', compact('regimens','diagnosesSelected','diagnoses','reasons','reasonsSelected'));
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -57,8 +72,11 @@ class PposController extends Controller
         if(isset($request->diagnoses))
         {
             $ppo->diagnoses()->sync($request->diagnoses);
+        }        
+        if(isset($request->reasons))
+        {
+            $ppo->diagnoses()->sync($request->reasons);
         }
-
         return redirect()->route('ppos.index')->with('message', 'PPO created');
     }
 
@@ -70,7 +88,7 @@ class PposController extends Controller
      */
     public function show($id)
     {//'doseModificationReasons'
-        $ppo = Ppo::with('diagnoses','regimen','author','ppoItems')->findOrFail($id);
+        $ppo = Ppo::with('diagnoses','regimen','author','ppoItems','reasons')->findOrFail($id);
         return view('ppos.show', compact('ppo'));
     }
 
@@ -87,7 +105,8 @@ class PposController extends Controller
         $diagnoses = Diagnosis::lists('name','id');
         $reasons = DoseModificationReason::lists('name','id');
         $diagnosesSelected = $ppo->diagnoses->pluck('id')->all();
-        return view('ppos.edit', compact('ppo','regimens','diagnosesSelected','diagnoses','reasons'));
+        $reasonsSelected = $ppo->reasons->pluck('id')->all();
+        return view('ppos.edit', compact('ppo','regimens','diagnosesSelected','diagnoses','reasons','reasonsSelected'));
     }
 
     /**
@@ -106,9 +125,14 @@ class PposController extends Controller
 
         $ppo = Ppo::findOrFail($id);
         $ppo->update( $input );
+
         if(isset($request->diagnoses))
         {
             $ppo->diagnoses()->sync($request->diagnoses);
+        }
+        if(isset($request->reasons))
+        {
+            $ppo->reasons()->sync($request->reasons);
         }
         return redirect()->route('ppos.index')->with('message', 'PPO updated');
     }

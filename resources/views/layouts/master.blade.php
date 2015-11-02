@@ -7,13 +7,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('css/eppo.css') }}" rel="stylesheet" type="text/css" />
-        <!-- ES5, Html5 shim and Respond.js IE8 support of Html5 elements and media queries -->
         <script src="{{ asset('js/Modernizr.mq.min.js') }}"></script>
         <script>
+        /* ES5, Html5 shim and Respond.js IE8 support of Html5 elements and media queries */
             yepnope({
                 test: Modernizr.mq('only all'),
                 both: ["{{ asset('bower_components/jquery/dist/jquery.min.js')}}",
-                    "{{ asset('js/bootstrap.min.js') }}"
+                    "{{ asset('js/bootstrap.min.js') }}",
+                    "{{ asset('js/jquery.shuffle.modernizr.min.js') }}",
+                    "{{ asset('js/ppoExplorer.js') }}"
                     ],
                 nope: [
                     "{{ asset('bower_components/es5-shim/es5-shim.min.js') }}",

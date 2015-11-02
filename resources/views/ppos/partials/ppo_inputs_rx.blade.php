@@ -21,7 +21,16 @@
             @endif
         @endforeach
     </div>
-    <div class="col-md-12"><strong>*NO Repeats for chemotherapy medication</strong></div>
+
+    @if($ppo->is_dose_reason)
+    <div class='ppo-dose-reasons col-md-12'>
+        <h6><strong>*Dose modification reason</strong></h6>
+        @foreach($ppo->reasons as $reason)
+            {!! Form::checkbox('reasons[]', $reason->id, null) !!}
+            {!! Form::label('is_reason',$reason->name, ['class' => 'control-label']) !!}
+        @endforeach
+    </div>
+    @endif
 </td>
 </tr>
 </tbody>
