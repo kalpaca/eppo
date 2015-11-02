@@ -72,10 +72,10 @@ class PposController extends Controller
         if(isset($request->diagnoses))
         {
             $ppo->diagnoses()->sync($request->diagnoses);
-        }        
+        }
         if(isset($request->reasons))
         {
-            $ppo->diagnoses()->sync($request->reasons);
+            $ppo->reasons()->sync($request->reasons);
         }
         return redirect()->route('ppos.index')->with('message', 'PPO created');
     }

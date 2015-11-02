@@ -2,7 +2,7 @@
 @section('title',$ppo->name)
 @section('formTitle','Create new prescription')
 @section('formContent')
-{!! Form::model(new eppo\prescription, [
+{!! Form::model(new eppo\Prescription, [
         'route'=>'prescriptions.store',
         'class'=>'form-inline'
     ]) !!}

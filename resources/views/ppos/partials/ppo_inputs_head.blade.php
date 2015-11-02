@@ -25,8 +25,9 @@
         <p class="regimen-name">{{ $ppo->regimen->name }}</p>
 
         <p><strong>Diagnosis: </strong>
-        @if(isset($diagnosisSelect))
-            <span class="diagnosis-name"><strong>{{ $ppo->diagnoses->name }}</strong></span>
+        @if(isset($diagnosis))
+            <span class="diagnosis-name"><strong>{{ $diagnosis->name }}</strong></span>
+            {!! Form::hidden('diagnosis_id', $diagnosis->id) !!}
         @else
             </p>
             @foreach($ppo->diagnoses as $diagnosis)
@@ -37,8 +38,8 @@
     <td class="col-md-6">
         @if($ppo->is_cycle)
         <div class="ppo-cycle">
-            {!! Form::label('cycle_days','Cycle #: ', ['class' => 'control-label']) !!}
-            {!! Form::text('cycle_days', null, ['class' => 'form-control', 'size'=> 2]) !!}
+            {!! Form::label('cycle_id','Cycle #: ', ['class' => 'control-label']) !!}
+            {!! Form::text('cycle_id', null, ['class' => 'form-control', 'size'=> 2]) !!}
              Cycle repeats every {{ $ppo->cycle_days }} days
         </div>
         @endif
@@ -60,3 +61,10 @@
 </tr>
 </tbody>
 </table>
+{!! Form::hidden('ppo_id', $ppo->id) !!}
+{!! Form::hidden('regimen_id', $ppo->regimen->id) !!}
+{!! Form::hidden('is_start_date',$ppo->is_start_date) !!}
+{!! Form::hidden('is_bsa',$ppo->is_bsa) !!}
+{!! Form::hidden('is_dose_reason',$ppo->is_dose_reason) !!}
+{!! Form::hidden('is_cycle',$ppo->is_cycle) !!}
+{!! Form::hidden('cycle_days',$ppo->cycle_days) !!}

@@ -1,6 +1,6 @@
 <?php
 $index = isset($index)? $index : 0;
-$postDataIndex = 'PrescriptionItem['.$index.'][';
+$postDataIndex = 'prescriptionItems['.$index.'][';
 $ppoItemIndex = 'ppo-item-'.$item->ppo_section_id .'-'. $index;
 $itemLineClass = 'ppo-item-line col-md-12';
 ?>
@@ -12,7 +12,7 @@ $itemLineClass = 'ppo-item-line col-md-12';
 	{!! Form::hidden($postDataIndex.'ppo_item_id]', $item->id) !!}
 	{!! Form::hidden($postDataIndex.'medication_id]', $item->medication->id) !!}
 	{!! Form::hidden($postDataIndex.'medication_name]', $item->medication->name) !!}
-	{!! Form::hidden($postDataIndex.'medication_instruction]', $item->medication->instruction) !!}
+	{!! Form::hidden($postDataIndex.'medication_common_instruction]', $item->medication->instruction) !!}
 	{!! Form::hidden($postDataIndex.'is_duration_input]', $item->is_duration_input) !!}
 	{!! Form::hidden($postDataIndex.'is_frequency_input]', $item->is_frequency_input) !!}
 	{!! Form::hidden($postDataIndex.'is_mitte_input]', $item->is_mitte_input) !!}
