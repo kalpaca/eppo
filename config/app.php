@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost/eppo',
+    'url' => env('APP_URL', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Toronto',
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY', 'okwhatthehellisthis'),
+    'key' => env('APP_KEY', '3KdypMcQjhoAFz4sJ4qcbZSk9lE7jWJq'),
 
     'cipher' => 'AES-256-CBC',
 
