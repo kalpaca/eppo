@@ -6,10 +6,11 @@
         'route'=>'prescriptions.store',
         'class'=>'form-inline'
     ]) !!}
-    @include('ppos/partials/ppo_inputs_head')
-    @include('ppos/partials/ppo_inputs_rx')
-    @include('ppos/partials/ppo_inputs_suppotive_rx')
-    @include('ppos/partials/ppo_inputs_tail')
+@include('ppos/partials/ppo_inputs_all')
+<div class="col-md-12">
+	{!! Form::submit('Submit', ['class' => 'btn btn-primary pull-right']) !!}
+</div>
+
 {!! Form::close() !!}
 </div>
 @endsection
