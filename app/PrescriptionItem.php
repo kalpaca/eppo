@@ -47,4 +47,16 @@ class PrescriptionItem extends Model
     {
         return $this->belongsTo('eppo\Lucode');
     }
+    public function doseRoute()
+    {
+        return $this->belongsTo('eppo\DoseRoute');
+    }
+    public function doseUnit()
+    {
+        return $this->belongsTo('eppo\DoseUnit');
+    }
+    public function mitteUnit()
+    {
+        return $this->belongsTo('eppo\MitteUnit');
+    }
 }

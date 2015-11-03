@@ -89,7 +89,16 @@ class PposController extends Controller
     public function show($id)
     {//'doseModificationReasons'
         $ppo = Ppo::with('diagnoses','regimen','author','ppoItems','reasons')->findOrFail($id);
-        return view('ppos.show', compact('ppo'));
+        $rx = new Collection();
+        $supportiveRx = new Collection();
+        foreach($ppo->ppoItems as $item)
+        {
+            if($item->ppo_section_id == 1)
+                $rx->push($item);
+            elseif($item->ppo_section_id == 2)
+                $supportiveRx->push($item);
+        }
+        return view('ppos.show', compact('ppo','rx','supportiveRx'));
     }
 
     /**

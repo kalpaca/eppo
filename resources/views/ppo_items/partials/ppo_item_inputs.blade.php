@@ -8,7 +8,7 @@ $itemLineClass = 'ppo-item-line col-md-12';
 <div class="ppo-item clearfix" id="{{ $ppoItemIndex }}">
 	<!--start: ppo item hidden input-->
 	{!! Form::hidden($postDataIndex.'id]', null) !!}
-	{!! Form::hidden($postDataIndex.'ppo_section_id]', $item->ppoSection->id) !!}
+	{!! Form::hidden($postDataIndex.'ppo_section_id]', $item->ppo_section_id) !!}
 	{!! Form::hidden($postDataIndex.'ppo_item_id]', $item->id) !!}
 	{!! Form::hidden($postDataIndex.'dose_base]', $item->dose_base) !!}
 	{!! Form::hidden($postDataIndex.'dose_unit_id]', $item->dose_unit_id) !!}
@@ -41,7 +41,6 @@ $itemLineClass = 'ppo-item-line col-md-12';
 			{!! Form::text($postDataIndex.'dose_percentage]', null, ['class'=>'form-control integer-field', 'size' => 2]) !!}
 			 % * =
 		@elseif($item->dose_calculation_type_id == 4) {{-- Fixed dose --}}
-			{{ $item->dose_base . $item->doseUnit->name }}
 			{!! Form::hidden ( $postDataIndex.'dose_result]', $fixed_dose_result) !!}
 		@endif
 		{{-- MD dose input--}}

@@ -18,6 +18,9 @@ select[multiple] {
     padding: 0px 4px;
     margin: 5px 0px;
 }
+.unicode-checkbox {
+    font-size: 14pt;
+}
 .form-inline .form-group {
     margin-bottom: 10px !important;
 }

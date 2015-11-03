@@ -30,17 +30,9 @@ class PpoItem extends Model
 	{
     	return $this->belongsTo('eppo\Ppo');
 	}
-    public function ppoSection()
-    {
-        return $this->belongsTo('eppo\PpoSection');
-    }
     public function medication()
     {
         return $this->belongsTo('eppo\Medication');
-    }
-    public function doseCalculationType()
-    {
-        return $this->belongsTo('eppo\DoseCalculationType');
     }
     public function doseRoute()
     {

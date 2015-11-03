@@ -1,4 +1,5 @@
 <?php $index = 0;?>
+@if($rx->count()>0)
 <table class="table table-bordered ppo-rx">
 <tbody>
 <tr>
@@ -14,12 +15,10 @@
         </h3>
     </p>
     <hr>
-    <div class="ppo-items">     
-        @foreach($ppo->ppoItems as $item)
-            @if($item->ppo_section_id == 1)
-                @include('ppo_items/partials/ppo_item_inputs', compact('index'))
-                <?php $index++; ?>
-            @endif
+    <div class="ppo-items">
+        @foreach($rx as $item)
+            @include('ppo_items/partials/ppo_item_inputs', compact('index'))
+            <?php $index++; ?>
         @endforeach
     </div>
 
@@ -36,6 +35,8 @@
 </tr>
 </tbody>
 </table>
+@endif
+@if($supportiveRx->count()>0)
 <table class="table table-bordered ppo-rx">
 <tbody>
 <tr>
@@ -46,14 +47,13 @@
     </p>
     <hr>
     <div class="ppo-items">
-        @foreach($ppo->ppoItems as $item)
-            @if($item->ppo_section_id == 2)
-                @include('ppo_items/partials/ppo_item_inputs', compact('index'))
-                <?php $index++; ?>
-            @endif
+        @foreach($supportiveRx as $item)
+            @include('ppo_items/partials/ppo_item_inputs', compact('index'))
+            <?php $index++; ?>
         @endforeach
     </div>
     </td>
 </tr>
 </tbody>
 </table>
+@endif

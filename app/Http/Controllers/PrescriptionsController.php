@@ -3,6 +3,7 @@
 namespace eppo\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use eppo\Http\Requests;
 use eppo\Http\Controllers\Controller;
 use eppo\Prescription;
@@ -26,7 +27,16 @@ class PrescriptionsController extends Controller
     {
         $diagnosis = Diagnosis::findOrFail($diagnosisId);
         $ppo = Ppo::with('diagnoses','regimen','author','ppoItems')->findOrFail($ppoId);
-        return view('prescriptions.create', compact('ppo','diagnosis'));
+        $rx = new Collection();
+        $supportiveRx = new Collection();
+        foreach($ppo->ppoItems as $item)
+        {
+            if($item->ppo_section_id == 1)
+                $rx->push($item);
+            elseif($item->ppo_section_id == 2)
+                $supportiveRx->push($item);
+        }
+        return view('prescriptions.create', compact('ppo','diagnosis','rx','supportiveRx'));
     }
 
     /**
@@ -71,7 +81,17 @@ class PrescriptionsController extends Controller
     public function show($id)
     {
         $prescription = Prescription::with('diagnosis','regimen','author','prescriptionItems','reasons')->findOrFail($id);
-        return view('prescriptions.show', compact('prescription'));
+
+        $rx = new Collection();
+        $suppotiveRx = new Collection();
+        foreach($prescription->prescriptionItems as $item)
+        {
+            if($item->ppo_section_id == 1)
+                $rx->push($item);
+            elseif($item->ppo_section_id == 2)
+                $suppotiveRx->push($item);
+        }
+        return view('prescriptions.show', compact('prescription','rx','suppotiveRx'));
     }
 
     /**
@@ -83,7 +103,16 @@ class PrescriptionsController extends Controller
     public function edit($id)
     {
         $prescription = Prescription::with('diagnosis','regimen','author','prescriptionItems','reasons')->findOrFail($id);
-        return view('prescriptions.edit', compact('prescription'));
+        $rx = new Collection();
+        $suppotiveRx = new Collection();
+        foreach($prescription->prescriptionItems as $item)
+        {
+            if($item->ppo_section_id == 1)
+                $rx->push($item);
+            elseif($item->ppo_section_id == 2)
+                $suppotiveRx->push($item);
+        }
+        return view('prescriptions.edit', compact('prescription','rx','suppotiveRx'));
     }
 
     /**
