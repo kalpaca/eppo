@@ -2,7 +2,9 @@
 
 [![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
 
+### Live demo of current development stage
 
+http://phpstack-12523-27493-66288.cloudwaysapps.com/
 
 This tool is made for oncologists/Hematologists and Nurse Practitioners to enter, per the CancerCare Ontario PrePrinted Orders (PPOs) , prescribed medications based on disease, regimen for the patient to take to a pharmacy to dispense the medications.
 
