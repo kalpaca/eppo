@@ -103,17 +103,18 @@ class PrescriptionsController extends Controller
      */
     public function edit($id)
     {
-        $prescription = Prescription::with('diagnosis','regimen','author','prescriptionItems','reasons')->findOrFail($id);
+        $prescription = Prescription::with('diagnosis','ppo','author','prescriptionItems','reasons')->findOrFail($id);
+        $ppo =  $prescription->ppo;
         $rx = new Collection();
         $supportiveRx = new Collection();
-        foreach($prescription->prescriptionItems as $item)
+        foreach($ppo->ppoItems as $item)
         {
             if($item->ppo_section_id == 1)
                 $rx->push($item);
             elseif($item->ppo_section_id == 2)
                 $supportiveRx->push($item);
         }
-        return view('prescriptions.edit', compact('prescription','rx','supportiveRx'));
+        return view('prescriptions.edit', compact('diagnosis','prescription','ppo','prescriptionItems','rx','supportiveRx'));
     }
 
     /**

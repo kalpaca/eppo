@@ -2,9 +2,6 @@
 @section('title','View prescription')
 @section('panelHeading','View prescription')
 @section('panelBody')
-<?php
-$ppo = $prescription->ppo;
-?>
 {!! Form::model($prescription, [
     'method' => 'PATCH',
         'route'=>['prescriptions.update',$prescription->id],
