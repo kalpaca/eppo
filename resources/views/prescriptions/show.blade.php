@@ -49,7 +49,7 @@ $ppo = $prescription->ppo;
         @if($ppo->is_bsa)
         <div class="ppo-bsa">
             <p>
-                <strong>Height: </strong> {{$prescription->height}} cm&nbsp;&nbsp;&nbsp;&nbsp;<strong>Weight: </strong> kg
+                <strong>Height: </strong> {{$prescription->height}} cm&nbsp;&nbsp;&nbsp;&nbsp;<strong>Weight: </strong>  {{$prescription->weight}} kg
             </p>
             <p>
                 <strong>Body Surface Area (BSA): </strong> {{$prescription->bsa}} m<sup>2</sup>
@@ -71,7 +71,7 @@ $ppo = $prescription->ppo;
         <h3>Rx
         <sub>
         @if($prescription->is_start_date)
-            <strong>Start Date/Day 1: </strong>$prescription->start_date
+            <strong>Start Date/Day 1: </strong>{{$prescription->start_date}}
         @endif
         </sub>
         </h3>

@@ -10,6 +10,7 @@ use eppo\Prescription;
 use eppo\PrescriptionItem;
 use eppo\Ppo;
 use eppo\Diagnosis;
+
 class PrescriptionsController extends Controller
 {
     public function index()

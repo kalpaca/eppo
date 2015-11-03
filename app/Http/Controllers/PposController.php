@@ -3,6 +3,8 @@
 namespace eppo\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+
 use eppo\Http\Requests;
 use eppo\Http\Controllers\Controller;
 
@@ -12,6 +14,7 @@ use eppo\Diagnosis;
 use eppo\DoseModificationReason;
 use eppo\DiagnosisSecondaryCategory;
 use eppo\DiagnosisPrimaryCategory;
+
 
 class PposController extends Controller
 {
