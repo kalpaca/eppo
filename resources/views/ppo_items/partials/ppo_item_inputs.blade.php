@@ -46,23 +46,23 @@ $itemLineClass = 'ppo-item-line col-md-12';
 		@endif
 		{{-- MD dose input--}}
 		{!! Form::text($postDataIndex.'dose_result]', null, ['class'=>$ppoItemInput.'decimal-field', 'size' => 6 ]) !!}
-		 {{ $item->doseUnit->name . $item->instruction }}
+		 {{ $item->doseUnit->name .' '. $item->instruction }}
 
 
 		@if($item->is_frequency_input)
-			{!! Form::text($postDataIndex.'frequency]', null, ['class'=>$ppoItemInput, 'size' => 6]) !!}
+		 {!! Form::text($postDataIndex.'frequency]', null, ['class'=>$ppoItemInput, 'size' => 6]) !!}
 		@endif
 
 		@if($item->is_duration_input)
-			{!! Form::text($postDataIndex.'duration]', null, ['class'=>$ppoItemInput, 'size' => 6]) !!} days
+		 {!! Form::text($postDataIndex.'duration]', null, ['class'=>$ppoItemInput, 'size' => 6]) !!} days
 		@endif
 
 		@if($item->medication->instruction)
-			{{ $item->medication->instruction }}
+		 {{ $item->medication->instruction }}
 		@endif
 
 		@if($item->is_instruction_input)
-			{!! Form::text($postDataIndex.'instruction_input]', null, ['class'=>$ppoItemInput]) !!}
+		 {!! Form::text($postDataIndex.'instruction_input]', null, ['class'=>$ppoItemInput]) !!}
 		@endif
 	</div>
 	<div class="{{ $itemLineClass }}">

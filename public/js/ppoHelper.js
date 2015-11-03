@@ -67,14 +67,15 @@ var ppoHelper = (function($){
 		var itemID = $(box).attr("id");
 
 		var ppoItemIndex = itemID.substring(0, 12);
+		var ppoItem = $('#' + ppoItemIndex);
 		if ($(box).is(':checked')) {
-			$('#' + ppoItemIndex).addClass("item-is-selected");
+			ppoItem.addClass("item-is-selected");
 			$('.' + ppoItemIndex + '-input').addClass("mandatary-field").prop('disabled', false);
 
 		} else {
-			$('#' + ppoItemIndex).removeClass("item-is-selected");
+			ppoItem.removeClass("item-is-selected");
 			$('.' + ppoItemIndex + '-input').removeClass("mandatary-field").removeClass("mandatary-field-error").prop('disabled', true);
-			$('.' + ppoItemIndex + ' .ppo-item-line .error-message').remove();
+			ppoItem.find('.alert').remove();
 		}
 	},
 
@@ -268,8 +269,11 @@ var ppoHelper = (function($){
 					// check this has no class .mandatary-field-error so we only attach error message once
 					if(!$(this).hasClass("mandatary-field-error"))
 					{
+						var alert =
+						"<span id = '"+$(this).attr('id')+"-error' class='alert alert-danger alert-dismissible' role='alert'>"
+							+"!</span>";
 						// add error message
-						$(this).addClass("mandatary-field-error").after( "<span id = '"+$(this).attr('id')+"-error' class='error-message'>This cannot be empty. </span>" );
+						$(this).addClass("mandatary-field-error").after( alert );
 					}
 					// set result false to prevent form submit
 					result = false;
@@ -310,8 +314,11 @@ var ppoHelper = (function($){
 				    {
 				    	$(this).focus();
 				    	result = false;
+				    	var alert =
+						"<span id = '"+$(this).attr('id')+"-error' class='alert alert-danger alert-dismissible' role='alert'>"
+							+"!</span>";
 				    	if(!$(this).hasClass("integer-field-error"))
-				    		$(this).addClass("integer-field-error").after( "<span id = '"+$(this).attr('id')+"-error' class='error-message'>This shoubld be an integer. </span>" );
+				    		$(this).addClass("integer-field-error").after( alert );
 				    }
 				}
 
