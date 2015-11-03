@@ -7,7 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('css/eppo.css') }}" rel="stylesheet" type="text/css" />
-        <script src="{{ asset('js/Modernizr.mq.min.js') }}"></script>
+        <script src="{{ asset('js/modernizr.mq.min.js') }}"></script>
         <script>
         /* ES5, Html5 shim and Respond.js IE8 support of Html5 elements and media queries */
             yepnope({
