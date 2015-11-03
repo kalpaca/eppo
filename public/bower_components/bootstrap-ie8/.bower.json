@@ -41,6 +41,5 @@
   },
   "_source": "git://github.com/kalpaca/bootstrap-ie8.git",
   "_target": "*",
-  "_originalSource": "bootstrap-ie8",
-  "_direct": true
+  "_originalSource": "bootstrap-ie8"
 }
