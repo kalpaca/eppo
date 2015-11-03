@@ -3,7 +3,10 @@
 @section('content')
 
 <p>Welcome, currently ePPO is under construction.</p>
-<p>you can check navbar 'About' link to learn more about this application.</p>
+<p>you can check navbar <a href="/about">About</a> link to learn more about this application.</p>
+
+<p>GitHub: <a href="https://github.com/kalpaca/eppo">click here</a></p>
+
 <h3>To Do List</h3>
 <ul>
 <li><a href="{{route('ppos.create')}}">Use Case: build ppo (almost done)</a></li>

@@ -13,13 +13,6 @@
         /* ES5, Html5 shim and Respond.js IE8 support of Html5 elements and media queries */
             yepnope({
                 test: Modernizr.mq('only all'),
-                both: ["{{ asset('bower_components/jquery/dist/jquery.min.js')}}",
-                    "{{ asset('js/bootstrap.min.js') }}",
-                    "{{ asset('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}",
-                    "{{ asset('js/jquery.shuffle.modernizr.min.js') }}",
-                    "{{ asset('js/ppoExplorer.js') }}",
-                    "{{ asset('js/ppoHelper.js') }}"
-                    ],
                 nope: [
                     "{{ asset('bower_components/es5-shim/es5-shim.min.js') }}",
                     "{{ asset('bower_components/es5-shim/es5-sham.min.js') }}",
@@ -27,6 +20,13 @@
                     "{{ asset('bower_components/html5shiv/dist/html5shiv.js') }}",
                     "{{ asset('bower_components/respond/dest/respond.min.js') }}",
                     "{{ asset('js/selectivizr.min.js') }}"
+                    ],
+                both: ["{{ asset('bower_components/jquery/dist/jquery.min.js')}}",
+                    "{{ asset('js/bootstrap.min.js') }}",
+                    "{{ asset('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}",
+                    "{{ asset('js/jquery.shuffle.modernizr.min.js') }}",
+                    "{{ asset('js/ppoExplorer.js') }}",
+                    "{{ asset('js/ppoHelper.js') }}"
                     ]
             });
         </script>
