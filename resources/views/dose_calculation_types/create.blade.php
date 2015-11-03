@@ -1,7 +1,7 @@
-@extends('layouts.form')
+@extends('layouts.panel')
 @section('title','Dose Calculation Type')
-@section('formTitle','Add a New Dose Calculation Type')
-@section('formContent')
+@section('panelHeading','Add a New Dose Calculation Type')
+@section('panelBody')
 {!! Form::model(new eppo\DoseCalculationType, [
     'route'=>'dosecalculationtypes.store',
     'class'=>'col-md-6'])

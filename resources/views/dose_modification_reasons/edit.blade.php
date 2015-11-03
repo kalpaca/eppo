@@ -1,7 +1,7 @@
-@extends('layouts.form')
+@extends('layouts.panel')
 @section('title','Dose Modification Reason')
-@section('formTitle','Edit a Dose Modification Reason')
-@section('formContent')
+@section('panelHeading','Edit a Dose Modification Reason')
+@section('panelBody')
 {!! Form::model($reason, [
         'method' => 'PATCH',
         'route'=>['dosemodificationreasons.update',

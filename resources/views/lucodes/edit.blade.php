@@ -1,7 +1,7 @@
-@extends('layouts.form')
+@extends('layouts.panel')
 @section('title','LU Code')
-@section('formTitle','Edit a LU Code')
-@section('formContent')
+@section('panelHeading','Edit a LU Code')
+@section('panelBody')
 {!! Form::model($lucode, [
         'method' => 'PATCH',
         'route'=>['lucodes.update',

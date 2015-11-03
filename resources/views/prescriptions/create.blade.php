@@ -1,7 +1,7 @@
-@extends('layouts.form')
+@extends('layouts.panel')
 @section('title',$ppo->name)
-@section('formTitle','Create new prescription')
-@section('formContent')
+@section('panelHeading','Create new prescription')
+@section('panelBody')
 {!! Form::model(new eppo\Prescription, [
         'route'=>'prescriptions.store',
         'class'=>'form-inline'

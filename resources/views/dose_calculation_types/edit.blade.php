@@ -1,7 +1,7 @@
-@extends('layouts.form')
+@extends('layouts.panel')
 @section('title','Dose Calculation Type')
-@section('formTitle','Edit a Dose Calculation Type')
-@section('formContent')
+@section('panelHeading','Edit a Dose Calculation Type')
+@section('panelBody')
 {!! Form::model($type, [
         'method' => 'PATCH',
         'route'=>['dosecalculationtypes.update',

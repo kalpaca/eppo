@@ -1,7 +1,7 @@
-@extends('layouts.form')
+@extends('layouts.panel')
 @section('title','ppo')
-@section('formTitle','Add a New PPO')
-@section('formContent')
+@section('panelHeading','Add a New PPO')
+@section('panelBody')
 {!! Form::model(new eppo\ppo, [
     'route'=>'ppos.store',
     'class'=>'col-md-6'])

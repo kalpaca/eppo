@@ -84,15 +84,15 @@ class PrescriptionsController extends Controller
         $prescription = Prescription::with('diagnosis','regimen','author','prescriptionItems','reasons')->findOrFail($id);
 
         $rx = new Collection();
-        $suppotiveRx = new Collection();
+        $supportiveRx = new Collection();
         foreach($prescription->prescriptionItems as $item)
         {
             if($item->ppo_section_id == 1)
                 $rx->push($item);
             elseif($item->ppo_section_id == 2)
-                $suppotiveRx->push($item);
+                $supportiveRx->push($item);
         }
-        return view('prescriptions.show', compact('prescription','rx','suppotiveRx'));
+        return view('prescriptions.show', compact('prescription','rx','supportiveRx'));
     }
 
     /**
@@ -105,15 +105,15 @@ class PrescriptionsController extends Controller
     {
         $prescription = Prescription::with('diagnosis','regimen','author','prescriptionItems','reasons')->findOrFail($id);
         $rx = new Collection();
-        $suppotiveRx = new Collection();
+        $supportiveRx = new Collection();
         foreach($prescription->prescriptionItems as $item)
         {
             if($item->ppo_section_id == 1)
                 $rx->push($item);
             elseif($item->ppo_section_id == 2)
-                $suppotiveRx->push($item);
+                $supportiveRx->push($item);
         }
-        return view('prescriptions.edit', compact('prescription','rx','suppotiveRx'));
+        return view('prescriptions.edit', compact('prescription','rx','supportiveRx'));
     }
 
     /**

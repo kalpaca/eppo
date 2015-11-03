@@ -1,7 +1,7 @@
-@extends('layouts.form')
+@extends('layouts.panel')
 @section('title','Dose Modification Reasons')
-@section('formTitle','Add a NewDose Modification Reason')
-@section('formContent')
+@section('panelHeading','Add a NewDose Modification Reason')
+@section('panelBody')
 {!! Form::model(new eppo\DiagnosisPrimaryCategory, [
     'route'=>'dosemodificationreasons.store',
     'class'=>'col-md-6'])

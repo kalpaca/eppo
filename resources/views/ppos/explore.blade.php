@@ -1,7 +1,7 @@
-@extends('layouts.form')
+@extends('layouts.panel')
 @section('title','PPO explorer')
-@section('formTitle','PPO explorer')
-@section('formContent')
+@section('panelHeading','PPO explorer')
+@section('panelBody')
 <div class="col-md-12 pri-cat">
 	<h4 id="pri-cat-heading">Select Primary Categories: </h4>
 	<div class="btn-group btn-group-sm pri-cat-btn-group" role="group">

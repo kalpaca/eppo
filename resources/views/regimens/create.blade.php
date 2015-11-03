@@ -1,7 +1,7 @@
-@extends('layouts.form')
+@extends('layouts.panel')
 @section('title','Regimen')
-@section('formTitle','Add a New Regimen')
-@section('formContent')
+@section('panelHeading','Add a New Regimen')
+@section('panelBody')
 {!! Form::model(new eppo\Regimen, [
     'route'=>'regimens.store',
     'class'=>'col-md-6'])

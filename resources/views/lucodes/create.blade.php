@@ -1,7 +1,7 @@
-@extends('layouts.form')
+@extends('layouts.panel')
 @section('title','LU Code')
-@section('formTitle','Add a New LU Code')
-@section('formContent')
+@section('panelHeading','Add a New LU Code')
+@section('panelBody')
 {!! Form::model(new eppo\Lucode, [
     'route'=>'lucodes.store',
     'class'=>'col-md-6'])

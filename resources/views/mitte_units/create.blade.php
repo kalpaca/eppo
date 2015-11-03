@@ -1,7 +1,7 @@
-@extends('layouts.form')
+@extends('layouts.panel')
 @section('title','Mitte Unit')
-@section('formTitle','Add a New Mitte Unit')
-@section('formContent')
+@section('panelHeading','Add a New Mitte Unit')
+@section('panelBody')
 {!! Form::model(new eppo\MitteUnit, [
     'route'=>'mitteunits.store',
     'class'=>'col-md-6'])

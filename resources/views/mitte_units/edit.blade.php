@@ -1,7 +1,7 @@
-@extends('layouts.form')
+@extends('layouts.panel')
 @section('title','Mitte Unit')
-@section('formTitle','Edit a Mitte Unit')
-@section('formContent')
+@section('panelHeading','Edit a Mitte Unit')
+@section('panelBody')
 {!! Form::model($unit, [
         'method' => 'PATCH',
         'route'=>['mitteunits.update',

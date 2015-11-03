@@ -1,7 +1,7 @@
-@extends('layouts.form')
+@extends('layouts.panel')
 @section('title','Diagnosis')
-@section('formTitle','Add a New Diagnosis')
-@section('formContent')
+@section('panelHeading','Add a New Diagnosis')
+@section('panelBody')
 
 {!! Form::model(new eppo\Diagnosis, [
     'route'=>'diagnoses.store',

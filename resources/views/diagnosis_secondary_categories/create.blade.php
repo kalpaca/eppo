@@ -1,7 +1,7 @@
-@extends('layouts.form')
+@extends('layouts.panel')
 @section('title','Diagnosis Secondary Category')
-@section('formTitle','Add a New Diagnosis Secondary Category')
-@section('formContent')
+@section('panelHeading','Add a New Diagnosis Secondary Category')
+@section('panelBody')
 {!! Form::model(new eppo\DiagnosisSecondaryCategory, [
     'route'=>'diagnosissecondarycategories.store',
     'class'=>'col-md-6'])

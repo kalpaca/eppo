@@ -1,7 +1,7 @@
-@extends('layouts.form')
+@extends('layouts.panel')
 @section('title','Dose Routes')
-@section('formTitle','Edit a Dose Route')
-@section('formContent')
+@section('panelHeading','Edit a Dose Route')
+@section('panelBody')
 {!! Form::model($route, [
         'method' => 'PATCH',
         'route'=>['doseroutes.update',

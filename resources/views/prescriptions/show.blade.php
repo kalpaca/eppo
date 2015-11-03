@@ -1,58 +1,52 @@
-@extends('layouts.form')
+@extends('layouts.panel')
 @section('title','View prescription')
-@section('formTitle','View prescription')
-@section('formContent')
-<?php
-$ppo = $prescription->ppo;
-?>
+@section('panelHeading','View prescription')
+@section('panelTopBar')
+{!! link_to_route('prescriptions.edit', 'Update', $prescription->id, array('class' => 'btn btn-default')) !!}
+{!! link_to_route('prescriptions.index', 'Index', null, array('class' => 'btn btn-default')) !!}
+@endsection
+@section('panelBody')
 
-<table class="table table-bordered ppo-allergies">
+<table class="table table-bordered prescription-allergies">
 <tbody>
 <tr>
     <td class="col-md-12">
     <strong>Allergies: </strong>
     @if($prescription->is_allergies)
         {{$prescription->allergies}}
-    @elseif(!$prescription->is_allergies)
-        No allergies
     @elseif(!$prescription->is_allergies_unknown)
         Unknown
+    @elseif(!$prescription->is_allergies)
+        No allergies
     @endif
     </td>
 </tr>
 </tbody>
 </table>
 
-<table class="table table-bordered ppo-protocol">
+<table class="table table-bordered prescription-protocol">
 <tbody>
 <tr>
     <td class="col-md-6">
-        <p><strong>Regimen: </strong><span class="regimen-code">{{ $ppo->regimen->code }}</span></p>
-        <p class="regimen-name">{{ $ppo->regimen->name }}</p>
+        <p><strong>Regimen: </strong><span class="regimen-code">{{ $prescription->regimen->code }}</span></p>
+        <p class="regimen-name">{{ $prescription->regimen->name }}</p>
 
         <p><strong>Diagnosis: </strong>
         @if(isset($diagnosis))
             <span class="diagnosis-name"><strong>{{ $diagnosis->name }}</strong></span>
-        @else
-            </p>
-            @foreach($ppo->diagnoses as $diagnosis)
-                <p class="diagnosis-name"><strong>{{ $diagnosis->name }}</strong></p>
-            @endforeach
         @endif
     </td>
     <td class="col-md-6">
-        @if($ppo->is_cycle)
-        <div class="ppo-cycle">
+        @if($prescription->is_cycle)
+        <div class="prescription-cycle">
             <strong>Cycle #: </strong>{{$prescription->cycle_id}}; Cycle repeats every {{ $prescription->cycle_days }} days
         </div>
         @endif
-        @if($ppo->is_bsa)
-        <div class="ppo-bsa">
-            <p>
-                <strong>Height: </strong> {{$prescription->height}} cm&nbsp;&nbsp;&nbsp;&nbsp;<strong>Weight: </strong>  {{$prescription->weight}} kg
+        @if($prescription->is_bsa)
+        <div class="prescription-bsa">
+            <p><strong>Height: </strong> {{$prescription->height}} cm&nbsp;&nbsp;&nbsp;&nbsp;<strong>Weight: </strong>  {{$prescription->weight}} kg
             </p>
-            <p>
-                <strong>Body Surface Area (BSA): </strong> {{$prescription->bsa}} m<sup>2</sup>
+            <p><strong>Body Surface Area (BSA): </strong> {{$prescription->bsa}} m<sup>2</sup>
             </p>
         </div>
         @endif
@@ -63,10 +57,10 @@ $ppo = $prescription->ppo;
 
 <?php $index = 0;?>
 @if($rx->count()>0)
-<table class="table table-bordered ppo-rx">
+<table class="table table-bordered prescription-rx">
 <tbody>
 <tr>
-<td class="ppo-rx col-md-12">
+<td class="prescription-rx col-md-12">
     <p>
         <h3>Rx
         <sub>
@@ -77,7 +71,7 @@ $ppo = $prescription->ppo;
         </h3>
     </p>
     <hr>
-    <div class="ppo-items">
+    <div class="prescription-items">
         @foreach($rx as $item)
             @include('prescription_items/show', compact('index'))
             <?php $index++; ?>
@@ -85,9 +79,9 @@ $ppo = $prescription->ppo;
     </div>
 
     @if($prescription->is_dose_reason)
-    <div class='ppo-dose-reasons col-md-12'>
+    <div class='prescription-dose-reasons col-md-12'>
         <h6><strong>*Dose modification reason</strong></h6>
-        @foreach($ppo->reasons as $reason)
+        @foreach($prescription->reasons as $reason)
             <span class="unicode-checkbox">&#x2611;</span> {{ $reason->name }}&nbsp;&nbsp;&nbsp;&nbsp;
         @endforeach
     </div>
@@ -97,18 +91,18 @@ $ppo = $prescription->ppo;
 </tbody>
 </table>
 @endif
-@if($suppotiveRx->count()>0)
-<table class="table table-bordered ppo-rx">
+@if($supportiveRx->count()>0)
+<table class="table table-bordered prescription-supportive-rx">
 <tbody>
 <tr>
-<td class="ppo-rx col-md-12">
+<td class="prescription-rx col-md-12">
     <p>
         <h3>Supportive Rx
         </h3>
     </p>
     <hr>
-    <div class="ppo-items">
-        @foreach($suppotiveRx as $item)
+    <div class="prescription-items">
+        @foreach($supportiveRx as $item)
             @include('prescription_items/show', compact('index'))
             <?php $index++; ?>
         @endforeach
@@ -118,4 +112,5 @@ $ppo = $prescription->ppo;
 </tbody>
 </table>
 @endif
+
 @endsection

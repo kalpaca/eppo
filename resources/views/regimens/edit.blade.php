@@ -1,7 +1,7 @@
-@extends('layouts.form')
+@extends('layouts.panel')
 @section('title','Regimen')
-@section('formTitle','Edit a Regimen')
-@section('formContent')
+@section('panelHeading','Edit a Regimen')
+@section('panelBody')
 {!! Form::model($regimen, [
         'method' => 'PATCH',
         'route'=>['regimens.update',

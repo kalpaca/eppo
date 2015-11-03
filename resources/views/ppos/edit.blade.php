@@ -1,7 +1,7 @@
-@extends('layouts.form')
+@extends('layouts.panel')
 @section('title','PPO')
-@section('formTitle','Edit a PPO')
-@section('formContent')
+@section('panelHeading','Edit a PPO')
+@section('panelBody')
 {!! Form::model($ppo, [
         'method' => 'PATCH',
         'route'=>['ppos.update',

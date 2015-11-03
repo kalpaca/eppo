@@ -1,7 +1,7 @@
-@extends('layouts.form')
+@extends('layouts.panel')
 @section('title','View prescription')
-@section('formTitle','View prescription')
-@section('formContent')
+@section('panelHeading','View prescription')
+@section('panelBody')
 <?php
 $ppo = $prescription->ppo;
 ?>

@@ -1,7 +1,7 @@
-@extends('layouts.form')
+@extends('layouts.panel')
 @section('title','Dose Route')
-@section('formTitle','Add a New Dose Route')
-@section('formContent')
+@section('panelHeading','Add a New Dose Route')
+@section('panelBody')
 {!! Form::model(new eppo\DoseRoute, [
     'route'=>'doseroutes.store',
     'class'=>'col-md-6'])

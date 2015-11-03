@@ -1,7 +1,7 @@
-@extends('layouts.form')
+@extends('layouts.panel')
 @section('title',$ppo->name)
-@section('formTitle','PPO Admin View')
-@section('formContent')
+@section('panelHeading','PPO Admin View')
+@section('panelBody')
 <div class="form-inline">
     @include('ppos/partials/ppo_inputs_all')
 </div>

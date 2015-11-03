@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title','PPO')
 @section('content')
-<h2>PPOs</h2>
+<h2>Prescriptions</h2>
 <p>{!! link_to_route('ppos.explore', 'Create prescription') !!}</p>
 @if(!$prescriptions->count())
 <p>You have no prescription</p>
