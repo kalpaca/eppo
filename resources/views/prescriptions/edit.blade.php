@@ -7,7 +7,7 @@ $ppo = $prescription->ppo;
 ?>
 {!! Form::model($prescription, [
     'method' => 'PATCH',
-        'route'=>'prescriptions.update',
+        'route'=>['prescriptions.update',$prescription->id],
         'class'=>'form-inline'
     ]) !!}
 @include('ppos/partials/ppo_inputs_all')

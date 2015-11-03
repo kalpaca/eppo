@@ -12,6 +12,9 @@
             <th>#</th>
             <th>Regimen</th>
             <th>Diagnosis</th>
+            <th>Created at</th>
+            <th>Updated at</th>
+            <th>View</th>
             <th>Update</th>
             <th>Delete</th>
         </tr>
