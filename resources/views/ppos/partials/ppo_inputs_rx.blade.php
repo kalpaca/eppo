@@ -9,7 +9,7 @@
         <sub>
         @if($ppo->is_start_date)
             {!! Form::label('start_date','Start Date/Day 1: ', ['class' => 'control-label']) !!}
-            {!! Form::text('start_date', null, ['class' => 'form-control datetimepicker']) !!}
+            {!! Form::text('start_date', null, ['class' => 'form-control datepicker']) !!}
         @endif
         </sub>
         </h3>

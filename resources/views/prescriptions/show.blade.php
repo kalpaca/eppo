@@ -2,7 +2,7 @@
 @section('title','View prescription')
 @section('panelHeading','View prescription')
 @section('panelTopBar')
-{!! link_to_route('prescriptions.edit', 'Update', $prescription->id, array('class' => 'btn btn-default')) !!}
+{!! link_to_route('prescriptions.edit', 'Edit', $prescription->id, array('class' => 'btn btn-default')) !!}
 {!! link_to_route('prescriptions.index', 'Index', null, array('class' => 'btn btn-default')) !!}
 @endsection
 @section('panelBody')
@@ -14,7 +14,7 @@
     <strong>Allergies: </strong>
     @if($prescription->is_allergies)
         {{$prescription->allergies}}
-    @elseif(!$prescription->is_allergies_unknown)
+    @elseif($prescription->is_allergies_unknown)
         Unknown
     @elseif(!$prescription->is_allergies)
         No allergies

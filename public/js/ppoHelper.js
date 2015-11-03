@@ -32,57 +32,49 @@ var ppoHelper = (function($){
 	 *
 	 */
 	toggleAllergiesInput = function () {
-		if ($('#PrescriptionAllergiesToggle1').is(":checked"))
-			$(".allergies").removeClass('hidden');
-		else if ($('#PrescriptionAllergiesToggle0').is(":checked"))
-			$(".allergies").addClass('hidden');
-	},
-
-	/**
-	 * Validation Toggle
-	 *
-	 * if IOT selection is P, then add class mandatary-field
-	 *
-	 */
-	toggleCCOLotMandatary = function () {
-		if ($('#PrescriptionInternalNoteIotP').is(":checked")) {
-			// alert($("#PrescriptionInternalNoteCcolot").val())
-			$("#PrescriptionInternalNoteCcolot").addClass("mandatary-field");
-			if(	$("#PrescriptionInternalNoteCcolot").val() == 'N/A')
-				$("#PrescriptionInternalNoteCcolot").val('')
+		if ($("#is-allergies").is(":checked"))
+		{
+			$('#is-allergies-unknown').prop("checked",false);
+			$("#allergies-detail").removeClass('hidden');
 		}
 		else
 		{
-			$("#PrescriptionInternalNoteCcolot").removeClass("mandatary-field").removeClass("mandatary-field-error").val('N/A');
-			$('#PrescriptionInternalNoteCcolot-error').remove();
+			$("#allergies-detail").addClass('hidden');
 		}
 	},
-
+	toggleAllergiesUnknownInput = function () {
+		if ($("#is-allergies-unknown").is(":checked"))
+		{
+			$('#is-allergies').prop("checked",false);
+			$("#allergies-detail").addClass('hidden');
+		}
+	},
 
 	/**
 	 *  Validation Toggle
 	 *  @Description:
 	 *
 	 *  1. get the id of the checkbox
-	 * 	2. string processing to get the class(area) of this whole drug item. set the class as drug-is-selected
+	 * 	2. string processing to get the class(area) of this whole drug item. set the class as item-is-selected
 	 *  3. if this drug is checked, then remove disabled prop, add class mandatary-field for validation
 	 *  4. if this drug is unchecked, then do reverse stuff.
 	 *
 	 *  @param: get the check box for drug
 	 */
 
-	toggleDrugFieldsMandatary = function (box) {
+	toggleMedFieldsMandatary = function (box) {
+
 		var itemID = $(box).attr("id");
-		var itemClass = itemID.substring(0, itemID.length - 10);
-		var divID = itemClass+'Div';
+
+		var ppoItemIndex = itemID.substring(0, 12);
 		if ($(box).is(':checked')) {
-			$('#'+divID).addClass("drug-is-selected");
-			$('.' + itemClass + '>:input').addClass("mandatary-field").prop('disabled', false);
+			$('#' + ppoItemIndex).addClass("item-is-selected");
+			$('.' + ppoItemIndex + '-input').addClass("mandatary-field").prop('disabled', false);
 
 		} else {
-			$('#'+divID).removeClass("drug-is-selected");
-			$('.' + itemClass + '>:input').removeClass("mandatary-field").removeClass("mandatary-field-error").prop('disabled', true);
-			$('.' + itemClass + '>.error-message').remove();
+			$('#' + ppoItemIndex).removeClass("item-is-selected");
+			$('.' + ppoItemIndex + '-input').removeClass("mandatary-field").removeClass("mandatary-field-error").prop('disabled', true);
+			$('.' + ppoItemIndex + ' .ppo-item-line .error-message').remove();
 		}
 	},
 
@@ -93,12 +85,9 @@ var ppoHelper = (function($){
 		//If allergies toggled 'yes', then show allergies textarea
 		toggleAllergiesInput();
 
-		//If IOT radio button toggled to P, then add CCOLot to Mandatary
-		toggleCCOLotMandatary();
-
-		//If drug-select-checkbox is checked, then toggle its fields as mandatary
-		$('.drug-select-checkbox').each(function() {
-			toggleDrugFieldsMandatary(this);
+		//If ppo-item-checkbox is checked, then toggle its fields as mandatary
+		$('.ppo-item-checkbox').each(function() {
+			toggleMedFieldsMandatary(this);
 		});
 	},
 
@@ -107,12 +96,9 @@ var ppoHelper = (function($){
 	 */
 	setupDatePicker = function(){
 
-		$('.datetimepicker').datetimepicker({
-			minView : 2,
-			startView : 2,
-			autoclose : true,
-			todayBtn : true,
-			//startDate : new Date(),
+		$('.datepicker').datepicker({
+			showTodayButton : true,
+			showClose: true,
 			format : 'MM d, yyyy',
 		})
 	},
@@ -123,9 +109,9 @@ var ppoHelper = (function($){
 	setupBSACalculator = function() {
 
 		$('.get_bsa_btn').click(function() {
-			if($('#PrescriptionWeight').val() && $('#PrescriptionHeight').val())
+			if($('#weight').val() && $('#height').val())
 			{
-				var bsaValue = Math.round(Math.sqrt($('#PrescriptionWeight').val() * $('#PrescriptionHeight').val() / 3600) * 100) / 100;
+				var bsaValue = Math.round(Math.sqrt($('#weight').val() * $('#height').val() / 3600) * 100) / 100;
 				if(bsaValue < 0.5 || bsaValue >3.0){
 					alert("BSA value should be in the range of 0.5 to 3.0.");
 				}
@@ -135,10 +121,10 @@ var ppoHelper = (function($){
 				$('.bsa_dose_result').val('');
 			}
 		});
-		$('#PrescriptionHeight').change(function(e) {
+		$('#height').change(function(e) {
 			$('.get_bsa_btn').click();
 		});
-		$('#PrescriptionWeight').change(function(e) {
+		$('#weight').change(function(e) {
 			$('.get_bsa_btn').click();
 		});
 	},
@@ -206,12 +192,12 @@ var ppoHelper = (function($){
 	},
 	/**
 	 * Listener: if checkbox clicked, simulate radio button behavior for each drug block
-	 * and call toggleDrugFieldsMandatary() function
+	 * and call toggleMedFieldsMandatary() function
 	 *
 	 */
 	setupMutualExclusiveBehavior = function(){
 
-		$('.drug-select-checkbox').change(function() {
+		$('.ppo-item-checkbox').change(function() {
 
 			var block = $(this).attr("class").split(' ')[0];
 
@@ -221,15 +207,17 @@ var ppoHelper = (function($){
 				// toggle all durgs off with same drug id(same block)
 				$('.' + block).prop("checked", false).each(function() {
 					// toggle inputs fields belongs to diabled to this block of drugs
-					toggleDrugFieldsMandatary(this)
+
+					toggleMedFieldsMandatary(this)
 				});
 
 				// toggle this one on, this would not trigger change event, so would not be a dead loop
 				$(this).prop("checked", true);
 
 			}
+
 			// toggle other inputs fields diable/enable belongs to this drug not this block
-			toggleDrugFieldsMandatary(this);
+			toggleMedFieldsMandatary(this);
 		})
 	},
 
@@ -240,8 +228,11 @@ var ppoHelper = (function($){
 	//
 	setupAllergiesListener = function(){
 
-		$("input[name='data[Prescription][allergies_toggle]']").change(function() {
-			toggleAllergiesInput()
+		$("#is-allergies").change(function() {
+			toggleAllergiesInput();
+		})
+		$("#is-allergies-unknown").change(function() {
+			toggleAllergiesUnknownInput();
 		})
 	},
 	/**

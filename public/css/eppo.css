@@ -13,6 +13,18 @@
 select[multiple] {
     height : 200px;
 }
+.form-inline .form-group {
+    margin-bottom: 10px !important;
+}
+.form-inline .width_100_percent {
+    width: 100%;
+    display: block;
+}
+/* Start: PPO form*/
+.mandatary-field-error, .integer-field-error
+{
+    border: 1px solid red;
+}
 .form-control {
     height: 26px;
     padding: 0px 4px;
@@ -21,14 +33,11 @@ select[multiple] {
 .unicode-checkbox {
     font-size: 14pt;
 }
-.form-inline .form-group {
-    margin-bottom: 10px !important;
+.item-is-selected {
+    opacity: 1;
+    color: #222;
+    background-color: #ffc;
 }
-.form-inline .width_100_percent {
-    width: 100%;
-    display: block;
-}
-/* Start: PPO item */
 .ppo-item {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -51,7 +60,7 @@ select[multiple] {
     }
 
 }
-/* End: PPO item */
+/* End: PPO form */
 /* Start: PPO explorer */
 .sec-cat{
     margin-top:15px;

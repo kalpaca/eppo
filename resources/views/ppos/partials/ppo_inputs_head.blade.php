@@ -2,15 +2,16 @@
 <tbody>
 <tr>
     <td class="col-md-12">
-    {!! Form::label('is_allergies','Allergies ', ['class' => 'control-label']) !!}
-    {!! Form::radio('is_allergies',null) !!}
-    {!! Form::label('is_allergies','Yes ', ['class' => 'control-label']) !!}
-    {!! Form::radio('is_allergies',null) !!}
-    {!! Form::label('is_allergies','No ', ['class' => 'control-label']) !!}
-    {!! Form::radio('is_allergies_unknown',null) !!}
+    {!! Form::label('is_allergies', 'Allergies: ', ['class' => 'control-label']) !!}
+    {!! Form::hidden('is_allergies', false) !!}
+    {!! Form::checkbox('is_allergies', null, null, ['id' => 'is-allergies']) !!}
+    {!! Form::label('is_allergies', 'Yes ', ['class' => 'control-label']) !!}
+
+    {!! Form::hidden('is_allergies_unknown', false) !!}
+    {!! Form::checkbox('is_allergies_unknown', null, null, ['id' => 'is-allergies-unknown']) !!}
     {!! Form::label('is_allergies_unknown','Unknown', ['class' => 'control-label']) !!}
     <p>
-        {!! Form::textarea('allergies', null, ['class'=>'form-control width_100_percent', 'rows'=>"3"]) !!}
+        {!! Form::textarea('allergies', null, ['class'=>'form-control width_100_percent hidden', 'rows'=>"3", 'id' => 'allergies-detail']) !!}
     </p>
     </td>
 </tr>
@@ -39,7 +40,7 @@
         @if($ppo->is_cycle)
         <div class="ppo-cycle">
             {!! Form::label('cycle_id','Cycle #: ', ['class' => 'control-label']) !!}
-            {!! Form::text('cycle_id', null, ['class' => 'form-control', 'size'=> 2]) !!}
+            {!! Form::text('cycle_id', null, ['class' => 'integer-field form-control', 'size'=> 2]) !!}
              Cycle repeats every {{ $ppo->cycle_days }} days
         </div>
         @endif
@@ -47,12 +48,12 @@
         <div class="ppo-bsa">
             <p>
                 {!! Form::label('height','Height: ', ['class' => 'control-label']) !!}
-                {!! Form::text('height', null, ['class' => 'form-control', 'size'=> 6]) !!} cm&nbsp;&nbsp;&nbsp;&nbsp;
+                {!! Form::text('height', null, ['class' => 'decimal-field form-control', 'size'=> 6]) !!} cm&nbsp;&nbsp;&nbsp;&nbsp;
                 {!! Form::label('weight','Weight: ', ['class' => 'control-label']) !!}
-                {!! Form::text('weight', null, ['class' => 'form-control', 'size'=> 6]) !!} kg
+                {!! Form::text('weight', null, ['class' => 'decimal-field form-control', 'size'=> 6]) !!} kg
             </p>
             <p>
-                {!! Form::label('bsa','Body Surface Area (BSA): ', ['class' => 'control-label']) !!}
+                {!! Form::label('bsa','Body Surface Area (BSA): ', ['class' => 'decimal-field control-label']) !!}
                 {!! Form::text('bsa', null, ['class' => 'form-control', 'size'=> 6]) !!} m<sup>2</sup>
             </p>
         </div>

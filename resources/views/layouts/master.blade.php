@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('css/eppo.css') }}" rel="stylesheet" type="text/css" />
         <script src="{{ asset('js/modernizr.mq.min.js') }}"></script>
         <script>
@@ -14,8 +15,10 @@
                 test: Modernizr.mq('only all'),
                 both: ["{{ asset('bower_components/jquery/dist/jquery.min.js')}}",
                     "{{ asset('js/bootstrap.min.js') }}",
+                    "{{ asset('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}",
                     "{{ asset('js/jquery.shuffle.modernizr.min.js') }}",
-                    "{{ asset('js/ppoExplorer.js') }}"
+                    "{{ asset('js/ppoExplorer.js') }}",
+                    "{{ asset('js/ppoHelper.js') }}"
                     ],
                 nope: [
                     "{{ asset('bower_components/es5-shim/es5-shim.min.js') }}",
