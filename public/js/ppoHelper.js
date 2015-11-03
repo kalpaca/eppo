@@ -1,5 +1,5 @@
 /**
- * Script by Steven W. @ SMH
+ * Script by Steven Wang
  * Prescription form interaction javascript
  */
 var ppoHelper = (function($){
