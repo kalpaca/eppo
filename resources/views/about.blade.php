@@ -12,10 +12,7 @@
     <div class="col-md-12">
         <h3>Summary</h3>
 
-        <p>
-        This tool is made for oncologists/Hematologists and Nurse Practitioners to enter,
-        per the CancerCare Ontario PrePrinted Orders (PPOs) , prescribed medications based on
-        disease, regimen for the patient to take to a pharmacy to dispense the medications.
+        <p>This tool is made for Oncologists/Hematologists and Nurse Practitioners to enter, per the CancerCare Ontario PrePrinted Orders (PPOs) , prescribed medications based on disease, regimen for the patient to take to a pharmacy to dispense medications. Also a health information administrator can build a "combo" of medications based on chemotherapy regimen and diagosis, which allows end user to quickly determine a colletion of medications and make customization based on actual situation.
         </p>
 
         <h3>What are PrePrinted Orders (PPOs)?</h3>
