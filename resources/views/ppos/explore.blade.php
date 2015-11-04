@@ -47,7 +47,7 @@
 	<?php
 	$primCatId = 'pri-cat-'.$secondaryCats[$diagnosis->diagnosis_secondary_category_id];
 	$secCatId = 'sec-cat-'.$diagnosis->diagnosis_secondary_category_id;
-	$url = route('prescriptions.create', ['ppo_id' => $ppo->id,'disgnosis_id' => $diagnosis->id]);
+	$url = route('prescriptions.create', ['ppoid' => $ppo->id,'disgnosisid' => $diagnosis->id, 'patientid'=>$patientid]);
 	?>
 	<!-- PPO item start -->
 	<a href="{{ $url }}" class="list-group-item ppo {{$primCatId}} {{$secCatId}}" data-groups="{{$primCatId}},{{$secCatId}}">

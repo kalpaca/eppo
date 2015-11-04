@@ -10,6 +10,7 @@ use eppo\Prescription;
 use eppo\PrescriptionItem;
 use eppo\Ppo;
 use eppo\Diagnosis;
+use eppo\Patient;
 
 class PrescriptionsController extends Controller
 {
@@ -24,10 +25,11 @@ class PrescriptionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($ppoId, $diagnosisId)
+    public function create($ppoid, $diagnosisid, $patientid)
     {
-        $diagnosis = Diagnosis::findOrFail($diagnosisId);
-        $ppo = Ppo::with('diagnoses','regimen','author','ppoItems')->findOrFail($ppoId);
+        $diagnosis = Diagnosis::findOrFail($diagnosisid);
+        $patient = Patient::findOrFail($patientid);
+        $ppo = Ppo::with('diagnoses','regimen','author','ppoItems')->findOrFail($ppoid);
         $rx = new Collection();
         $supportiveRx = new Collection();
         foreach($ppo->ppoItems as $item)
@@ -37,7 +39,7 @@ class PrescriptionsController extends Controller
             elseif($item->ppo_section_id == 2)
                 $supportiveRx->push($item);
         }
-        return view('prescriptions.create', compact('ppo','diagnosis','rx','supportiveRx'));
+        return view('prescriptions.create', compact('patient','ppo','diagnosis','rx','supportiveRx'));
     }
 
     /**
@@ -81,7 +83,7 @@ class PrescriptionsController extends Controller
      */
     public function show($id)
     {
-        $prescription = Prescription::with('diagnosis','regimen','author','prescriptionItems','reasons')->findOrFail($id);
+        $prescription = Prescription::with('diagnosis','regimen','author','prescriptionItems','reasons','patient')->findOrFail($id);
 
         $rx = new Collection();
         $supportiveRx = new Collection();

@@ -34,12 +34,12 @@ class PposController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function explore()
+    public function explore($patientid)
     {
         $primaryCats = DiagnosisPrimaryCategory::with('secondaryCats')->get();
         $secondaryCats = DiagnosisSecondaryCategory::lists('diagnosis_primary_category_id','id');
         $ppos = Ppo::with('diagnoses','regimen')->get();
-        return view('ppos.explore', compact('primaryCats','secondaryCats','ppos'));
+        return view('ppos.explore', compact('primaryCats','secondaryCats','ppos','patientid'));
     }
 
     /**

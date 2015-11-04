@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','PPO')
+@section('title','Prescriptions')
 @section('content')
 <h2>Prescriptions</h2>
 <p>{!! link_to_route('ppos.explore', 'Create prescription') !!}</p>

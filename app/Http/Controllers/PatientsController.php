@@ -57,8 +57,8 @@ class PatientsController extends Controller
      */
     public function show($id)
     {
-        $patients = Patient::findOrFail($id);
-        return view('patients.show', compact('patients'));
+        $patient = Patient::with('prescriptions')->findOrFail($id);
+        return view('patients.show', compact('patient'));
     }
 
     /**
@@ -69,8 +69,8 @@ class PatientsController extends Controller
      */
     public function edit($id)
     {
-        $regimen = Patient::findOrFail($id);
-        return view('patients.edit', compact('regimen'));
+        $patient = Patient::findOrFail($id);
+        return view('patients.edit', compact('patient'));
     }
 
     /**
@@ -83,8 +83,8 @@ class PatientsController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->all();
-        $regimen = Patient::findOrFail($id);
-        $regimen->update( $input );
+        $patient = Patient::findOrFail($id);
+        $patient->update( $input );
 
         return redirect()->route('patients.index')->with('success-message', 'Patient updated');
     }
@@ -97,8 +97,8 @@ class PatientsController extends Controller
      */
     public function destroy($id)
     {
-        $diagnosis = Patient::findOrFail($id);
-        $diagnosis->delete();
+        $patient = Patient::findOrFail($id);
+        $patient->delete();
 
         return redirect()->route('patients.index')->with('success-message', 'Patient deleted.');
     }

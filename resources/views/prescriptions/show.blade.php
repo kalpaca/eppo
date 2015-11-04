@@ -7,11 +7,8 @@
 
 @endsection
 @section('panelBody')
-<<<<<<< ca51f79f39a877b01cc6487f6bd24326fa6b2a2e
-=======
 
-@include('patients/partials/patient_info_panel')
->>>>>>> update patient view and prescription view
+@include('patients/partials/patient_info_table')
 
 <table class="table table-bordered prescription-allergies">
 <tbody>

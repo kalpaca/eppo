@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Patient extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name','dob'];
+
+    public function prescriptions()
+    {
+        return $this->hasMany('eppo\Prescription');
+    }
 }

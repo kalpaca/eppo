@@ -14,6 +14,7 @@
       <ul class="nav navbar-nav">
         <li><a href="{{ asset('/') }}">Home</a></li>
         <li><a href="{{ asset('/about') }}">About</a></li>
+        <li><a href="{{ route('patients.index') }}">Patients</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings <span class="caret"></span></a>
           <ul class="dropdown-menu">
