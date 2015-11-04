@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f3ae4da412c4df5e6729c1778bac4ff9",
+    "hash": "76f419641dcf3eec2b4df8aebd8a533c",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -3000,7 +3000,7 @@
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.0.0",
-        "ext-sqlite3": "*"
+        "ext-pdo_sqlite": "*"
     },
     "platform-dev": []
 }
