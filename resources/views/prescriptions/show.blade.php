@@ -1,11 +1,17 @@
+<?php $patient = $prescription->patient; ?>
 @extends('layouts.panel')
 @section('title','View prescription')
 @section('panelHeading','View prescription')
 @section('panelTopBar')
 {!! link_to_route('prescriptions.edit', 'Edit', $prescription->id, array('class' => 'btn btn-default')) !!}
-{!! link_to_route('prescriptions.index', 'Index', null, array('class' => 'btn btn-default')) !!}
+
 @endsection
 @section('panelBody')
+<<<<<<< ca51f79f39a877b01cc6487f6bd24326fa6b2a2e
+=======
+
+@include('patients/partials/patient_info_panel')
+>>>>>>> update patient view and prescription view
 
 <table class="table table-bordered prescription-allergies">
 <tbody>
