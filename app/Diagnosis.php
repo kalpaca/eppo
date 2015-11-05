@@ -12,13 +12,6 @@ class Diagnosis extends Model
 
     public function secondaryCat()
     {
-        return $this->belongsTo('eppo\DiagnosisSecondaryCategory','diagnosis_secondary_category_id');
-    }
-
-    public function primaryCat()
-    {
-        $secondaryCat = $this->secondaryCat;
-        return $secondaryCat->primaryCat();
-        //return $secondaryCat->belongsTo('eppo\DiagnosisPrimaryCategory','diagnosis_primary_category_id');
+        return $this->belongsTo('eppo\DiagnosisSecondaryCategory','diagnosis_secondary_category_id')->select('name','id','diagnosis_primary_category_id');
     }
 }

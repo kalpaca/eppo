@@ -10,10 +10,10 @@ class DiagnosisPrimaryCategory extends Model
 
     public function secondaryCats()
     {
-        return $this->hasMany('eppo\DiagnosisSecondaryCategory');
+        return $this->hasMany('eppo\DiagnosisSecondaryCategory')->select(['diagnosis_primary_category_id','id','name']);
     }
     public function diagnoses()
     {
-        return $this->hasMany('eppo\Diagnosis');
+        return $this->hasMany('eppo\Diagnosis')->select(['id','name']);
     }
 }

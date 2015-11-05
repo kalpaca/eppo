@@ -38,7 +38,7 @@ class PposController extends Controller
     {
         $primaryCats = DiagnosisPrimaryCategory::with('secondaryCats')->get();
         $secondaryCats = DiagnosisSecondaryCategory::lists('diagnosis_primary_category_id','id');
-        $ppos = Ppo::with('diagnoses','regimen')->get();
+        $ppos = Ppo::with('diagnoses','regimen')->get(['regimen_id','id']);
         return view('ppos.explore', compact('primaryCats','secondaryCats','ppos','patientid'));
     }
 

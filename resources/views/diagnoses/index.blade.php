@@ -25,7 +25,7 @@
         <td>{{ $diagnosis->id }}</td>
         <td>{{ $diagnosis->name }}</td>
         <td>{{ $diagnosis->secondaryCat->name}}</td>
-        <td>{{ $diagnosis->primaryCat->name}}</td>
+        <td>{{ $diagnosis->secondaryCat->primaryCat->name}}</td>
         <td>{{ $diagnosis->created_at }}</td>
         <td>{{ $diagnosis->updated_at }}</td>
         <td>

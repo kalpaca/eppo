@@ -10,15 +10,15 @@ class Ppo extends Model
 
     public function author()
 	{
-    	return $this->belongsTo('eppo\User','user_id');
+    	return $this->belongsTo('eppo\User','user_id')->select(['id','name']);
 	}
    	public function regimen()
 	{
-    	return $this->belongsTo('eppo\Regimen');
+    	return $this->belongsTo('eppo\Regimen')->select(['id','name','code']);
 	}
     public function diagnoses()
 	{
-    	return $this->belongsToMany('eppo\Diagnosis','ppo_diagnoses','ppo_id','diagnosis_id');
+    	return $this->belongsToMany('eppo\Diagnosis','ppo_diagnoses','ppo_id','diagnosis_id')->select(['diagnosis_id','name','diagnosis_secondary_category_id']);
 	}
 	public function ppoItems()
 	{
@@ -26,7 +26,7 @@ class Ppo extends Model
 	}
 	public function reasons()
 	{
-		return $this->belongsToMany('eppo\DoseModificationReason','ppo_dose_modification_reasons');
+		return $this->belongsToMany('eppo\DoseModificationReason','ppo_dose_modification_reasons')->select(['dose_modification_reason_id','name']);
 	}
 
 }

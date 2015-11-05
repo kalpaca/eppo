@@ -10,10 +10,10 @@ class DiagnosisSecondaryCategory extends Model
 
     public function primaryCat()
     {
-        return $this->belongsTo('eppo\DiagnosisPrimaryCategory','diagnosis_primary_category_id');
+        return $this->belongsTo('eppo\DiagnosisPrimaryCategory','diagnosis_primary_category_id')->select(['id','name']);
     }
     public function diagnoses()
     {
-        return $this->hasMany('eppo\Diagnosis');
+        return $this->hasMany('eppo\Diagnosis')->select(['id','name']);
     }
 }
