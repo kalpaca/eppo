@@ -56,7 +56,7 @@ class Prescription extends Model
 	}
     public function reasons()
     {
-        return $this->belongsToMany('eppo\DoseModificationReason','prescription_dose_modification_reasons')->select(['dose_modification_reason_id','name']);
+        return $this->belongsToMany('eppo\DoseModificationReason','prescription_dose_modification_reasons')->select(['dose_modification_reasons.id','dose_modification_reason_id','name']);
     }
 	public function operationRecords()
 	{
