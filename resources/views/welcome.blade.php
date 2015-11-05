@@ -15,11 +15,11 @@
 <li class="list-group-item"><a href="{{route('patients.show',['id'=>2])}}">Use Case: select a patient (done)</a></li>
 <li class="list-group-item"><a href="{{route('ppos.explore',['id'=>1])}}">Use Case: select a ppo (done) </a></li>
 <li class="list-group-item"><a href="{{route('prescriptions.create', ['ppoId'=>1,'diagnosisId'=>1])}}">Use Case: fill a ppo (almost done)</a></li>
-<li class="list-group-item"><a href="{{route('prescriptions.create', ['ppoId'=>1,'diagnosisId'=>1])}}">Use Case: validate a prescription input (in progress)</a></li>
-<li class="list-group-item"><a href="{{route('prescriptions.create', ['ppoId'=>1,'diagnosisId'=>1])}}">Use Case: save a prescription (done)</a></li>
+<li class="list-group-item">Use Case: validate a prescription input (in progress)</li>
+<li class="list-group-item">Use Case: save a prescription (done)</li>
 <li class="list-group-item"><a href="{{route('prescriptions.show', ['id'=>19])}}">Use Case: view a prescription (almost done)</a></li>
 <li class="list-group-item">Use Case: print prescription</li>
-<li class="list-group-item">Use Case: login and signup</li>
+<li class="list-group-item">Use Case: login and signup (in progress)</li>
 </ul>
 @endsection
 
