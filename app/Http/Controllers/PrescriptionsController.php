@@ -4,6 +4,7 @@ namespace eppo\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use eppo\Http\Requests;
 use eppo\Http\Controllers\Controller;
 use eppo\Prescription;
@@ -16,7 +17,7 @@ class PrescriptionsController extends Controller
 {
     public function index()
     {
-        $prescriptions = Prescription::with('diagnosis','regimen')->get();
+        $prescriptions = Prescription::with('diagnosis','regimen','author','patient')->get();
         return view('prescriptions.index', compact('prescriptions'));
     }
 
@@ -30,6 +31,7 @@ class PrescriptionsController extends Controller
         $diagnosis = Diagnosis::findOrFail($diagnosisid);
         $patient = Patient::findOrFail($patientid);
         $ppo = Ppo::with('diagnoses','regimen','author','ppoItems')->findOrFail($ppoid);
+        $ppo->ppoItems->load('doseUnit','mitteUnit','medication');
         $rx = new Collection();
         $supportiveRx = new Collection();
         foreach($ppo->ppoItems as $item)
@@ -55,6 +57,10 @@ class PrescriptionsController extends Controller
             'regimen_id' => 'required',
             'ppo_id' => 'required',
         ]);
+
+        $user = Auth::user();
+
+        $request->merge(array('user_id' => $user->id));
 
         $input = $request->all();
 
@@ -84,7 +90,7 @@ class PrescriptionsController extends Controller
     public function show($id)
     {
         $prescription = Prescription::with('diagnosis','regimen','author','prescriptionItems','reasons','patient')->findOrFail($id);
-
+        $prescription->prescriptionItems->load('doseUnit','mitteUnit','medication');
         $rx = new Collection();
         $supportiveRx = new Collection();
         foreach($prescription->prescriptionItems as $item)
@@ -105,8 +111,9 @@ class PrescriptionsController extends Controller
      */
     public function edit($id)
     {
-        $prescription = Prescription::with('diagnosis','ppo','author','prescriptionItems','reasons')->findOrFail($id);
+        $prescription = Prescription::with('diagnosis','ppo.ppoItems','author','prescriptionItems','reasons')->findOrFail($id);
         $ppo =  $prescription->ppo;
+        $ppo->ppoItems->load('doseUnit','mitteUnit','medication');
         $rx = new Collection();
         $supportiveRx = new Collection();
         foreach($ppo->ppoItems as $item)
@@ -130,6 +137,11 @@ class PrescriptionsController extends Controller
     {
         $this->validate($request, [
         ]);
+
+        $user = Auth::user();
+
+        $request->merge(array('user_id' => $user->id));
+
         $input = $request->all();
 
         $prescription = Prescription::findOrFail($id);

@@ -40,8 +40,13 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Login</a></li>
-        <li><a href="#">Sign up</a></li>
+        @if (Auth::check())
+        <li><a href="{{ asset('/') }}">Hi, {{Auth::user()->name}}</a></li>
+        <li><a href="{{ route('auth.logout') }}">Logout</a></li>
+        @else
+        <li><a href="{{ route('auth.login') }}">Login</a></li>
+        <li><a href="{{ route('auth.reg') }}">Sign up</a></li>
+        @endif
       </ul>
     </div><!--/.nav-collapse -->
   </div>

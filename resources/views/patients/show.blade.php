@@ -13,8 +13,9 @@
             <th>#</th>
             <th>Regimen</th>
             <th>Diagnosis</th>
-            <th>Created</th>
-            <th>Updated</th>
+            <th>Created by</th>
+            <th>Created at</th>
+            <th>Updated at</th>
             <th>View</th>
         </tr>
     </thead>
@@ -22,8 +23,9 @@
         @foreach($patient->prescriptions as $prescription)
         <tr>
         <td>{{ $prescription->id }}</td>
-        <td>{{ $prescription->regimen->name }}</td>
+        <td>{{ $prescription->regimen->code }}</td>
         <td>{{ $prescription->diagnosis->name }}</td>
+        <td>{{ $prescription->author->name }}</td>
         <td>{{ $prescription->created_at }}</td>
         <td>{{ $prescription->updated_at }}</td>
         <td>

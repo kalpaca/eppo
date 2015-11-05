@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ppo extends Model
 {
-    protected $fillable = ['name','regimen_id','version','is_active','is_start_date','is_cycle','is_dose_reason'];
+    protected $fillable = ['name','regimen_id','version','is_active','is_start_date','is_cycle','is_dose_reason','user_id'];
 
     public function author()
 	{
-    	return $this->belongsTo('eppo\User');
+    	return $this->belongsTo('eppo\User','user_id');
 	}
    	public function regimen()
 	{
@@ -23,10 +23,10 @@ class Ppo extends Model
 	public function ppoItems()
 	{
     	return $this->hasMany('eppo\PpoItem');
-	}   
+	}
 	public function reasons()
 	{
 		return $this->belongsToMany('eppo\DoseModificationReason','ppo_dose_modification_reasons');
 	}
-    
+
 }

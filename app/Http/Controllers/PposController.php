@@ -4,7 +4,7 @@ namespace eppo\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
-
+use Illuminate\Support\Facades\Auth;
 use eppo\Http\Requests;
 use eppo\Http\Controllers\Controller;
 
@@ -67,6 +67,9 @@ class PposController extends Controller
         $this->validate($request, [
             'regimen_id' => 'required',
         ]);
+        $user = Auth::user();
+
+        $request->merge(array('user_id' => $user->id));
 
         $input = $request->all();
 
@@ -92,6 +95,7 @@ class PposController extends Controller
     public function show($id)
     {//'doseModificationReasons'
         $ppo = Ppo::with('diagnoses','regimen','author','ppoItems','reasons')->findOrFail($id);
+        $ppo->ppoItems->load('doseUnit','mitteUnit','medication');
         $rx = new Collection();
         $supportiveRx = new Collection();
         foreach($ppo->ppoItems as $item)
@@ -101,7 +105,8 @@ class PposController extends Controller
             elseif($item->ppo_section_id == 2)
                 $supportiveRx->push($item);
         }
-        return view('ppos.show', compact('ppo','rx','supportiveRx'));
+        $isAdminView = true;
+        return view('ppos.show', compact('ppo','rx','supportiveRx','isAdminView'));
     }
 
     /**
@@ -133,6 +138,11 @@ class PposController extends Controller
         $this->validate($request, [
             'regimen_id' => 'required',
         ]);
+
+        $user = Auth::user();
+
+        $request->merge(array('user_id' => $user->id));
+
         $input = $request->all();
 
         $ppo = Ppo::findOrFail($id);

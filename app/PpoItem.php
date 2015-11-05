@@ -28,22 +28,22 @@ class PpoItem extends Model
     ];
 	public function Ppo()
 	{
-    	return $this->belongsTo('eppo\Ppo');
+    	return $this->belongsTo('eppo\Ppo')->select(['id','name']);
 	}
     public function medication()
     {
-        return $this->belongsTo('eppo\Medication');
+        return $this->belongsTo('eppo\Medication')->select(['id','name','instruction']);
     }
     public function doseRoute()
     {
-        return $this->belongsTo('eppo\DoseRoute');
+        return $this->belongsTo('eppo\DoseRoute')->select(['id','name']);
     }
     public function doseUnit()
     {
-        return $this->belongsTo('eppo\DoseUnit');
+        return $this->belongsTo('eppo\DoseUnit')->select(['id','name']);
     }
     public function mitteUnit()
     {
-        return $this->belongsTo('eppo\MitteUnit');
+        return $this->belongsTo('eppo\MitteUnit')->select(['id','name']);
     }
 }

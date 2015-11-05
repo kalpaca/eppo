@@ -5,7 +5,7 @@ namespace eppo\Http\Controllers;
 use Illuminate\Http\Request;
 use eppo\Http\Requests;
 use eppo\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Auth;
 class PrescriptionOperationRecordsController extends Controller
 {
     public function index()

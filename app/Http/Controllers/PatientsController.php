@@ -58,6 +58,7 @@ class PatientsController extends Controller
     public function show($id)
     {
         $patient = Patient::with('prescriptions')->findOrFail($id);
+        $patient->prescriptions->load('author', 'regimen', 'diagnosis');
         return view('patients.show', compact('patient'));
     }
 

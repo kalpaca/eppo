@@ -37,26 +37,22 @@ class PrescriptionItem extends Model
     ];
     public function PpoItem()
     {
-        return $this->belongsTo('eppo\PpoItem');
+        return $this->belongsTo('eppo\PpoItem')->select(['id']);
     }
     public function medication()
     {
-        return $this->belongsTo('eppo\Medication');
-    }
-    public function lucode()
-    {
-        return $this->belongsTo('eppo\Lucode');
+        return $this->belongsTo('eppo\Medication')->select(['id','name','instruction']);
     }
     public function doseRoute()
     {
-        return $this->belongsTo('eppo\DoseRoute');
+        return $this->belongsTo('eppo\DoseRoute')->select(['id','name']);
     }
     public function doseUnit()
     {
-        return $this->belongsTo('eppo\DoseUnit');
+        return $this->belongsTo('eppo\DoseUnit')->select(['id','name']);
     }
     public function mitteUnit()
     {
-        return $this->belongsTo('eppo\MitteUnit');
+        return $this->belongsTo('eppo\MitteUnit')->select(['id','name']);
     }
 }

@@ -1,3 +1,6 @@
+
+
+
 @extends('layouts.master')
 @section('title','PPO')
 @section('content')
@@ -17,6 +20,7 @@
             <th>Cycle Input</th>
             <th>Reason Input</th>
             <th>Start Date Input</th>
+            <th>Created by</th>
             <th>Created Date</th>
             <th>Updated Date</th>
             <th>View</th>
@@ -26,6 +30,9 @@
     </thead>
     <tbody>
         @foreach($ppos as $ppo)
+        <?php
+        var_dump($ppo->user_id);
+?>
         <tr>
         <td>{{ $ppo->is_active }}</td>
         <td>{{ $ppo->id }}</td>
@@ -41,6 +48,7 @@
         <td>{{ $ppo->is_cycle }}</td>
         <td>{{ $ppo->is_dose_reason }}</td>
         <td>{{ $ppo->is_start_date }}</td>
+        <td></td>
         <td>{{ $ppo->created_at }}</td>
         <td>{{ $ppo->updated_at }}</td>
         <td>

@@ -11,6 +11,7 @@ class Prescription extends Model
     'patient_id',
     'regimen_id',
     'cycle_id',
+    'user_id',
     'diagnosis_id',
     'is_instruction_input',
     'is_start_date',
@@ -31,19 +32,19 @@ class Prescription extends Model
     ];
     public function patient()
 	{
-    	return $this->belongsTo('eppo\Patient');
+    	return $this->belongsTo('eppo\Patient')->select(['id','name']);
 	}
     public function author()
-	{
-    	return $this->belongsTo('eppo\User');
-	}
+    {
+        return $this->belongsTo('eppo\User','user_id')->select(['id','name']);
+    }
    	public function regimen()
 	{
-    	return $this->belongsTo('eppo\Regimen');
+    	return $this->belongsTo('eppo\Regimen')->select(['id','code','name']);
 	}
     public function diagnosis()
 	{
-    	return $this->belongsTo('eppo\Diagnosis');
+    	return $this->belongsTo('eppo\Diagnosis')->select(['id','name']);
 	}
     public function ppo()
     {
