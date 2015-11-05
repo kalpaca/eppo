@@ -25,7 +25,7 @@ class PpoItemsController extends Controller
      */
     public function index()
     {
-        $items = PpoItem::with('doseUnit','mitteUnit','ppo','medication')->get();
+        $items = PpoItem::with('doseUnit','mitteUnit','ppo','medication','ppoSection')->get();
         return view('ppo_items.index', compact('items'));
     }
 

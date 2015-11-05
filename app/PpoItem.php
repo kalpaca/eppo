@@ -26,10 +26,14 @@ class PpoItem extends Model
     'is_repeat_input',
     'mitte_unit_id',
     ];
-	public function Ppo()
+	public function ppo()
 	{
     	return $this->belongsTo('eppo\Ppo')->select(['id','name']);
 	}
+    public function ppoSection()
+    {
+        return $this->belongsTo('eppo\PpoSection')->select(['id','name']);
+    }
     public function medication()
     {
         return $this->belongsTo('eppo\Medication')->select(['id','name','instruction']);

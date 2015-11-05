@@ -13,6 +13,6 @@
         <span>{{ $item->created_at }}</span>
         <small>Updated at</small>
         <span>{{ $item->updated_at }}</span>
-    {!! link_to_route('ppoitems.edit', 'Update', $item->id, array('class' => 'btn btn-xs btn-primary')) !!}
+
     </div>
 </div>
