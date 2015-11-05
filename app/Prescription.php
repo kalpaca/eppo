@@ -32,7 +32,7 @@ class Prescription extends Model
     ];
     public function patient()
 	{
-    	return $this->belongsTo('eppo\Patient')->select(['id','name']);
+    	return $this->belongsTo('eppo\Patient')->select(['id','name','dob']);
 	}
     public function author()
     {
