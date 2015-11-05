@@ -80,3 +80,10 @@ select[multiple] {
     color:black;
 }
 /** End: PPO explorer */
+
+@media print {
+  a, button, .btn, .lead{
+    display: none;
+  }
+
+}
