@@ -3,7 +3,7 @@
 [![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
 
 
-Health information administrators can use this tool to build a "combo" of medications based on CancerCare Ontario PrePrinted Orders (PPOs), which allows end users like Oncologists/Hematologists and Nurse Practitioners to prescript chemotherapy regimen and customize the combo of medications based on actual situation, for the patient to take to a pharmacy to dispense medications.
+Health information administrators can use this tool to build a "combo" of medications based on CancerCare Ontario PrePrinted Orders (PPOs), which allows end users like Oncologists/Hematologists and Nurse Practitioners to make chemotherapy regimen prescriptions and customize the combo of medications based on actual situation, for the patient to take to a pharmacy to dispense medications.
 
 ### What are PrePrinted Orders (PPOs)?
 
