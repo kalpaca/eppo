@@ -1,6 +1,7 @@
 <?php
 $isActive = isset($ppo->is_active) ? $ppo->is_active : true;
 $isCycle = isset($ppo->is_cycle) ? $ppo->is_cycle : true;
+$isBSA = isset($ppo->is_bsa) ? $ppo->is_bsa : true;
 $isReason = isset($ppo->is_dose_reason) ? $ppo->is_dose_reason : true;
 $isStartDate = isset($ppo->is_start_date) ? $ppo->is_start_date : true;
 ?>
@@ -43,9 +44,15 @@ $isStartDate = isset($ppo->is_start_date) ? $ppo->is_start_date : true;
 </div>
 
 <div class="form-group">
+    {!! Form::hidden('is_bsa', false) !!}
+    {!! Form::checkbox('is_bsa', null, $isBSA) !!}
+    {!! Form::label('is_bsa','Show BSA calculation  ', ['class' => 'control-label']) !!}
+</div>
+
+<div class="form-group">
     {!! Form::hidden('is_dose_reason', false) !!}
     {!! Form::checkbox('is_dose_reason', null, $isReason) !!}
-    {!! Form::label('is_reason','Show Dose modification reasons selection ', ['class' => 'control-label']) !!}
+    {!! Form::label('is_dose_reason','Show Dose modification reasons selection ', ['class' => 'control-label']) !!}
 </div>
 
 <div class="form-group">

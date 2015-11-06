@@ -43,6 +43,10 @@ class PrescriptionItem extends Model
     {
         return $this->belongsTo('eppo\Medication')->select(['id','name','instruction']);
     }
+     public function lucode()
+    {
+        return $this->belongsTo('eppo\Lucode')->select(['id','name','code']);
+    }
     public function doseRoute()
     {
         return $this->belongsTo('eppo\DoseRoute')->select(['id','name']);

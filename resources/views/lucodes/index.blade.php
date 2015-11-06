@@ -11,7 +11,8 @@
         <tr>
             <th>#</th>
             <th>Code</th>
-            <th>Name</th>
+            <th>Description</th>
+            <th>Medication</th>
             <th>Created</th>
             <th>Updated</th>
             <th>Update</th>
@@ -24,6 +25,7 @@
         <td>{{ $lucode->id }}</td>
         <td>{{ $lucode->code }}</td>
         <td>{{ $lucode->name }}</td>
+        <td>{{ $lucode->medication->name }}</td>
         <td>{{ $lucode->created_at }}</td>
         <td>{{ $lucode->updated_at }}</td>
         <td>

@@ -1,6 +1,3 @@
-
-
-
 @extends('layouts.master')
 @section('title','PPO')
 @section('content')
@@ -30,9 +27,6 @@
     </thead>
     <tbody>
         @foreach($ppos as $ppo)
-        <?php
-        var_dump($ppo->user_id);
-?>
         <tr>
         <td>{{ $ppo->is_active }}</td>
         <td>{{ $ppo->id }}</td>

@@ -50,4 +50,8 @@ class PpoItem extends Model
     {
         return $this->belongsTo('eppo\MitteUnit')->select(['id','name']);
     }
+    public function lucodes()
+    {
+        return $this->belongsToMany('eppo\Lucode','ppo_item_lucodes')->select(['lucodes.id','lucode_id','name','code']);
+    }
 }

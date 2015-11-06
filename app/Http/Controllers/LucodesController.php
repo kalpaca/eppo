@@ -7,6 +7,7 @@ use eppo\Http\Requests;
 use eppo\Http\Controllers\Controller;
 
 use eppo\Lucode;
+use eppo\Medication;
 
 class LucodesController extends Controller
 {
@@ -17,7 +18,7 @@ class LucodesController extends Controller
      */
     public function index()
     {
-        $lucodes = Lucode::paginate(10);
+        $lucodes = Lucode::with('medication')->paginate(10);
         return view('lucodes.index', compact('lucodes'));
     }
 
@@ -28,7 +29,8 @@ class LucodesController extends Controller
      */
     public function create()
     {
-        return view('lucodes.create');
+        $medications = Medication::lists('name','id');
+        return view('lucodes.create', compact('medications'));
     }
 
     /**
@@ -70,7 +72,8 @@ class LucodesController extends Controller
     public function edit($id)
     {
         $lucode = Lucode::findOrFail($id);
-        return view('lucodes.edit', compact('lucode'));
+        $medications = Medication::lists('name','id');
+        return view('lucodes.edit', compact('lucode','medications'));
     }
 
     /**

@@ -26,7 +26,7 @@
     </div>
 
     <div class="form-group">
-        <button type="submit" class="btn btn-primary pull-right">Register</button>
+        <button type="submit" class="btn btn-primary pull-right">Sinp up</button>
     </div>
 </form>
 @endsection

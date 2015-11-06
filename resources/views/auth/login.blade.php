@@ -20,7 +20,8 @@
     </div>
 
     <div class="form-group">
-        <button type="submit" class="btn btn-primary pull-right">Login</button>
+        <a href = "{{route('auth.reg')}}" class="btn btn-danger">Sign Up</a>
+        <button type="submit" class="btn btn-primary pull-right">Log in</button>
     </div>
 </form>
 @endsection
