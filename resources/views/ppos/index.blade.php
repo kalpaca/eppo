@@ -42,7 +42,7 @@
         <td>{{ $ppo->is_cycle }}</td>
         <td>{{ $ppo->is_dose_reason }}</td>
         <td>{{ $ppo->is_start_date }}</td>
-        <td></td>
+        <td>{{ $ppo->author->name }}</td>
         <td>{{ $ppo->created_at }}</td>
         <td>{{ $ppo->updated_at }}</td>
         <td>

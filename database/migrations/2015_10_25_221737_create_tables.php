@@ -39,8 +39,8 @@ class CreateTables extends Migration
         });
         Schema::create('lucodes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('code');
-            $table->string('name')->unique();
+            $table->string('code')->nullable();
+            $table->string('name')->nullable();
             $table->integer('medication_id')->unsigned()->default(0);
             $table->timestamps();
         });

@@ -41,10 +41,6 @@ class LucodesController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'code' => 'required',
-        ]);
         $input = $request->all();
         Lucode::create( $input );
 
