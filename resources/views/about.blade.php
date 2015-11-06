@@ -14,19 +14,16 @@
         <h3>Summary</h3>
 
         <p>Health information administrators can use this tool to build a "combo" of medications
-         based on CancerCare Ontario PrePrinted Orders (PPOs), which allows end users like
+         based on <a href="https://www.cancercare.on.ca/cms/one.aspx?portalId=1377&pageId=322076" target="_blank">CancerCare Ontario PrePrinted Orders (PPOs)</a>, which allows end users like
          Oncologists/Hematologists and Nurse Practitioners to make chemotherapy regimen prescriptions
          and customize the combo of medications based on actual situation, for the patient to
          take to a pharmacy to dispense medications.</p>
-
-        <h3>What are PrePrinted Orders (PPOs)?</h3>
-
-        <a herf="https://www.cancercare.on.ca/cms/one.aspx?portalId=1377&pageId=322076">Check this page</a>
+        <hr>
 
         <h3>License</h3>
 
         <p>ePPO is open-sourced software licensed under the MIT license</p>
-
+        <hr>
         <h3>To Do List</h3>
         <ul class="list-group">
         <li class="list-group-item"><a href="{{route('ppos.create')}}">Use Case: build a ppo (almost done)</a></li>
