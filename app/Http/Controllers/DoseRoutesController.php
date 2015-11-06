@@ -81,6 +81,9 @@ class DoseRoutesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
         $input = $request->all();
         $reason = DoseRoute::findOrFail($id);
         $reason->update( $input );

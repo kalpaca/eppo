@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-     return view('welcome');
+     return view('about');
 });
 
 // Authentication routes...
@@ -25,11 +25,13 @@ Route::get('auth/register', array('uses' => 'Auth\AuthController@getRegister', '
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::get('/home', function () {
-     return view('welcome');
+     return view('about');
 });
+
 Route::get('/about', function () {
      return view('about');
 });
+
 Route::get('ppos/explore/{patientid}', array('uses' => 'PposController@explore', 'as' => 'ppos.explore'));
 Route::get('prescriptions/create/{ppoid}/{diagnosisid}/{patientid}', array('uses' => 'PrescriptionsController@create', 'as' => 'prescriptions.create'));
 Route::resource('diagnoses', 'DiagnosesController');

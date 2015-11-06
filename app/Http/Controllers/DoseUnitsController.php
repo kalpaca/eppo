@@ -82,6 +82,9 @@ class DoseUnitsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
         $input = $request->all();
         $unit = DoseUnit::findOrFail($id);
         $unit->update( $input );

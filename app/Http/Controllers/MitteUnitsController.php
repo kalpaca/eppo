@@ -82,6 +82,9 @@ class MitteUnitsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
         $input = $request->all();
         $unit = MitteUnit::findOrFail($id);
         $unit->update( $input );

@@ -76,6 +76,9 @@ class DoseModificationReasonsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
         $input = $request->all();
         $reason = DoseModificationReason::findOrFail($id);
         $reason->update( $input );

@@ -66,6 +66,7 @@ class PposController extends Controller
     {
         $this->validate($request, [
             'regimen_id' => 'required',
+            'name' => 'required',
         ]);
         $user = Auth::user();
 
@@ -137,6 +138,7 @@ class PposController extends Controller
     {
         $this->validate($request, [
             'regimen_id' => 'required',
+            'name' => 'required',
         ]);
 
         $user = Auth::user();

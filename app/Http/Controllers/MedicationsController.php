@@ -82,6 +82,9 @@ class MedicationsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
         $input = $request->all();
         $medication = Medication::findOrFail($id);
         $medication->update( $input );

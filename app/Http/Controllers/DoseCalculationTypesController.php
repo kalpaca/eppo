@@ -82,6 +82,9 @@ class DoseCalculationTypesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
         $input = $request->all();
         $type = DoseCalculationType::findOrFail($id);
         $type->update( $input );

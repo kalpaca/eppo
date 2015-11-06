@@ -86,6 +86,9 @@ class DiagnosisSecondaryCategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
         $input = $request->all();
         $cat = DiagnosisSecondaryCategory::findOrFail($id);
         $cat->update( $input );
