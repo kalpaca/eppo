@@ -24,14 +24,19 @@ class PrescriptionsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param   $ppoid, ppo id selected in ppo explorer;
+     *          $diagnosisid, id selected in ppo explorer;
+     *          $patientid, id selected patient selection;
+     *
      * @return \Illuminate\Http\Response
      */
+
     public function create($ppoid, $diagnosisid, $patientid)
     {
         $diagnosis = Diagnosis::findOrFail($diagnosisid);
         $patient = Patient::findOrFail($patientid);
         $ppo = Ppo::with('diagnoses','regimen','author','ppoItems')->findOrFail($ppoid);
-        $ppo->ppoItems->load('doseUnit','mitteUnit','medication');
+        $ppo->ppoItems->load('doseUnit','mitteUnit','medication','lucodes');
         $rx = new Collection();
         $supportiveRx = new Collection();
         foreach($ppo->ppoItems as $item)
@@ -90,7 +95,7 @@ class PrescriptionsController extends Controller
     public function show($id)
     {
         $prescription = Prescription::with('diagnosis','regimen','author','prescriptionItems','reasons','patient')->findOrFail($id);
-        $prescription->prescriptionItems->load('doseUnit','mitteUnit','medication');
+        $prescription->prescriptionItems->load('doseUnit','mitteUnit','medication','lucode');
         $rx = new Collection();
         $supportiveRx = new Collection();
         foreach($prescription->prescriptionItems as $item)
@@ -151,8 +156,9 @@ class PrescriptionsController extends Controller
         {
             $prescription->prescriptionItems()->delete();
             foreach($request->prescriptionItems as $item)
-                if(isset($item['is_selected']) && $item['is_selected'])
-                    $prescription->prescriptionItems()->create($item);
+                $prescription->prescriptionItems()->create($item);
+        } else {
+            $prescription->prescriptionItems()->delete();
         }
         if(isset($request->reasons))
         {

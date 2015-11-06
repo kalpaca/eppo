@@ -15,6 +15,7 @@ $ppos = $defaultSelection + $ppos->toArray();
 <div class="form-group col-md-6">
     {!! Form::label('medication_id','Medication: ',['class' => 'control-label']) !!}
     {!! Form::select('medication_id',$medications, null, ['class'=>'form-control']) !!}
+    <img id="loading" src="{{ asset('img/icon_loading.gif') }}" alt="Updating ..." />
 </div>
 
 <div class="form-group col-md-6">
@@ -42,8 +43,9 @@ $ppos = $defaultSelection + $ppos->toArray();
 </div>
 
 <div class="form-group width_100_percent">
-    {!! Form::label('fixed_dose_result','Dose Result (if fixed): ',['class' => 'control-label']) !!}
+    {!! Form::label('fixed_dose_result','Dose Result for report (if fixed): ',['class' => 'control-label']) !!}
     {!! Form::text('fixed_dose_result', null, ['class'=>'form-control']) !!}
+    <p>*This attribute is only used for back end report; not for prescription display.</p>
 </div>
 
 <div class="form-group width_100_percent">
@@ -104,6 +106,102 @@ $ppos = $defaultSelection + $ppos->toArray();
     {!! Form::select('mitte_unit_id', $mitteUnits, null, ['class'=>'form-control']) !!}
 </div>
 
+<div class="form-group col-md-12">
+    {!! Form::label('lucodes[]','Use "Ctrl" key to select mutiple LU Codes (if applicable): ',['class' => 'control-label']) !!}
+    {!! Form::select('lucodes[]', $lucodes, $lucodesSelected, ['class'=>'form-control width_100_percent','multiple'=>'multiple']) !!}
+</div>
+
 <div class="col-md-12">
 {!! Form::submit('Submit', ['class' => 'btn btn-primary pull-right']) !!}
 </div>
+
+<script>
+
+$loadingDiv = $("#loading");
+
+$templateDiv = $("#template");
+
+$lucodeDiv = $("#lucodes");
+
+$loadingDiv.hide();
+
+
+$.ajaxSetup({
+    beforeSend:function(){
+        // show gif here, eg:
+        $loadingDiv.show();
+    },
+    complete:function(){
+        // hide gif here, eg:
+        $loadingDiv.hide();
+    }
+});
+//on drug selection change
+$('#FormSpecificDrugDrugId').change(function(){
+    var drugId = $('#FormSpecificDrugDrugId').val();
+    var url = '/ePrescription/lucodes/ajaxGetListByDrugId/'+drugId ;
+    var url2 = '/ePrescription/formspecificdrugs/ajaxGetListByDrugId/'+drugId ;
+
+    //get lucodes for new drug selection
+    var lucodeRequest = $.ajax({
+        type: 'POST',
+        url: url,
+        data: '',
+        dataType: 'json',
+
+    })
+
+    .done(function(data){
+        //console.log(data.data);
+        $lucodeDiv.empty();
+        for (var j = 0; j < data.data.length; j++){
+            var lucode = data.data[j].Lucode;
+            //console.log(lucode.code + "--");
+
+            $lucodeDiv.append("<option value='" +lucode.code+ "'>" +lucode.code+' '+lucode.description+ "</option>");
+        }
+    })
+
+    .fail(function( jqXHR, textStatus ) {
+          alert( "Request failed: " + textStatus );
+    });
+
+    //get new ppo item templates for new drug selection
+    var templateRequest = $.ajax({
+        type: 'POST',
+        url: url2,
+        data: '',
+        dataType: 'json',
+
+    })
+
+    .done(function(data){
+        //console.log(data.data);
+        $templateDiv.empty().append("<option value>(choose template)</option>");
+        for (var j = 0; j < data.data.length; j++){
+            var item = data.data[j];
+            //console.log(item.PrescriptionForm.name + "--");
+            $templateDiv.append("<option value='" +item.FormSpecificDrug.id+ "'>" +item.Drug.name+' '+item.FormSpecificDrug.dose_base_value+' for '+item.PrescriptionForm.name+ "</option>");
+        }
+    })
+
+    .fail(function( jqXHR, textStatus ) {
+          alert( "Request failed: " + textStatus );
+    });
+})
+//on template selection change
+$templateDiv.change(function(){
+    var id = $templateDiv.val();
+    window.location = '/ePrescription/formspecificdrugs/add/templateId:'+id ;
+})
+$('#universal-tpl').click(function(){
+    $('#instruction').html('po');
+    $("#dose_unit").val("mg");
+    $("#dose_calculation_type").val("self");
+    $("#FormSpecificDrugIsFrequencyInput").prop('checked',true);
+    $("#FormSpecificDrugIsDaysInput").prop('checked',true);
+    $("#dose_route").val("PO");
+    $("#mitte_unit").val("days");
+})
+
+</script>

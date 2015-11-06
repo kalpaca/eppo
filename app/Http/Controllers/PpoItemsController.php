@@ -15,6 +15,7 @@ use eppo\DoseUnit;
 use eppo\DoseRoute;
 use eppo\MitteUnit;
 use eppo\DoseCalculationType;
+use eppo\Lucode;
 
 class PpoItemsController extends Controller
 {
@@ -25,8 +26,9 @@ class PpoItemsController extends Controller
      */
     public function index()
     {
-        $items = PpoItem::with('doseUnit','mitteUnit','ppo','medication','ppoSection')->paginate(10);
-        return view('ppo_items.index', compact('items'));
+        $items = PpoItem::with('doseUnit','mitteUnit','ppo','medication','ppoSection','lucodes')->paginate(10);
+        $isAdminView = true;
+        return view('ppo_items.index', compact('items','isAdminView'));
     }
 
     /**
@@ -43,8 +45,10 @@ class PpoItemsController extends Controller
         $doseUnits = DoseUnit::lists('name','id');
         $doseRoutes = DoseRoute::lists('name','id');
         $mitteUnits = MitteUnit::lists('name','id');
+        $lucodes = Lucode::get()->lists('detail','id');
+        $lucodesSelected = null;
 
-        return view('ppo_items.create', compact('medications','ppoSections','ppos','doseCalculationTypes','doseUnits','doseRoutes','mitteUnits'));
+        return view('ppo_items.create', compact('lucodes','lucodesSelected','medications','ppoSections','ppos','doseCalculationTypes','doseUnits','doseRoutes','mitteUnits'));
     }
 
     /**
@@ -61,8 +65,11 @@ class PpoItemsController extends Controller
             'ppo_section_id' => 'required',
         ]);
         $input = $request->all();
-        PpoItem::create( $input );
-
+        $item = PpoItem::create( $input );
+        if(isset($request->lucodes))
+        {
+            $item->lucodes()->sync($request->lucodes);
+        }
         return redirect()->route('ppoitems.index')->with('success-message', 'Dose Schedule created');
     }
 
@@ -95,8 +102,10 @@ class PpoItemsController extends Controller
         $doseUnits = DoseUnit::lists('name','id');
         $doseRoutes = DoseRoute::lists('name','id');
         $mitteUnits = MitteUnit::lists('name','id');
+        $lucodes = Lucode::get()->lists('detail','id');
+        $lucodesSelected = $item->lucodes->pluck('id')->all();
 
-        return view('ppo_items.edit', compact('item','medications','ppoSections','ppos','doseCalculationTypes','doseUnits','doseRoutes','mitteUnits'));
+        return view('ppo_items.edit', compact('lucodes','lucodesSelected','item','medications','ppoSections','ppos','doseCalculationTypes','doseUnits','doseRoutes','mitteUnits'));
     }
 
     /**
@@ -116,7 +125,10 @@ class PpoItemsController extends Controller
         $input = $request->all();
         $item = PpoItem::findOrFail($id);
         $item->update( $input );
-
+        if(isset($request->lucodes))
+        {
+            $item->lucodes()->sync($request->lucodes);
+        }
         return redirect()->route('ppoitems.index')->with('success-message', 'Dose Schedule updated');
     }
 

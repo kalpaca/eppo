@@ -14,23 +14,22 @@
 Route::get('/', function () {
      return view('about');
 });
-
-// Authentication routes...
-Route::get('auth/login', array('uses' => 'Auth\AuthController@getLogin', 'as' => 'auth.login'));
-Route::post('auth/login', 'Auth\AuthController@postLogin');
-
-
-// Registration routes...
-Route::get('auth/register', array('uses' => 'Auth\AuthController@getRegister', 'as' => 'auth.reg'));
-Route::post('auth/register', 'Auth\AuthController@postRegister');
-
 Route::get('/home', function () {
      return view('about');
 });
-
 Route::get('/about', function () {
      return view('about');
 });
+
+// Authentication routes
+Route::get('auth/login', array('uses' => 'Auth\AuthController@getLogin', 'as' => 'auth.login'));
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+
+// Registration routes
+Route::get('auth/register', array('uses' => 'Auth\AuthController@getRegister', 'as' => 'auth.reg'));
+Route::post('auth/register', 'Auth\AuthController@postRegister');
+
+// Routes need auth
 Route::group(['middleware' => 'auth'], function () {
     Route::get('auth/logout', array('uses' => 'Auth\AuthController@getLogout', 'as' => 'auth.logout'));
     Route::get('ppos/explore/{patientid}', array('uses' => 'PposController@explore', 'as' => 'ppos.explore'));

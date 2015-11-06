@@ -12,4 +12,9 @@ class Lucode extends Model
     {
         return $this->belongsTo('eppo\Medication')->select(['id','name']);
     }
+
+    public function getDetailAttribute()
+    {
+        return $this->attributes['code'] .' '. $this->attributes['name'];
+    }
 }

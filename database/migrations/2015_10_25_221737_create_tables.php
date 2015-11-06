@@ -144,7 +144,6 @@ class CreateTables extends Migration
             $table->foreign('ppo_item_id')->references('id')->on('ppo_items')->onDelete('cascade');
             $table->integer('lucode_id')->unsigned()->default(0);
             $table->foreign('lucode_id')->references('id')->on('lucodes')->onDelete('cascade');
-            $table->timestamps();
         });
         Schema::create('prescriptions', function (Blueprint $table) {
             $table->increments('id');

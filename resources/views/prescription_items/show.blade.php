@@ -33,7 +33,7 @@ $itemLineClass = 'ppo-item-line col-md-12';
     </div>
     <div class="{{ $itemLineClass }}">
         @if($item->is_start_date)
-            $item->start_date
+            Start date: {{ $item->start_date }}
         @endif
     </div>
     <div class="{{ $itemLineClass }}">
@@ -44,6 +44,11 @@ $itemLineClass = 'ppo-item-line col-md-12';
 
         @if($item->is_repeat_input)
             Repeat: {{ $item->repeat }}
+        @endif
+    </div>
+    <div class="{{ $itemLineClass }}">
+        @if($item->lucode_id)
+            LU Code: {{$item->lucode->code}} {{$item->lucode->name}}
         @endif
     </div>
 </div>

@@ -22,6 +22,7 @@ class PrescriptionItem extends Model
     'instruction',
     'is_instruction_input',
     'instruction_input',
+    'is_start_date',
     'start_date',
     'is_frequency_input',
     'frequency',

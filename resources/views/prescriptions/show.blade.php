@@ -3,7 +3,7 @@
 @section('title','View prescription')
 @section('panelHeading','View prescription')
 @section('panelTopBar')
-{!! link_to_route('prescriptions.edit', 'Edit', $prescription->id, array('class' => 'btn btn-default')) !!}
+{{-- link_to_route('prescriptions.edit', 'Edit', $prescription->id, array('class' => 'btn btn-default')) --}}
 
 @endsection
 @section('panelBody')
@@ -36,7 +36,7 @@
 
         <p><strong>Diagnosis: </strong>
         @if(isset($diagnosis))
-            <span class="diagnosis-name"><strong>{{ $diagnosis->name }}</strong></span>
+            <span class="diagnosis-name"><strong>{{ $prescription->diagnosis->name }}</strong></span>
         @endif
     </td>
     <td class="col-md-6">

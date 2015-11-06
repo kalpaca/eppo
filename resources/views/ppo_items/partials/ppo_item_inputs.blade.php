@@ -32,6 +32,7 @@ $itemLineClass = 'ppo-item-line col-md-12';
 		{!! Form::checkbox($postDataIndex.'is_selected]', null, null, ['id' => $ppoItemIndex.'-checkbox', 'class' => 'med-'.$item->medication->id . ' ppo-item-checkbox']) !!}
 		{!! Form::label($postDataIndex.'is_selected]', $item->medication->name, ['class'=>'control-label']) !!}
 
+		{{-- Formula for Percentage; Percentage and BSA --}}
 		@if($item->dose_calculation_type_id == 1) {{-- Percentage --}}
 			{{ $item->dose_base . $item->doseUnit->name }} x
 			{!! Form::text($postDataIndex.'dose_percentage]', null, ['class'=>$ppoItemInput.'integer-field', 'size' => 2]) !!}
@@ -41,13 +42,19 @@ $itemLineClass = 'ppo-item-line col-md-12';
 			/m<sup>2</sup> x <span class='bsa_value'>BSA</span> x
 			{!! Form::text($postDataIndex.'dose_percentage]', null, ['class'=>$ppoItemInput.'integer-field', 'size' => 2]) !!}
 			 % * =
-		@elseif($item->dose_calculation_type_id == 4) {{-- Fixed dose --}}
-			{!! Form::hidden ( $postDataIndex.'dose_result]', $fixed_dose_result) !!}
 		@endif
-		{{-- MD dose input--}}
-		{!! Form::text($postDataIndex.'dose_result]', null, ['class'=>$ppoItemInput.'decimal-field', 'size' => 6 ]) !!}
-		 {{ $item->doseUnit->name .' '. $item->instruction }}
 
+		{{-- Percentage; Percentage and BSA; MD dose input--}}
+		@if($item->dose_calculation_type_id < 4)
+		{!! Form::text($postDataIndex.'dose_result]', null, ['class'=>$ppoItemInput.'decimal-field', 'size' => 6 ]) !!}
+		 {{ $item->doseUnit->name }}
+
+		{{-- Fixed dose --}}
+		@elseif($item->dose_calculation_type_id == 4)
+			{!! Form::hidden ( $postDataIndex.'dose_result]', $item->dose_result) !!}
+		@endif
+
+		 {{$item->instruction}}
 
 		@if($item->is_frequency_input)
 		 {!! Form::text($postDataIndex.'frequency]', null, ['class'=>$ppoItemInput, 'size' => 6]) !!}
@@ -82,9 +89,18 @@ $itemLineClass = 'ppo-item-line col-md-12';
 			{!! Form::text($postDataIndex.'repeat]', null, ['class'=>$ppoItemInput.'integer-field', 'size' => 4]) !!}
 		@endif
 	</div>
+	<div class="{{ $itemLineClass }}">
+	<?php $lucodes = $item->lucodes->lists('detail','id'); ?>
+		@if(count($lucodes)>0)
+    	{!! Form::label($postDataIndex.'lucode_id]','LU Code: ',['class' => 'control-label']) !!}
+    	{!! Form::select($postDataIndex.'lucode_id]', $lucodes, null, ['class'=>'form-control width_100_percent']) !!}
+		@endif
+	</div>
 	<div class="col-md-12">
 		{{-- TO DO: implement user role --}}
+		@if( isset($isAdminView) && $isAdminView )
 		{!! link_to_route('ppoitems.edit', 'Update', $item->id, array('class' => 'btn btn-xs btn-primary')) !!}
+		@endif
 	</div>
 </div>
 </fieldset>
