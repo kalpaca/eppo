@@ -27,6 +27,8 @@ class CreateTables extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->date('dob');
+            $table->integer('user_id')->unsigned()->default(0);
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
         Schema::create('regimens', function (Blueprint $table) {
@@ -57,7 +59,6 @@ class CreateTables extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->integer('diagnosis_secondary_category_id')->unsigned()->default(0);
-            $table->integer('diagnosis_primary_category_id')->unsigned()->default(0);
             $table->timestamps();
         });
         Schema::create('dose_units', function (Blueprint $table) {
