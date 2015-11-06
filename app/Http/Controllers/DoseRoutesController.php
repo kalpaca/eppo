@@ -17,7 +17,7 @@ class DoseRoutesController extends Controller
      */
     public function index()
     {
-        $routes = DoseRoute::all();
+        $routes = DoseRoute::simplePaginate(10);
         return view('dose_routes.index', compact('routes'));
     }
 

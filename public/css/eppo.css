@@ -33,16 +33,11 @@ select[multiple] {
 .unicode-checkbox {
     font-size: 14pt;
 }
-.item-is-selected {
-    opacity: 1;
-    color: #222;
-    background-color: #ffc;
-}
 .ppo-item {
     padding-top: 5px;
     padding-bottom: 5px;
 }
-.ppo-item .ppo-item-line + .ppo-item-line {
+.ppo-item .ppo-item-line + .ppo-item-line {/* from second ppo-item-line */
     text-indent: 10px;
 }
 .ppo-item-line {

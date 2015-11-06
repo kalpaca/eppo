@@ -38,5 +38,6 @@
         @endforeach
     </tbody>
 </table>
+{!! $lucodes->render() !!}
 @endif
 @endsection

@@ -18,7 +18,7 @@ class DoseUnitsController extends Controller
      */
     public function index()
     {
-        $units = DoseUnit::all();
+        $units = DoseUnit::simplePaginate(15);
         return view('dose_units.index', compact('units'));
     }
 

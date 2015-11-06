@@ -66,5 +66,6 @@
         @endforeach
     </tbody>
 </table>
+{!! $ppos->render() !!}
 @endif
 @endsection

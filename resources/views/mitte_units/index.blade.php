@@ -36,5 +36,6 @@
         @endforeach
     </tbody>
 </table>
+{!! $units->render() !!}
 @endif
 @endsection

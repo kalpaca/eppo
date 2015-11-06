@@ -17,7 +17,7 @@ class LucodesController extends Controller
      */
     public function index()
     {
-        $lucodes = Lucode::all();
+        $lucodes = Lucode::paginate(10);
         return view('lucodes.index', compact('lucodes'));
     }
 

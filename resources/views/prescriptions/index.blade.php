@@ -44,5 +44,6 @@
         @endforeach
     </tbody>
 </table>
+{!! $prescriptions->render() !!}
 @endif
 @endsection

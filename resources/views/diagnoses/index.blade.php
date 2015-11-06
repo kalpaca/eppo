@@ -40,5 +40,6 @@
         @endforeach
     </tbody>
 </table>
+{!! $diagnoses->render() !!}
 @endif
 @endsection

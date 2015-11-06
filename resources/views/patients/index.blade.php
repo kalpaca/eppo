@@ -32,5 +32,6 @@
         @endforeach
     </tbody>
 </table>
+{!! $patients->render() !!}
 @endif
 @endsection

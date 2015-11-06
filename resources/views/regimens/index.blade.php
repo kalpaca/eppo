@@ -38,5 +38,6 @@
         @endforeach
     </tbody>
 </table>
+{!! $regimens->render() !!}
 @endif
 @endsection

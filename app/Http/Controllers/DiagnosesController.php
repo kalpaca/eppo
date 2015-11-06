@@ -20,7 +20,7 @@ class DiagnosesController extends Controller
      */
     public function index()
     {
-        $diagnoses = Diagnosis::with('secondaryCat.primaryCat')->get();
+        $diagnoses = Diagnosis::with('secondaryCat.primaryCat')->paginate(10);
         return view('diagnoses.index', compact('diagnoses'));
     }
 

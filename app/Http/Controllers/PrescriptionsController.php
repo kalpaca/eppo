@@ -17,7 +17,7 @@ class PrescriptionsController extends Controller
 {
     public function index()
     {
-        $prescriptions = Prescription::with('diagnosis','regimen','author','patient')->get();
+        $prescriptions = Prescription::with('diagnosis','regimen','author','patient')->paginate(10);
         return view('prescriptions.index', compact('prescriptions'));
     }
 

@@ -6,6 +6,7 @@
 @if(!$units->count())
 <p>You have no dose units.</p>
 @else
+
 <table class="table">
     <thead>
         <tr>
@@ -36,5 +37,6 @@
         @endforeach
     </tbody>
 </table>
+{!! $units->render() !!}
 @endif
 @endsection

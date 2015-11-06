@@ -36,5 +36,6 @@
         @endforeach
     </tbody>
 </table>
+{!! $routes->render() !!}
 @endif
 @endsection

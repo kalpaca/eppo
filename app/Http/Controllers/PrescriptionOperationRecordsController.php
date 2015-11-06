@@ -10,7 +10,7 @@ class PrescriptionOperationRecordsController extends Controller
 {
     public function index()
     {
-        $prescriptionOperationRecords = PrescriptionOperationRecord::all();
+        $prescriptionOperationRecords = PrescriptionOperationRecord::paginate(10);
         return view('prescription_operation_records.index', compact('prescriptionOperationRecords'));
     }
 

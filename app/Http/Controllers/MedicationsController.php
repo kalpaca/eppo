@@ -18,7 +18,7 @@ class MedicationsController extends Controller
      */
     public function index()
     {
-        $medications = Medication::all();
+        $medications = Medication::paginate(10);
         return view('medications.index', compact('medications'));
     }
 

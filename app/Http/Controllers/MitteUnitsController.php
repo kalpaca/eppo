@@ -18,7 +18,7 @@ class MitteUnitsController extends Controller
      */
     public function index()
     {
-        $units = MitteUnit::all();
+        $units = MitteUnit::paginate(10);
         return view('mitte_units.index', compact('units'));
     }
 

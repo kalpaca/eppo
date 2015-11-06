@@ -18,7 +18,7 @@ class RegimensController extends Controller
      */
     public function index()
     {
-        $regimens = Regimen::all();
+        $regimens = Regimen::paginate(10);
         return view('regimens.index', compact('regimens'));
     }
 

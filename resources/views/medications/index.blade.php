@@ -38,5 +38,6 @@
         @endforeach
     </tbody>
 </table>
+{!! $medications->render() !!}
 @endif
 @endsection

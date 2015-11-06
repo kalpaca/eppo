@@ -25,7 +25,7 @@ class PposController extends Controller
      */
     public function index()
     {
-        $ppos = Ppo::with('diagnoses','regimen','author')->get();
+        $ppos = Ppo::with('diagnoses','regimen','author')->paginate(10);
         return view('ppos.index', compact('ppos'));
     }
 
