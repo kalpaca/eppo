@@ -1,4 +1,4 @@
-<div class="margin_bottom_10 clearfix">
+<div class="margin_bottom_10 clearfix ppo-item-admin-view">
     @include('ppo_items/partials/ppo_item_inputs')
     <div class="col-md-12">
         <small>Item #</small>

@@ -1,14 +1,7 @@
+/* StartL: For all forms */
 .width_100_percent {
     width: 100%;
     display: block;
-}
-
-.callout {
-    padding: 0;
-    padding-bottom: 5px;
-    margin: 10px 5px;
-    border-bottom: 1px solid #eee;
-    border-left: 5px solid #eee;
 }
 select[multiple] {
     height : 200px;
@@ -20,6 +13,16 @@ select[multiple] {
     width: 100%;
     display: block;
 }
+/* End: all forms */
+
+.ppo-item-admin-view {
+    padding: 0;
+    padding-bottom: 5px;
+    margin: 10px 5px;
+    border-bottom: 1px solid #eee;
+    border-left: 5px solid #eee;
+}.
+
 /* Start: PPO form*/
 .mandatary-field-error, .integer-field-error
 {
@@ -56,6 +59,7 @@ select[multiple] {
 
 }
 /* End: PPO form */
+
 /* Start: PPO explorer */
 .sec-cat{
     margin-top:15px;
