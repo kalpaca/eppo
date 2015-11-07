@@ -11,6 +11,7 @@
 </div>
 <div class="container">
     <div class="col-md-12">
+        <div><img src="{{asset('img/workflow.jpg')}}" class="img-responsive center-block"></div>
         <h3>Description</h3>
 
         <p>"<a href="https://www.cancercare.on.ca/toolbox/drugformulary/pre_printed_orders/" target="_blank">CancerCare Ontario PrePrinted Orders (PPOs)</a> are protocol-specific forms that simplify and standardize the prescribing process. CancerCare Ontario pre-printed order forms for take-home chemotherapy prescriptions may reduce dosing, transcription and omission errors related to handwritten and verbal take-home chemotherapy orders. "</p>
