@@ -1,4 +1,4 @@
-<?php $patient = $prescription->patient; ?>
+<?php $patient = $prescription->patient; debug($patient);?>
 @extends('layouts.panel')
 @section('title','View prescription')
 @section('panelHeading','View prescription')

@@ -11,6 +11,7 @@
         'route'=>['prescriptions.update',$prescription->id],
         'class'=>'form-inline'
     ]) !!}
+@include('patients/partials/patient_info_table')
 @include('ppos/partials/ppo_inputs_all')
 <div class="col-md-12">
 {!! Form::submit('Submit', ['class' => 'btn btn-primary pull-right']) !!}

@@ -69,3 +69,6 @@
 {!! Form::hidden('is_dose_reason',$ppo->is_dose_reason) !!}
 {!! Form::hidden('is_cycle',$ppo->is_cycle) !!}
 {!! Form::hidden('cycle_days',$ppo->cycle_days) !!}
+@if($patient)
+{!! Form::hidden('patient_id', $patient->id) !!}
+@endif
