@@ -1,5 +1,7 @@
 <?php
-$index = isset($index)? $index : 0;
+// posted prescription items index by ppo item id
+$index = $item->id;
+
 $postDataIndex = 'prescriptionItems['.$index.'][';
 $ppoItemIndex = 'ppo-item-'.$item->ppo_section_id .'-'. $index;
 $ppoItemInput = $ppoItemIndex.'-input form-control ';

@@ -117,10 +117,14 @@ class PrescriptionsController extends Controller
     public function edit($id)
     {
         $prescription = Prescription::with('diagnosis','ppo.ppoItems','author','prescriptionItems','reasons')->findOrFail($id);
-        $ppo =  $prescription->ppo;
-        $ppo->ppoItems->load('doseUnit','mitteUnit','medication');
+        $ppo = $prescription->ppo;
+        $ppo->ppoItems->load('doseUnit','mitteUnit','medication','lucodes');
         $rx = new Collection();
         $supportiveRx = new Collection();
+        $temp = new Collection();
+
+        //this loop will produce the ppo item collection, which looks like a bunch of inputs on form
+        //and those ppoItems index by ppo item id in the form
         foreach($ppo->ppoItems as $item)
         {
             if($item->ppo_section_id == 1)
@@ -128,7 +132,17 @@ class PrescriptionsController extends Controller
             elseif($item->ppo_section_id == 2)
                 $supportiveRx->push($item);
         }
-        return view('prescriptions.edit', compact('diagnosis','prescription','ppo','prescriptionItems','rx','supportiveRx'));
+
+        //this loop will produce an array for swap, make the prescriptionItems array indexed by ppo_item_id
+        //so prescriptionItem data can find their ppo item inputs, and sit in the empty boxes where they should be!
+        foreach($prescription->prescriptionItems as $item)
+        {
+            $temp->put($item->ppo_item_id, $item);
+        }
+        
+        $prescription->prescriptionItems = $temp;
+        
+        return view('prescriptions.edit', compact('diagnosis','prescription','ppo','rx','supportiveRx'));
     }
 
     /**
@@ -156,7 +170,10 @@ class PrescriptionsController extends Controller
         {
             $prescription->prescriptionItems()->delete();
             foreach($request->prescriptionItems as $item)
-                $prescription->prescriptionItems()->create($item);
+            {
+                if(isset($item['is_selected']) && $item['is_selected'])
+                    $prescription->prescriptionItems()->create($item);
+            }
         } else {
             $prescription->prescriptionItems()->delete();
         }

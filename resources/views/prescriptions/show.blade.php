@@ -3,8 +3,8 @@
 @section('title','View prescription')
 @section('panelHeading','View prescription')
 @section('panelTopBar')
-{{-- link_to_route('prescriptions.edit', 'Edit', $prescription->id, array('class' => 'btn btn-default')) --}}
-
+{!! link_to_route('prescriptions.edit', 'Edit', $prescription->id, array('class' => 'btn btn-default')) !!}
+{!! link_to_route('patients.show', 'Back to patient', $prescription->patient_id, array('class' => 'btn btn-default')) !!}
 @endsection
 @section('panelBody')
 

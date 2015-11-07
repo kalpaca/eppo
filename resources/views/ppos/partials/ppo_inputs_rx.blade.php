@@ -1,4 +1,3 @@
-<?php $index = 0;?>
 @if($rx->count()>0)
 <table class="table table-bordered ppo-rx">
 <tbody>
@@ -17,8 +16,7 @@
     <hr>
     <div class="ppo-items">
         @foreach($rx as $item)
-            @include('ppo_items/partials/ppo_item_inputs', compact('index'))
-            <?php $index++; ?>
+            @include('ppo_items/partials/ppo_item_inputs')
         @endforeach
     </div>
 
@@ -48,8 +46,7 @@
     <hr>
     <div class="ppo-items">
         @foreach($supportiveRx as $item)
-            @include('ppo_items/partials/ppo_item_inputs', compact('index'))
-            <?php $index++; ?>
+            @include('ppo_items/partials/ppo_item_inputs')
         @endforeach
     </div>
     </td>

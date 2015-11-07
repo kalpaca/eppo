@@ -1,6 +1,10 @@
 @extends('layouts.panel')
 @section('title','View prescription')
 @section('panelHeading','View prescription')
+@section('panelTopBar')
+{!! link_to_route('prescriptions.show', 'Back to prescription', $prescription->id, array('class' => 'btn btn-default')) !!}
+{!! link_to_route('patients.show', 'Back to patient', $prescription->patient_id, array('class' => 'btn btn-default')) !!}
+@endsection
 @section('panelBody')
 {!! Form::model($prescription, [
     'method' => 'PATCH',
