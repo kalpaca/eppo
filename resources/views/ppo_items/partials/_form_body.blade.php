@@ -108,7 +108,7 @@ $ppos = $defaultSelection + $ppos->toArray();
 
 <div class="form-group col-md-12">
     {!! Form::label('lucodes[]','Use "Ctrl" key to select mutiple LU Codes (if applicable): ',['class' => 'control-label']) !!}
-    {!! Form::select('lucodes[]', $lucodes, $lucodesSelected, ['class'=>'form-control width_100_percent','multiple'=>'multiple']) !!}
+    {!! Form::select('lucodes[]', $lucodes, $lucodesSelected, ['class'=>'form-control width_100_percent','multiple'=>'multiple','id'=>'lucodes']) !!}
 </div>
 
 <div class="col-md-12">
@@ -116,91 +116,97 @@ $ppos = $defaultSelection + $ppos->toArray();
 </div>
 
 <script>
+yepnope([{
+  load: '{{ asset('bower_components/jquery/dist/jquery.min.js')}}',
+  complete: function () {
 
-$loadingDiv = $("#loading");
+    $loadingDiv = $("#loading");
 
-$templateDiv = $("#template");
+    //$templateDiv = $("#template");
 
-$lucodeDiv = $("#lucodes");
+    $lucodeDiv = $("#lucodes");
 
-$loadingDiv.hide();
+    $loadingDiv.hide();
 
 
-$.ajaxSetup({
-    beforeSend:function(){
-        // show gif here, eg:
-        $loadingDiv.show();
-    },
-    complete:function(){
-        // hide gif here, eg:
-        $loadingDiv.hide();
-    }
-});
-//on drug selection change
-$('#medication_id').change(function(){
-    var medId = $('#medication_id').val();
-    var url = '/lucodes/ajaxGetListByMed/'+medId ;
-    var url2 = '/ppoitems/ajaxGetListByMed/'+medId ;
-
-    //get lucodes for new drug selection
-    var lucodeRequest = $.ajax({
-        type: 'POST',
-        url: url,
-        data: '',
-        dataType: 'json',
-
-    })
-
-    .done(function(data){
-        //console.log(data.data);
-        $lucodeDiv.empty();
-        for (var j = 0; j < data.data.length; j++){
-            var lucode = data.data[j].Lucode;
-            //console.log(lucode.code + "--");
-
-            $lucodeDiv.append("<option value='" +lucode.code+ "'>" +lucode.code+' '+lucode.description+ "</option>");
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('input[name="_token"]').val()
+        },
+        beforeSend:function(){
+            // show gif here, eg:
+            $loadingDiv.show();
+        },
+        complete:function(){
+            // hide gif here, eg:
+            $loadingDiv.hide();
         }
-    })
-
-    .fail(function( jqXHR, textStatus ) {
-          alert( "Request failed: " + textStatus );
     });
+    //on drug selection change
+    $('#medication_id').change(function(){
+        var medId = $('#medication_id').val();
+        var url = '/lucodes/ajaxListByMed/' ;
+        //var url2 = '/ppoitems/ajaxGetListByMed/'+medId ;
 
-    //get new ppo item templates for new drug selection
-    var templateRequest = $.ajax({
-        type: 'POST',
-        url: url2,
-        data: '',
-        dataType: 'json',
+        //get lucodes for new drug selection
+        var lucodeRequest = $.ajax({
+            type: 'POST',
+            url: url,
+            data: 'medid='+medId,
+            dataType: 'json',
 
+        })
+
+        .done(function(data){
+            //console.log(data.data);
+            $lucodeDiv.empty();
+            $.each(data, function( index, detail ) {
+              $lucodeDiv.append("<option value='" +index+ "'>" +detail+ "</option>");
+            });
+        })
+
+        .fail(function( jqXHR, textStatus ) {
+              alert( "Request failed: " + textStatus );
+        });
+/*
+        //get new ppo item templates for new drug selection
+        var templateRequest = $.ajax({
+            type: 'POST',
+            url: url2,
+            data: '',
+            dataType: 'json',
+
+        })
+
+        .done(function(data){
+            //console.log(data.data);
+            $templateDiv.empty().append("<option value>(choose template)</option>");
+            for (var j = 0; j < data.data.length; j++){
+                var item = data.data[j];
+                //console.log(item.PrescriptionForm.name + "--");
+                $templateDiv.append("<option value='" +item.FormSpecificDrug.id+ "'>" +item.Drug.name+' '+item.FormSpecificDrug.dose_base_value+' for '+item.PrescriptionForm.name+ "</option>");
+            }
+        })
+
+        .fail(function( jqXHR, textStatus ) {
+              alert( "Request failed: " + textStatus );
+        });
+*/
     })
-
-    .done(function(data){
-        //console.log(data.data);
-        $templateDiv.empty().append("<option value>(choose template)</option>");
-        for (var j = 0; j < data.data.length; j++){
-            var item = data.data[j];
-            //console.log(item.PrescriptionForm.name + "--");
-            $templateDiv.append("<option value='" +item.FormSpecificDrug.id+ "'>" +item.Drug.name+' '+item.FormSpecificDrug.dose_base_value+' for '+item.PrescriptionForm.name+ "</option>");
-        }
+    //on template selection change
+    /*
+    $templateDiv.change(function(){
+        var id = $templateDiv.val();
+        window.location = '/ppoitems/add/templateId:'+id ;
     })
-
-    .fail(function( jqXHR, textStatus ) {
-          alert( "Request failed: " + textStatus );
-    });
-})
-//on template selection change
-$templateDiv.change(function(){
-    var id = $templateDiv.val();
-    window.location = '/ppoitems/add/templateId:'+id ;
-})
-$('#universal-tpl').click(function(){
-    $('#instruction').html('po');
-    $("#dose_unit").val(2);
-    $("#dose_calculation_type").val(3);
-    $("#is_frequency_input").prop('checked',true);
-    $("#is_days_input").prop('checked',true);
-    $("#mitte_unit").val("days");
-})
-
+    $('#universal-tpl').click(function(){
+        $('#instruction').html('po');
+        $("#dose_unit").val(2);
+        $("#dose_calculation_type").val(3);
+        $("#is_frequency_input").prop('checked',true);
+        $("#is_days_input").prop('checked',true);
+        $("#mitte_unit").val("days");
+    })*/
+}
+}]);
 </script>

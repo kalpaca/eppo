@@ -45,7 +45,8 @@ class PpoItemsController extends Controller
         $doseUnits = DoseUnit::lists('name','id');
         $doseRoutes = DoseRoute::lists('name','id');
         $mitteUnits = MitteUnit::lists('name','id');
-        $lucodes = Lucode::get()->lists('detail','id');
+        //because detail is not a db field, so we have to get() first then lists()
+        $lucodes = null;
         $lucodesSelected = null;
 
         return view('ppo_items.create', compact('lucodes','lucodesSelected','medications','ppoSections','ppos','doseCalculationTypes','doseUnits','doseRoutes','mitteUnits'));
@@ -93,7 +94,7 @@ class PpoItemsController extends Controller
      */
     public function edit($id)
     {
-        $item = PpoItem::findOrFail($id);
+        $item = PpoItem::with('lucodes')->findOrFail($id);
 
         $medications = Medication::lists('name','id');
         $ppoSections = PpoSection::lists('name','id');
@@ -102,9 +103,9 @@ class PpoItemsController extends Controller
         $doseUnits = DoseUnit::lists('name','id');
         $doseRoutes = DoseRoute::lists('name','id');
         $mitteUnits = MitteUnit::lists('name','id');
-        $lucodes = Lucode::get()->lists('detail','id');
-        $lucodesSelected = $item->lucodes->pluck('id')->all();
 
+        $lucodes = Lucode::where('medication_id', $item->medication_id)->get()->lists('detail','id');
+        $lucodesSelected = $item->lucodes->pluck('id')->all();
         return view('ppo_items.edit', compact('lucodes','lucodesSelected','item','medications','ppoSections','ppos','doseCalculationTypes','doseUnits','doseRoutes','mitteUnits'));
     }
 

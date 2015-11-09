@@ -23,6 +23,17 @@ class LucodesController extends Controller
     }
 
     /**
+     * Get a listing of the resource by AJAX.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ajaxListByMed(Request $request)
+    {
+        $id = $request->medid;
+        $lucodes = Lucode::where('medication_id', $id)->get()->lists('detail','id');
+        return response()->json($lucodes);
+    }
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
