@@ -107,7 +107,8 @@ class PposController extends Controller
                 $supportiveRx->push($item);
         }
         $isAdminView = true;
-        return view('ppos.show', compact('ppo','rx','supportiveRx','isAdminView'));
+        $patient = null;
+        return view('ppos.show', compact('ppo','rx','supportiveRx','isAdminView','patient'));
     }
 
     /**

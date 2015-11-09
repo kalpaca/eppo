@@ -14,12 +14,11 @@
       <ul class="nav navbar-nav">
         <li><a href="{{ asset('/') }}">Home</a></li>
         <li><a href="{{ asset('/about') }}">About</a></li>
-        <li><a href="{{ route('patients.index') }}">Patients</a></li>
+        <li><a href="{{ route('patients.index') }}">My Patients</a></li>
+         <li><a href="{{ route('prescriptions.index') }}">My Prescriptions</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ route('prescriptions.index') }}">Prescriptions</a></li>
-            <li role="separator" class="divider"></li>
             <li><a href="{{ route('ppos.index') }}">PPOs</a></li>
             <li><a href="{{ route('ppoitems.index') }}">PPO Items</a></li>
             <li role="separator" class="divider"></li>

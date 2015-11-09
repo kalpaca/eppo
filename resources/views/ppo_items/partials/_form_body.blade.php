@@ -137,10 +137,10 @@ $.ajaxSetup({
     }
 });
 //on drug selection change
-$('#FormSpecificDrugDrugId').change(function(){
-    var drugId = $('#FormSpecificDrugDrugId').val();
-    var url = '/ePrescription/lucodes/ajaxGetListByDrugId/'+drugId ;
-    var url2 = '/ePrescription/formspecificdrugs/ajaxGetListByDrugId/'+drugId ;
+$('#medication_id').change(function(){
+    var medId = $('#medication_id').val();
+    var url = '/lucodes/ajaxGetListByMed/'+medId ;
+    var url2 = '/ppoitems/ajaxGetListByMed/'+medId ;
 
     //get lucodes for new drug selection
     var lucodeRequest = $.ajax({
@@ -192,15 +192,14 @@ $('#FormSpecificDrugDrugId').change(function(){
 //on template selection change
 $templateDiv.change(function(){
     var id = $templateDiv.val();
-    window.location = '/ePrescription/formspecificdrugs/add/templateId:'+id ;
+    window.location = '/ppoitems/add/templateId:'+id ;
 })
 $('#universal-tpl').click(function(){
     $('#instruction').html('po');
-    $("#dose_unit").val("mg");
-    $("#dose_calculation_type").val("self");
-    $("#FormSpecificDrugIsFrequencyInput").prop('checked',true);
-    $("#FormSpecificDrugIsDaysInput").prop('checked',true);
-    $("#dose_route").val("PO");
+    $("#dose_unit").val(2);
+    $("#dose_calculation_type").val(3);
+    $("#is_frequency_input").prop('checked',true);
+    $("#is_days_input").prop('checked',true);
     $("#mitte_unit").val("days");
 })
 
