@@ -17,7 +17,8 @@ class PrescriptionsController extends Controller
 {
     public function index()
     {
-        $prescriptions = Prescription::with('diagnosis','regimen','author','patient')->paginate(10);
+        $userId = Auth::user()->id;
+        $prescriptions = Prescription::where('user_id', $userId)->with('diagnosis','regimen','author','patient')->paginate(10);
         return view('prescriptions.index', compact('prescriptions'));
     }
 

@@ -3,7 +3,7 @@
 namespace eppo\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 use eppo\Http\Requests;
 use eppo\Http\Controllers\Controller;
 
@@ -18,7 +18,8 @@ class PatientsController extends Controller
      */
     public function index()
     {
-        $patients = Patient::paginate(10);
+        $userId = Auth::user()->id;
+        $patients = Patient::where('user_id', $userId)->paginate(10);
         return view('patients.index', compact('patients'));
     }
 
