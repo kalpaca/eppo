@@ -2,7 +2,7 @@
 @section('title','PPO Items')
 @section('panelHeading','Add a New PPO Item')
 @section('panelBody')
-{!! Form::model(new eppo\PpoItem, [
+{!! Form::model($item, [
     'route'=>'ppoitems.store',
     'class'=>'col-md-12 form-inline'])
     !!}

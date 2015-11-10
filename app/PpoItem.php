@@ -54,4 +54,8 @@ class PpoItem extends Model
     {
         return $this->belongsToMany('eppo\Lucode','ppo_item_lucodes')->select(['lucodes.id','lucode_id','name','code']);
     }
+    public function getDetailAttribute()
+    {
+        return $this->medication->name .' @ '. $this->ppo->name .' '. $this->ppoSection->name .' '. $this->attributes['dose_base'];
+    }
 }

@@ -30,14 +30,58 @@ class PpoItemsController extends Controller
         $isAdminView = true;
         return view('ppo_items.index', compact('items','isAdminView'));
     }
-
+    /**
+     * Get a listing of the resource by AJAX.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ajaxListByMed(Request $request)
+    {
+        $id = $request->medid;
+        $templates = PpoItem::where('medication_id', $id)->get()->lists('detail','id');
+        return response()->json($templates);
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($templateid=null)
     {
+        if($templateid)
+        {
+            $item = PpoItem::select(
+                'medication_id',
+                'is_active',
+                'ppo_section_id',
+                'dose_base',
+                'dose_calculation_type_id',
+                'fixed_dose_result',
+                'dose_unit_id',
+                'dose_route_id',
+                'instruction',
+                'is_instruction_input',
+                'is_start_date',
+                'is_frequency_input',
+                'is_duration_input',
+                'is_mitte_input',
+                'is_repeat_input',
+                'mitte_unit_id',
+                'id')->with('lucodes')->findOrFail($templateid);
+            $item->id = null;
+            //because detail is not a db field, so we have to get() first then lists()
+            $templates = PpoItem::where('medication_id', $item->medication_id)->get()->lists('detail','id')->toArray();
+            $templateSelected = $templateid;
+            $lucodes = Lucode::where('medication_id', $item->medication_id)->get()->lists('detail','id')->toArray();
+            $lucodesSelected = $item->lucodes->pluck('id')->all();
+        }
+        else{
+            $item = new PpoItem();
+            $lucodes = array();
+            $lucodesSelected = null;
+            $templates = array();
+            $templateSelected = null;
+        }
         $medications = Medication::lists('name','id');
         $ppoSections = PpoSection::lists('name','id');
         $ppos = Ppo::lists('name','id');
@@ -45,11 +89,9 @@ class PpoItemsController extends Controller
         $doseUnits = DoseUnit::lists('name','id');
         $doseRoutes = DoseRoute::lists('name','id');
         $mitteUnits = MitteUnit::lists('name','id');
-        //because detail is not a db field, so we have to get() first then lists()
-        $lucodes = null;
-        $lucodesSelected = null;
 
-        return view('ppo_items.create', compact('lucodes','lucodesSelected','medications','ppoSections','ppos','doseCalculationTypes','doseUnits','doseRoutes','mitteUnits'));
+
+        return view('ppo_items.create', compact('templates','templateSelected','lucodes','lucodesSelected','item','medications','ppoSections','ppos','doseCalculationTypes','doseUnits','doseRoutes','mitteUnits'));
     }
 
     /**
@@ -96,6 +138,12 @@ class PpoItemsController extends Controller
     {
         $item = PpoItem::with('lucodes')->findOrFail($id);
 
+        $templates = PpoItem::where('medication_id', $item->medication_id)->get()->lists('detail','id')->toArray();
+        $templateSelected = $id;
+        $lucodes = Lucode::where('medication_id', $item->medication_id)->get()->lists('detail','id')->toArray();
+        $lucodesSelected = $item->lucodes->pluck('id')->all();
+
+
         $medications = Medication::lists('name','id');
         $ppoSections = PpoSection::lists('name','id');
         $ppos = Ppo::lists('name','id');
@@ -104,9 +152,8 @@ class PpoItemsController extends Controller
         $doseRoutes = DoseRoute::lists('name','id');
         $mitteUnits = MitteUnit::lists('name','id');
 
-        $lucodes = Lucode::where('medication_id', $item->medication_id)->get()->lists('detail','id');
-        $lucodesSelected = $item->lucodes->pluck('id')->all();
-        return view('ppo_items.edit', compact('lucodes','lucodesSelected','item','medications','ppoSections','ppos','doseCalculationTypes','doseUnits','doseRoutes','mitteUnits'));
+
+        return view('ppo_items.edit', compact('templates','templateSelected','lucodes','lucodesSelected','item','medications','ppoSections','ppos','doseCalculationTypes','doseUnits','doseRoutes','mitteUnits'));
     }
 
     /**

@@ -2,7 +2,7 @@
 @section('title','Prescriptions')
 @section('content')
 <h2>Prescriptions</h2>
-<p>{!! link_to_route('ppos.explore', 'Create prescription') !!}</p>
+<p>{!! link_to_route('patients.index', 'Select patient to create new prescription') !!}</p>
 @if(!$prescriptions->count())
 <p>You have no prescription</p>
 @else

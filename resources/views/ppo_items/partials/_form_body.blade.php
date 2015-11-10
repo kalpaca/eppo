@@ -4,9 +4,14 @@ $isMitteInput = isset($item->is_mitte_reason) ? $item->is_mitte_reason : true;
 $isRepeatInput = isset($item->is_repeat_input) ? $item->is_repeat_input : true;
 $defaultSelection = [''=>'Please Select'];
 $medications = $defaultSelection + $medications->toArray();
+
+$templates = $defaultSelection + $templates;
+$postUri = route('ppoitems.create');
+
 $ppos = $defaultSelection + $ppos->toArray();
 ?>
-<div class="form-group col-md-6">
+<div id="ppo-item-builder">
+<div class="form-group col-md-12">
     {!! Form::hidden('is_active', false) !!}
     {!! Form::checkbox('is_active', null, $isActive) !!}
     {!! Form::label('is_active','Active for ppo ', ['class' => 'control-label']) !!}
@@ -15,6 +20,11 @@ $ppos = $defaultSelection + $ppos->toArray();
 <div class="form-group col-md-6">
     {!! Form::label('medication_id','Medication: ',['class' => 'control-label']) !!}
     {!! Form::select('medication_id',$medications, null, ['class'=>'form-control']) !!}
+</div>
+
+<div class="form-group col-md-6">
+    {!! Form::label('template','Schedule Template: ',['class' => 'control-label']) !!}
+    {!! Form::select('template', $templates, $templateSelected, ['class'=>'form-control','data-post-url'=> "$postUri"]) !!}
     <img id="loading" src="{{ asset('img/icon_loading.gif') }}" alt="Updating ..." />
 </div>
 
@@ -114,99 +124,100 @@ $ppos = $defaultSelection + $ppos->toArray();
 <div class="col-md-12">
 {!! Form::submit('Submit', ['class' => 'btn btn-primary pull-right']) !!}
 </div>
-
+</div>
 <script>
-yepnope([{
-  load: '{{ asset('bower_components/jquery/dist/jquery.min.js')}}',
-  complete: function () {
+yepnope({
+    load: ["{{ asset('bower_components/jquery/dist/jquery.min.js')}}",
+                "{{ asset('js/bootstrap.min.js') }}"],
+    complete: function() {
+        $ppoItemBuilder = $("#ppo-item-builder");
 
-    $loadingDiv = $("#loading");
+        var loadingDiv = $ppoItemBuilder.find("#loading");
 
-    //$templateDiv = $("#template");
+        var templateDiv = $ppoItemBuilder.find("#template");
 
-    $lucodeDiv = $("#lucodes");
+        var lucodeDiv = $ppoItemBuilder.find("#lucodes");
 
-    $loadingDiv.hide();
+        var medDiv = $ppoItemBuilder.find('#medication_id');
 
+        loadingDiv.hide();
 
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('input[name="_token"]').val()
-        },
-        beforeSend:function(){
-            // show gif here, eg:
-            $loadingDiv.show();
-        },
-        complete:function(){
-            // hide gif here, eg:
-            $loadingDiv.hide();
-        }
-    });
-    //on drug selection change
-    $('#medication_id').change(function(){
-        var medId = $('#medication_id').val();
-        var url = '/lucodes/ajaxListByMed/' ;
-        //var url2 = '/ppoitems/ajaxGetListByMed/'+medId ;
-
-        //get lucodes for new drug selection
-        var lucodeRequest = $.ajax({
-            type: 'POST',
-            url: url,
-            data: 'medid='+medId,
-            dataType: 'json',
-
-        })
-
-        .done(function(data){
-            //console.log(data.data);
-            $lucodeDiv.empty();
-            $.each(data, function( index, detail ) {
-              $lucodeDiv.append("<option value='" +index+ "'>" +detail+ "</option>");
-            });
-        })
-
-        .fail(function( jqXHR, textStatus ) {
-              alert( "Request failed: " + textStatus );
-        });
-/*
-        //get new ppo item templates for new drug selection
-        var templateRequest = $.ajax({
-            type: 'POST',
-            url: url2,
-            data: '',
-            dataType: 'json',
-
-        })
-
-        .done(function(data){
-            //console.log(data.data);
-            $templateDiv.empty().append("<option value>(choose template)</option>");
-            for (var j = 0; j < data.data.length; j++){
-                var item = data.data[j];
-                //console.log(item.PrescriptionForm.name + "--");
-                $templateDiv.append("<option value='" +item.FormSpecificDrug.id+ "'>" +item.Drug.name+' '+item.FormSpecificDrug.dose_base_value+' for '+item.PrescriptionForm.name+ "</option>");
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('input[name="_token"]').val()
+            },
+            beforeSend:function(){
+                // show gif here, eg:
+                loadingDiv.show();
+            },
+            complete:function(){
+                // hide gif here, eg:
+                loadingDiv.hide();
             }
-        })
-
-        .fail(function( jqXHR, textStatus ) {
-              alert( "Request failed: " + textStatus );
         });
-*/
-    })
-    //on template selection change
-    /*
-    $templateDiv.change(function(){
-        var id = $templateDiv.val();
-        window.location = '/ppoitems/add/templateId:'+id ;
-    })
-    $('#universal-tpl').click(function(){
-        $('#instruction').html('po');
-        $("#dose_unit").val(2);
-        $("#dose_calculation_type").val(3);
-        $("#is_frequency_input").prop('checked',true);
-        $("#is_days_input").prop('checked',true);
-        $("#mitte_unit").val("days");
-    })*/
-}
-}]);
+        //on drug selection change
+        medDiv.change(function(){
+            var medId = $('#medication_id').val();
+
+            //get lucodes for new drug selection
+            var lucodeRequest = $.ajax({
+                type: 'POST',
+                url: '/lucodes/ajaxListByMed/',
+                data: 'medid='+medId,
+                dataType: 'json',
+
+            })
+
+            .done(function(data){
+                //console.log(data.data);
+                lucodeDiv.empty();
+                $.each(data, function( index, detail ) {
+                    lucodeDiv.append("<option value='" +index+ "'>" +detail+ "</option>");
+                });
+            })
+
+            .fail(function( jqXHR, textStatus ) {
+                  alert( "Request failed: " + textStatus );
+            });
+
+            //get new ppo item templates for new drug selection
+            var templateRequest = $.ajax({
+                type: 'POST',
+                url: "/ppoitems/ajaxListByMed/",
+                data: 'medid='+medId,
+                dataType: 'json',
+
+            })
+
+            .done(function(data){
+                //console.log(data.data);
+                templateDiv.empty().append("<option value>(choose template)</option>");
+                $.each(data, function( index, detail ) {
+                    templateDiv.append("<option value='" +index+ "'>" +detail+ "</option>");
+                });
+            })
+
+            .fail(function( jqXHR, textStatus ) {
+                  alert( "Request failed: " + textStatus );
+            });
+
+        })
+        //on template selection change
+
+        templateDiv.change(function(){
+            var id = templateDiv.val();
+
+            window.location = templateDiv.data('post-url') +'/'+ id;
+        })
+        /*
+        $('#universal-tpl').click(function(){
+            $('#instruction').html('po');
+            $("#dose_unit").val(2);
+            $("#dose_calculation_type").val(3);
+            $("#is_frequency_input").prop('checked',true);
+            $("#is_days_input").prop('checked',true);
+            $("#mitte_unit").val("days");
+        })*/
+    }
+});
 </script>

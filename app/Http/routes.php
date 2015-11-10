@@ -32,14 +32,22 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 // Routes need auth
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::post('lucodes/ajaxListByMed/', array('uses' => 'LucodesController@ajaxListByMed'));
+    Route::post('lucodes/ajaxListByMed/', array('uses' => 'LucodesController@ajaxListByMed','as' => 'lucodes.ajaxListByMed'));
     Route::get('lucodes/ajaxListByMed/', function()
     {
         return redirect()->home();
     });
+    Route::post('ppoitems/ajaxListByMed/', array('uses' => 'PpoItemsController@ajaxListByMed','as' => 'ppoitems.ajaxListByMed'));
+    Route::get('ppoitems/ajaxListByMed/', function()
+    {
+        return redirect()->home();
+    });
+
+
     Route::get('auth/logout', array('uses' => 'Auth\AuthController@getLogout', 'as' => 'auth.logout'));
+    Route::get('ppoitems/create/{templateid?}', array('uses' => 'PpoItemsController@create', 'as' => 'ppoitems.create'));
     Route::get('ppos/explore/{patientid}', array('uses' => 'PposController@explore', 'as' => 'ppos.explore'));
-    Route::get('prescriptions/create/{ppoid}/{diagnosisid}/{patientid}', array('uses' => 'PrescriptionsController@create', 'as' => 'prescriptions.create'));
+    Route::get('prescriptions/create/{ppoisd}/{diagnosisid}/{patientid}', array('uses' => 'PrescriptionsController@create', 'as' => 'prescriptions.create'));
     Route::resource('diagnoses', 'DiagnosesController');
     Route::resource('diagnosisprimarycategories', 'DiagnosisPrimaryCategoriesController');
     Route::resource('diagnosissecondarycategories', 'DiagnosisSecondaryCategoriesController');
@@ -51,12 +59,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('patients', 'PatientsController');
     Route::resource('pposections', 'PpoSectionsController');
     Route::resource('prescriptionoperationrecords', 'PrescriptionOperationRecordsController');
-    Route::resource('ppoitems', 'PpoItemsController');
+    Route::resource('ppoitems', 'PpoItemsController', array('except' => array('create')));
     Route::resource('dosecalculationtypes', 'DoseCalculationTypesController');
     Route::resource('doseroutes', 'DoseRoutesController');
     Route::resource('doseunits', 'DoseUnitsController');
     Route::resource('mitteunits', 'MitteUnitsController');
     Route::resource('dosemodificationreasons', 'DoseModificationReasonsController');
     Route::resource('ppos.ppoitems', 'PpoItemsController');
+
 });
 
