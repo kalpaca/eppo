@@ -35,9 +35,9 @@
         <p class="regimen-name">{{ $prescription->regimen->name }}</p>
 
         <p><strong>Diagnosis: </strong>
-        @if(isset($diagnosis))
-            <span class="diagnosis-name"><strong>{{ $prescription->diagnosis->name }}</strong></span>
-        @endif
+        
+        <span class="diagnosis-name"><strong>{{ $prescription->diagnosis->name }}</strong></span>
+        </p>
     </td>
     <td class="col-md-6">
         @if($prescription->is_cycle)
