@@ -36,6 +36,16 @@ class DiagnosesController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource in ajax modal.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createAjax()
+    {
+        $cats = DiagnosisSecondaryCategory::lists('name', 'id');
+        return view('diagnoses.create_ajax', compact('cats'));
+    }
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

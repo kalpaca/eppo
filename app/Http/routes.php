@@ -32,6 +32,10 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 // Routes need auth
 Route::group(['middleware' => 'auth'], function () {
 
+    Route::get('diagnoses/createAjax', array('uses' => 'DiagnosesController@createAjax', 'as' => 'diagnoses.createAjax'));
+    Route::get('regimens/createAjax', array('uses' => 'RegimensController@createAjax', 'as' => 'regimens.createAjax'));
+
+
     Route::post('lucodes/ajaxListByMed/', array('uses' => 'LucodesController@ajaxListByMed','as' => 'lucodes.ajaxListByMed'));
     Route::get('lucodes/ajaxListByMed/', function()
     {
@@ -42,8 +46,6 @@ Route::group(['middleware' => 'auth'], function () {
     {
         return redirect()->home();
     });
-
-
     Route::get('auth/logout', array('uses' => 'Auth\AuthController@getLogout', 'as' => 'auth.logout'));
     Route::get('ppoitems/create/{templateid?}', array('uses' => 'PpoItemsController@create', 'as' => 'ppoitems.create'));
     Route::get('ppos/explore/{patientid}', array('uses' => 'PposController@explore', 'as' => 'ppos.explore'));

@@ -14,11 +14,13 @@ $isStartDate = isset($ppo->is_start_date) ? $ppo->is_start_date : true;
 <div class="form-group">
     {!! Form::label('regimen_id','Regimen: ',['class' => 'control-label']) !!}
     {!! Form::select('regimen_id',$regimens, null, ['class'=>'form-control']) !!}
+    {!! link_to_route('regimens.create', 'Add new regimen to the list', $parameters = array(), array('class' => 'ajax-modal-link')) !!}
 </div>
 
 <div class="form-group">
     {!! Form::label('diagnoses[]','Diagnoses: ',['class' => 'control-label']) !!}
     {!! Form::select('diagnoses[]',$diagnoses, $diagnosesSelected, ['class'=>'form-control','multiple'=>'multiple']) !!}
+    {!! link_to_route('diagnoses.create', 'Add new diagnosis to the list', $parameters = array(), array('class' => 'ajax-modal-link')) !!}
 </div>
 
 <div class="form-group">
@@ -60,3 +62,5 @@ $isStartDate = isset($ppo->is_start_date) ? $ppo->is_start_date : true;
     {!! Form::select('reasons[]',$reasons, $reasonsSelected, ['class'=>'form-control','multiple'=>'multiple']) !!}
 </div>
 {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
+
+@include('partials.add_inventory_modal')
