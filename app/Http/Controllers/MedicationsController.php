@@ -9,6 +9,8 @@ use eppo\Http\Controllers\Controller;
 
 use eppo\Medication;
 use eppo\PpoItem;
+use eppo\Lucode;
+
 class MedicationsController extends Controller
 {
     /**
@@ -59,8 +61,9 @@ class MedicationsController extends Controller
     {
         $medication = Medication::select('id','name')->findOrFail($id);
         $items = PpoItem::where('medication_id',$medication->id)->paginate(10);
+        $lucodes = Lucode::where('medication_id', $medication->id)->get();
         $isAdminView = true;
-        return view('medications.show', compact('medication','items','isAdminView'));
+        return view('medications.show', compact('medication','items','lucodes','isAdminView'));
     }
 
     /**

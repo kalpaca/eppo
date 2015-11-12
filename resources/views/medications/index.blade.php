@@ -26,7 +26,7 @@
         <td>{{ $medication->created_at }}</td>
         <td>{{ $medication->updated_at }}</td>
         <td>
-        {!! link_to_route('medications.show', 'Schedules', $medication->id, array('class' => 'btn btn-default')) !!}
+        {!! link_to_route('medications.show', 'Detail', $medication->id, array('class' => 'btn btn-default')) !!}
         </td>
         <td>
         {!! link_to_route('medications.edit', 'Update', $medication->id, array('class' => 'btn btn-info')) !!}

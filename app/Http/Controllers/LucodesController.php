@@ -38,10 +38,10 @@ class LucodesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($medid)
     {
-        $medications = Medication::lists('name','id');
-        return view('lucodes.create', compact('medications'));
+        $medication = Medication::select('name','id')->find($medid);
+        return view('lucodes.create', compact('medication'));
     }
 
     /**
@@ -55,7 +55,7 @@ class LucodesController extends Controller
         $input = $request->all();
         Lucode::create( $input );
 
-        return redirect()->route('lucodes.index')->with('success-message', 'Lucode created');
+        return redirect()->route('medication.show', $input['medication_id'])->with('success-message', 'Lucode created');
     }
 
     /**
@@ -78,9 +78,9 @@ class LucodesController extends Controller
      */
     public function edit($id)
     {
-        $lucode = Lucode::findOrFail($id);
-        $medications = Medication::lists('name','id');
-        return view('lucodes.edit', compact('lucode','medications'));
+        $lucode = Lucode::with('medication')->findOrFail($id);
+
+        return view('lucodes.edit', compact('lucode','medication'));
     }
 
     /**
@@ -96,7 +96,7 @@ class LucodesController extends Controller
         $lucode = Lucode::findOrFail($id);
         $lucode->update( $input );
 
-        return redirect()->route('lucodes.index')->with('success-message', 'Lucode updated');
+        return redirect()->route('medication.show', $input['medication_id'])->with('success-message', 'Lucode created');
     }
 
     /**

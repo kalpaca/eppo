@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "ePPO",
+    "description": "Pre-Printed Orders for Take-Home Chemotherapy  Developed by Steven Song Wang  Powered by Laravel, Bootstrap and JQuery frameworks",
+    "keywords": ["ePPO", "laravel", "prescription", "ppo", "regimen", "chemotherapy"],
     "license": "MIT",
     "type": "project",
     "require": {

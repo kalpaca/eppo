@@ -48,8 +48,9 @@ Route::group(['middleware' => 'auth'], function () {
     });
     Route::get('auth/logout', array('uses' => 'Auth\AuthController@getLogout', 'as' => 'auth.logout'));
     Route::get('ppoitems/create/{ppoid}/{templateid?}/', array('uses' => 'PpoItemsController@create', 'as' => 'ppoitems.create'));
+    Route::get('lucodes/create/{medid}/', array('uses' => 'LucodesController@create', 'as' => 'lucodes.create'));
     Route::get('ppos/explore/{patientid}', array('uses' => 'PposController@explore', 'as' => 'ppos.explore'));
-    Route::get('prescriptions/create/{ppoisd}/{diagnosisid}/{patientid}', array('uses' => 'PrescriptionsController@create', 'as' => 'prescriptions.create'));
+    Route::get('prescriptions/create/{ppoid}/{diagnosisid}/{patientid}', array('uses' => 'PrescriptionsController@create', 'as' => 'prescriptions.create'));
     Route::resource('diagnoses', 'DiagnosesController');
     Route::resource('diagnosisprimarycategories', 'DiagnosisPrimaryCategoriesController');
     Route::resource('diagnosissecondarycategories', 'DiagnosisSecondaryCategoriesController');
@@ -57,7 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('medications', 'MedicationsController');
     Route::resource('prescriptions', 'PrescriptionsController', array('except' => array('create')));
     Route::resource('ppos', 'PposController');
-    Route::resource('lucodes', 'LucodesController');
+    Route::resource('lucodes', 'LucodesController', array('except' => array('create')));
     Route::resource('patients', 'PatientsController');
     Route::resource('pposections', 'PpoSectionsController');
     Route::resource('prescriptionoperationrecords', 'PrescriptionOperationRecordsController');
