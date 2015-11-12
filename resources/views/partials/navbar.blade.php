@@ -26,7 +26,6 @@
             <li><a href="{{ route('medications.index') }}">Medications</a></li>
             <li role="separator" class="divider"></li>
             <li class="dropdown-header">Misc.</li>
-            <li><a href="{{ route('lucodes.index') }}">LU Codes</a></li>
             <li><a href="{{ route('doseunits.index') }}">Dose Units</a></li>
             <li><a href="{{ route('doseroutes.index') }}">Dose Routes</a></li>
             <li><a href="{{ route('dosecalculationtypes.index') }}">Dose Calculation Types</a></li>
