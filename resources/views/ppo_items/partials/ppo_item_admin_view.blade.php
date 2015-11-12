@@ -1,7 +1,7 @@
 <div class="margin_bottom_10 clearfix ppo-item-admin-view">
     @include('ppo_items/partials/ppo_item_inputs')
     <div class="col-md-12">
-        <small>Item #</small>
+        <small>Schedule id </small>
         <span>{{ $item->id }}</span>
         <small>belongs to PPO #</small>
         <span>{{ $item->ppo_id }}</span> -

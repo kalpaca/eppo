@@ -11,9 +11,9 @@
         <tr>
             <th>#</th>
             <th>Name</th>
-            <th>Instruction</th>
             <th>Created</th>
             <th>Updated</th>
+            <th>Detail</th>
             <th>Update</th>
             <th>Delete</th>
         </tr>
@@ -23,9 +23,11 @@
         <tr>
         <td>{{ $medication->id }}</td>
         <td>{{ $medication->name }}</td>
-        <td>{{ $medication->instruction}}</td>
         <td>{{ $medication->created_at }}</td>
         <td>{{ $medication->updated_at }}</td>
+        <td>
+        {!! link_to_route('medications.show', 'Schedules', $medication->id, array('class' => 'btn btn-default')) !!}
+        </td>
         <td>
         {!! link_to_route('medications.edit', 'Update', $medication->id, array('class' => 'btn btn-info')) !!}
         </td>

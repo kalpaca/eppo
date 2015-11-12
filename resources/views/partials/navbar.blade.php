@@ -20,7 +20,6 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="{{ route('ppos.index') }}">PPOs</a></li>
-            <li><a href="{{ route('ppoitems.index') }}">PPO Items</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{ route('diagnoses.index') }}">Diagnoses</a></li>
             <li><a href="{{ route('regimens.index') }}">Regimens</a></li>

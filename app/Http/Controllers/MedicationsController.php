@@ -8,7 +8,7 @@ use eppo\Http\Requests;
 use eppo\Http\Controllers\Controller;
 
 use eppo\Medication;
-
+use eppo\PpoItem;
 class MedicationsController extends Controller
 {
     /**
@@ -18,7 +18,7 @@ class MedicationsController extends Controller
      */
     public function index()
     {
-        $medications = Medication::paginate(10);
+        $medications = Medication::select('id','name','created_at','updated_at')->paginate(10);
         return view('medications.index', compact('medications'));
     }
 
@@ -57,8 +57,10 @@ class MedicationsController extends Controller
      */
     public function show($id)
     {
-        $medications = Medication::findOrFail($id);
-        return view('medications.show', compact('medications'));
+        $medication = Medication::select('id','name')->findOrFail($id);
+        $items = PpoItem::where('medication_id',$medication->id)->paginate(10);
+        $isAdminView = true;
+        return view('medications.show', compact('medication','items','isAdminView'));
     }
 
     /**
