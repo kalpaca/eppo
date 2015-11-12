@@ -55,7 +55,7 @@ class LucodesController extends Controller
         $input = $request->all();
         Lucode::create( $input );
 
-        return redirect()->route('medication.show', $input['medication_id'])->with('success-message', 'Lucode created');
+        return redirect()->route('medications.show', $input['medication_id'])->with('success-message', 'Lucode created');
     }
 
     /**
@@ -79,7 +79,7 @@ class LucodesController extends Controller
     public function edit($id)
     {
         $lucode = Lucode::with('medication')->findOrFail($id);
-
+        $medication = $lucode->medication;
         return view('lucodes.edit', compact('lucode','medication'));
     }
 
@@ -96,7 +96,7 @@ class LucodesController extends Controller
         $lucode = Lucode::findOrFail($id);
         $lucode->update( $input );
 
-        return redirect()->route('medication.show', $input['medication_id'])->with('success-message', 'Lucode created');
+        return redirect()->route('medications.show', $input['medication_id'])->with('success-message', 'Lucode created');
     }
 
     /**
@@ -105,11 +105,11 @@ class LucodesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $lucode = Lucode::findOrFail($id);
         $lucode->delete();
-
-        return redirect()->route('lucodes.index')->with('success-message', 'Lucode deleted.');
+        $request->session()->put('success-message', 'Lucode deleted.');
+        return redirect()->back();
     }
 }

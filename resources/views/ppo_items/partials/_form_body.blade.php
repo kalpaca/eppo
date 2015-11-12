@@ -22,6 +22,9 @@ if(isset($ppos))
 <div class="form-group col-md-6">
     {!! Form::label('medication_id','Medication: ',['class' => 'control-label']) !!}
     {!! Form::select('medication_id',$medications, null, ['class'=>'form-control']) !!}
+    @if($item->medication_id)
+        {!!link_to_route('medications.show', 'Go to medication page', ['medid'=>$item->medication_id])!!}
+    @endif
 </div>
 
 @if(isset($ppo))
@@ -36,6 +39,7 @@ if(isset($ppos))
 <div class="form-group col-md-6">
     {!! Form::label('ppo_id','PPO: ',['class' => 'control-label']) !!}
     {!! Form::select('ppo_id', $ppos, null, ['class'=>'form-control']) !!}
+    {!!link_to_route('ppos.show', 'Go to PPO', ['medid'=>$item->ppo_id])!!}
 </div>
 @elseif(isset($ppo))
 <div class="form-group col-md-6">

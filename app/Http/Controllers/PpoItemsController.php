@@ -175,7 +175,7 @@ class PpoItemsController extends Controller
         {
             $item->lucodes()->sync($request->lucodes);
         }
-        return redirect()->route('ppos.show', ['id'=>$input['ppo_id']])->with('success-message', 'Dose Schedule updated');
+        return redirect()->back()->with('success-message', 'Dose Schedule updated');
     }
 
     /**
@@ -184,11 +184,11 @@ class PpoItemsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $item = PpoItem::findOrFail($id);
         $item->delete();
-
-        return redirect()->route('ppoitems.index')->with('success-message', 'Dose Schedule deleted.');
+        $request->session()->put('success-message', 'Dose Schedule deleted.');
+        return redirect()->back();
     }
 }

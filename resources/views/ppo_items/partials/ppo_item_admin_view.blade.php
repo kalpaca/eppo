@@ -1,6 +1,11 @@
 <div class="margin_bottom_10 clearfix ppo-item-admin-view">
     @include('ppo_items/partials/ppo_item_inputs')
     <div class="col-md-12">
+    @if($item->is_active)
+        <span>Active </span>
+    @else
+        <span>Deactivated </span>
+    @endif
         <small>Schedule id </small>
         <span>{{ $item->id }}</span>
         <small>belongs to PPO #</small>
