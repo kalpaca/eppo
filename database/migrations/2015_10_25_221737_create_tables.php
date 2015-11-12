@@ -25,7 +25,7 @@ class CreateTables extends Migration
         });
         Schema::create('patients', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
+            $table->string('fullname');
             $table->date('dob');
             $table->integer('user_id')->unsigned()->default(0);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -40,7 +40,7 @@ class CreateTables extends Migration
         Schema::create('lucodes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('code')->nullable();
-            $table->string('name')->nullable();
+            $table->string('description')->nullable();
             $table->integer('medication_id')->unsigned()->default(0);
             $table->timestamps();
         });

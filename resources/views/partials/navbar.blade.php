@@ -21,11 +21,11 @@
           <ul class="dropdown-menu">
             <li><a href="{{ route('ppos.index') }}">PPOs</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="{{ route('diagnoses.index') }}">Diagnoses</a></li>
-            <li><a href="{{ route('regimens.index') }}">Regimens</a></li>
             <li><a href="{{ route('medications.index') }}">Medications</a></li>
             <li role="separator" class="divider"></li>
             <li class="dropdown-header">Misc.</li>
+            <li><a href="{{ route('diagnoses.index') }}">Diagnoses</a></li>
+            <li><a href="{{ route('regimens.index') }}">Regimens</a></li>
             <li><a href="{{ route('doseunits.index') }}">Dose Units</a></li>
             <li><a href="{{ route('doseroutes.index') }}">Dose Routes</a></li>
             <li><a href="{{ route('dosecalculationtypes.index') }}">Dose Calculation Types</a></li>

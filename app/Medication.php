@@ -15,6 +15,6 @@ class Medication extends Model
 	}
     public function lucodes()
     {
-        return $this->hasMany('eppo\Lucode')->select(['id','name','code']);
+        return $this->hasMany('eppo\Lucode')->select(['id','description','code']);
     }
 }

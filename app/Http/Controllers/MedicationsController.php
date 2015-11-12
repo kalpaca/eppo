@@ -53,7 +53,7 @@ class MedicationsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|unique:medications',
         ]);
         $input = $request->all();
         Medication::create( $input );
@@ -98,7 +98,7 @@ class MedicationsController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|unique:medications',
         ]);
         $input = $request->all();
         $medication = Medication::findOrFail($id);

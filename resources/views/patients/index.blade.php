@@ -7,7 +7,7 @@
 <div class="search">
 {!! Form::model(null, ['route' => array('patients.index'), 'class' => 'form-inline']) !!}
 {!! Form::label('name','Patient name: ',['class' => 'control-label']) !!}
-{!! Form::text('name',null,['class'=>'form-control']) !!}
+{!! Form::text('fullname',null,['class'=>'form-control']) !!}
 {!! Form::submit('Search', ['class' => 'btn btn-xs btn-primary']) !!}
 {!! Form::close() !!}
 </div>
@@ -31,7 +31,7 @@
         @foreach($patients as $patient)
         <tr>
         <td>{{ $patient->id }}</td>
-        <td>{{ $patient->name }}</td>
+        <td>{{ $patient->fullname }}</td>
         <td>{{ $patient->dob }}</td>
         <td>{{ $patient->created_at }}</td>
         <td>{{ $patient->updated_at }}</td>

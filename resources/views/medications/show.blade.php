@@ -37,7 +37,7 @@ none
         <tr>
         <td>{{ $lucode->id }}</td>
         <td>{{ $lucode->code }}</td>
-        <td>{{ $lucode->name }}</td>
+        <td>{{ $lucode->description }}</td>
         <td>{{ $lucode->created_at }}</td>
         <td>{{ $lucode->updated_at }}</td>
         <td>

@@ -23,7 +23,7 @@ class PatientsController extends Controller
         {
             if($request->name)
             {
-                $patients = Patient::where('name', 'like', '%'.$request->name.'%')
+                $patients = Patient::where('fullname', 'like', '%'.$request->name.'%')
                 ->where('user_id', $userId)
                 ->paginate(10);
             }

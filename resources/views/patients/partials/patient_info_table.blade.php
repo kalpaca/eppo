@@ -3,7 +3,7 @@
 <tbody>
 <tr>
     <td class="col-md-6">
-    <strong>Patient: </strong>  {!! link_to_route('patients.show', $patient->name, $patient->id) !!}
+    <strong>Patient: </strong>  {!! link_to_route('patients.show', $patient->fullname, $patient->id) !!}
     </td>
     <td class="col-md-6">
     <strong>Date of Birth: </strong>  {{$patient->dob}}

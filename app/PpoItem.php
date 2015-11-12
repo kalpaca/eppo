@@ -52,7 +52,7 @@ class PpoItem extends Model
     }
     public function lucodes()
     {
-        return $this->belongsToMany('eppo\Lucode','ppo_item_lucodes')->select(['lucodes.id','lucode_id','name','code']);
+        return $this->belongsToMany('eppo\Lucode','ppo_item_lucodes')->select(['lucodes.id','lucode_id','description','code']);
     }
     public function getDetailAttribute()
     {
