@@ -1,13 +1,10 @@
-@extends('layouts.master')
+@extends('layouts.panel')
 @section('title',$medication->name)
-@section('content')
+
+@section('panelHeading',$medication->name)
+@section('panelBody')
 <!-- Basic information section -->
-<h2>{{$medication->name}}
-<p class="pull-right btn-group">
-{!! link_to_route('medications.index', 'Back to index', null, array('class' => 'btn btn-small btn-primary')) !!}
-</p>
-</h2>
-<p><strong>Common Instruction: </strong>
+<h3>Common Instruction</h3>
 @if($medication->instruction)
 {{$medication->instruction}}
 @else
@@ -17,9 +14,9 @@ none
 </p>
 <hr>
 <!-- LU codes section -->
-<h4>Lucodes</h4>
+<h3>Lucodes</h3>
 <p>{!! link_to_route('lucodes.create', 'Add new LU Code', ['medid' => $medication->id]) !!}</p>
-<hr>
+
 @if(!$lucodes->count())
 <p>No data.</p>
 @else
@@ -58,9 +55,9 @@ none
 @endif
 <hr>
 <!-- Dosing schedules section -->
-<h4>Dosing schedules on different PPOs</h4>
+<h3>Dosing schedules on different PPOs</h3>
 <p>{!! link_to_route('ppos.index', 'Add new dosing schedule to PPOs') !!}</p>
-<hr>
+
 @if(!$items->count())
     <p>No data.</p>
 @else
@@ -69,6 +66,7 @@ none
         @foreach($items as $item)
             @include('ppo_items/partials/ppo_item_admin_view', compact('index'))
             <?php $index++; ?>
+            <hr>
         @endforeach
     </div>
     {!! $items->render() !!}
