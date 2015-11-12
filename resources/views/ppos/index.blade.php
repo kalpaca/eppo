@@ -20,8 +20,7 @@
             <th>Created by</th>
             <th>Created Date</th>
             <th>Updated Date</th>
-            <th>View</th>
-            <th>Update</th>
+            <th>Open</th>
             <th>Delete</th>
         </tr>
     </thead>
@@ -46,10 +45,7 @@
         <td>{{ $ppo->created_at }}</td>
         <td>{{ $ppo->updated_at }}</td>
         <td>
-        {!! link_to_route('ppos.show', 'View', $ppo->id, array('class' => 'btn btn-success')) !!}
-        </td>
-        <td>
-        {!! link_to_route('ppos.edit', 'Update', $ppo->id, array('class' => 'btn btn-info')) !!}
+        {!! link_to_route('ppos.show', 'View or Edit', $ppo->id, array('class' => 'btn btn-success')) !!}
         </td>
         <td>
         {!! Form::open(array('class' => 'form-inline', 'method' => 'DELETE', 'route' => array('ppos.destroy', $ppo->id))) !!}

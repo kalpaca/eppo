@@ -4,12 +4,14 @@ $isMitteInput = isset($item->is_mitte_reason) ? $item->is_mitte_reason : true;
 $isRepeatInput = isset($item->is_repeat_input) ? $item->is_repeat_input : true;
 $defaultSelection = [''=>'Please Select'];
 $medications = $defaultSelection + $medications->toArray();
-
-$templates = $defaultSelection + $templates;
-$postUri = route('ppoitems.create');
-
-$ppos = $defaultSelection + $ppos->toArray();
+if(isset($templates))
+    $templates = $defaultSelection + $templates;
+if(isset($ppo))
+    $postUri = route('ppoitems.create', ['ppoid'=>$ppo->id]);
+if(isset($ppos))
+    $ppos = $defaultSelection + $ppos->toArray();
 ?>
+
 <div id="ppo-item-builder">
 <div class="form-group col-md-12">
     {!! Form::hidden('is_active', false) !!}
@@ -22,16 +24,25 @@ $ppos = $defaultSelection + $ppos->toArray();
     {!! Form::select('medication_id',$medications, null, ['class'=>'form-control']) !!}
 </div>
 
+@if(isset($ppo))
 <div class="form-group col-md-6">
     {!! Form::label('template','Schedule Template: ',['class' => 'control-label']) !!}
     {!! Form::select('template', $templates, $templateSelected, ['class'=>'form-control','data-post-url'=> "$postUri"]) !!}
     <img id="loading" src="{{ asset('img/icon_loading.gif') }}" alt="Updating ..." />
 </div>
+@endif
 
+@if(isset($ppos))
 <div class="form-group col-md-6">
     {!! Form::label('ppo_id','PPO: ',['class' => 'control-label']) !!}
     {!! Form::select('ppo_id', $ppos, null, ['class'=>'form-control']) !!}
 </div>
+@elseif(isset($ppo))
+<div class="form-group col-md-6">
+    <label>PPO: <label>{{ $ppo->name }}
+    {!! Form::hidden('ppo_id', $ppo->id) !!}
+</div>
+@endif
 
 <div class="form-group col-md-6">
     {!! Form::label('ppo_section_id','PPO section: ',['class' => 'control-label']) !!}

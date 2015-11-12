@@ -1,3 +1,4 @@
+<p class="text-center"><a href="{{route('ppoitems.create',['ppoid'=>$ppo->id])}}">Add medication dosing schedule to this ppo</a></p>
 @if($rx->count()>0)
 <table class="table table-bordered ppo-rx">
 <tbody>
@@ -14,6 +15,7 @@
         </h3>
     </p>
     <hr>
+
     <div class="ppo-items">
         @foreach($rx as $item)
             @include('ppo_items/partials/ppo_item_inputs')

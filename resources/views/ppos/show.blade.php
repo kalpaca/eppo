@@ -7,6 +7,6 @@
 </div>
 @endsection
 @section('panelTopBar')
-{!! link_to_route('ppos.edit', 'Edit ppo', $ppo->id, array('class' => 'btn btn-default')) !!}
+{!! link_to_route('ppos.edit', 'Edit', $ppo->id, array('class' => 'btn btn-default')) !!}
 {!! link_to_route('ppos.index', 'Index', null, array('class' => 'btn btn-default')) !!}
 @endsection

@@ -46,10 +46,10 @@ class PpoItemsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($templateid=null)
+    public function create($ppoid, $templateid=null)
     {
-        if($templateid)
-        {
+        $ppo = Ppo::select('id','name')->findOrFail($ppoid);
+        if($templateid) {
             $item = PpoItem::select(
                 'medication_id',
                 'is_active',
@@ -74,8 +74,7 @@ class PpoItemsController extends Controller
             $templateSelected = $templateid;
             $lucodes = Lucode::where('medication_id', $item->medication_id)->get()->lists('detail','id')->toArray();
             $lucodesSelected = $item->lucodes->pluck('id')->all();
-        }
-        else{
+        } else {
             $item = new PpoItem();
             $lucodes = array();
             $lucodesSelected = null;
@@ -84,14 +83,13 @@ class PpoItemsController extends Controller
         }
         $medications = Medication::lists('name','id');
         $ppoSections = PpoSection::lists('name','id');
-        $ppos = Ppo::lists('name','id');
         $doseCalculationTypes = DoseCalculationType::lists('name','id');
         $doseUnits = DoseUnit::lists('name','id');
         $doseRoutes = DoseRoute::lists('name','id');
         $mitteUnits = MitteUnit::lists('name','id');
 
 
-        return view('ppo_items.create', compact('templates','templateSelected','lucodes','lucodesSelected','item','medications','ppoSections','ppos','doseCalculationTypes','doseUnits','doseRoutes','mitteUnits'));
+        return view('ppo_items.create', compact('templates','templateSelected','lucodes','lucodesSelected','item','medications','ppoSections','ppo','doseCalculationTypes','doseUnits','doseRoutes','mitteUnits'));
     }
 
     /**
@@ -113,7 +111,7 @@ class PpoItemsController extends Controller
         {
             $item->lucodes()->sync($request->lucodes);
         }
-        return redirect()->route('ppoitems.index')->with('success-message', 'Dose Schedule created');
+        return redirect()->route('ppos.show', ['id'=>$input['ppo_id']])->with('success-message', 'Dose Schedule created');
     }
 
     /**
@@ -137,7 +135,7 @@ class PpoItemsController extends Controller
     public function edit($id)
     {
         $item = PpoItem::with('lucodes')->findOrFail($id);
-
+        //because detail is not a db field, so we have to get() first then lists()
         $templates = PpoItem::where('medication_id', $item->medication_id)->get()->lists('detail','id')->toArray();
         $templateSelected = $id;
         $lucodes = Lucode::where('medication_id', $item->medication_id)->get()->lists('detail','id')->toArray();
@@ -177,7 +175,7 @@ class PpoItemsController extends Controller
         {
             $item->lucodes()->sync($request->lucodes);
         }
-        return redirect()->route('ppoitems.index')->with('success-message', 'Dose Schedule updated');
+        return redirect()->route('ppos.show', ['id'=>$input['ppo_id']])->with('success-message', 'Dose Schedule updated');
     }
 
     /**
