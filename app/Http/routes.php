@@ -48,7 +48,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
     Route::get('auth/logout', array('uses' => 'Auth\AuthController@getLogout', 'as' => 'auth.logout'));
     Route::get('ppoitems/create/{ppoid}/{templateid?}/', array('uses' => 'PpoItemsController@create', 'as' => 'ppoitems.create'));
-    Route::get('lucodes/create/{medid}/', array('uses' => 'LucodesController@create', 'as' => 'lucodes.create'));
+    Route::get('lucodes/create/{medid?}/', array('uses' => 'LucodesController@create', 'as' => 'lucodes.create'));
     Route::get('ppos/explore/{patientid}', array('uses' => 'PposController@explore', 'as' => 'ppos.explore'));
     Route::get('prescriptions/create/{ppoid}/{diagnosisid}/{patientid}', array('uses' => 'PrescriptionsController@create', 'as' => 'prescriptions.create'));
     Route::resource('diagnoses', 'DiagnosesController');

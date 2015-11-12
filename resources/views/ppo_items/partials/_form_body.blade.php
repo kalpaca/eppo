@@ -133,6 +133,7 @@ if(isset($ppos))
 
 <div class="form-group col-md-12">
     {!! Form::label('lucodes[]','Use "Ctrl" key to select mutiple LU Codes (if applicable): ',['class' => 'control-label']) !!}
+     {!!link_to_route('lucodes.create', 'Add New LU code')!!}
     {!! Form::select('lucodes[]', $lucodes, $lucodesSelected, ['class'=>'form-control width_100_percent','multiple'=>'multiple','id'=>'lucodes']) !!}
 </div>
 

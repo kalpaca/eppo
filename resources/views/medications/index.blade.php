@@ -14,7 +14,6 @@
             <th>Created</th>
             <th>Updated</th>
             <th>Detail</th>
-            <th>Update</th>
             <th>Delete</th>
         </tr>
     </thead>
@@ -27,9 +26,6 @@
         <td>{{ $medication->updated_at }}</td>
         <td>
         {!! link_to_route('medications.show', 'Detail', $medication->id, array('class' => 'btn btn-default')) !!}
-        </td>
-        <td>
-        {!! link_to_route('medications.edit', 'Update', $medication->id, array('class' => 'btn btn-info')) !!}
         </td>
         <td>
         {!! Form::open(array('class' => 'form-inline', 'method' => 'DELETE', 'route' => array('medications.destroy', $medication->id))) !!}

@@ -4,9 +4,7 @@
 <!-- Basic information section -->
 <h2>{{$medication->name}}
 <p class="pull-right btn-group">
-{!! link_to_route('medications.edit', 'Edit', $medication->id, array('class' => 'btn btn-small btn-primary')) !!}
-
-{!! link_to_route('medications.index', 'Index', null, array('class' => 'btn btn-small btn-primary')) !!}
+{!! link_to_route('medications.index', 'Back to index', null, array('class' => 'btn btn-small btn-primary')) !!}
 </p>
 </h2>
 <p><strong>Common Instruction: </strong>
@@ -15,6 +13,7 @@
 @else
 none
 @endif
+{!! link_to_route('medications.edit', 'Edit', $medication->id, array('class' => 'btn btn-xs btn-primary')) !!}
 </p>
 <hr>
 <!-- LU codes section -->

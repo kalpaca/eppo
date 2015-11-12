@@ -38,10 +38,20 @@ class LucodesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($medid)
+    public function create($medid = null)
     {
-        $medication = Medication::select('name','id')->find($medid);
-        return view('lucodes.create', compact('medication'));
+        if($medid)
+        {
+            $medication = Medication::select('name','id')->find($medid);
+            $medications = null;
+        }
+        else
+        {
+            $medication = null;
+            $medications = Medication::lists('name','id');
+        }
+
+        return view('lucodes.create', compact('medication','medications'));
     }
 
     /**
