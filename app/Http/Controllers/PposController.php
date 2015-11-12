@@ -23,9 +23,19 @@ class PposController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $ppos = Ppo::with('diagnoses','regimen','author')->paginate(10);
+        if($request->isMethod('post'))
+        {
+            if($request->name)
+            {
+                $ppos = Ppo::with('diagnoses','regimen','author')
+                ->where('name', 'like', '%'.$request->name.'%')
+                ->paginate(10);
+            }
+        }
+        else
+            $ppos = Ppo::with('diagnoses','regimen','author')->paginate(10);
         return view('ppos.index', compact('ppos'));
     }
 

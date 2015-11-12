@@ -16,10 +16,23 @@ class PatientsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $userId = Auth::user()->id;
-        $patients = Patient::where('user_id', $userId)->paginate(10);
+        if($request->isMethod('post'))
+        {
+            if($request->name)
+            {
+                $patients = Patient::where('name', 'like', '%'.$request->name.'%')
+                ->where('user_id', $userId)
+                ->paginate(10);
+            }
+        }
+        else
+        {
+            $patients = Patient::where('user_id', $userId)->paginate(10);
+        }
+
         return view('patients.index', compact('patients'));
     }
 

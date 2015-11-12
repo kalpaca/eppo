@@ -3,8 +3,17 @@
 @section('content')
 <h2>PPOs</h2>
 <p>{!! link_to_route('ppos.create', 'Create PPO') !!}</p>
+
+<div class="search">
+{!! Form::model(null, ['route' => array('ppos.index'), 'class' => 'form-inline']) !!}
+{!! Form::label('name','Partial regimen code or diagnosis: ',['class' => 'control-label']) !!}
+{!! Form::text('name',null,['class'=>'form-control']) !!}
+{!! Form::submit('Search', ['class' => 'btn btn-xs btn-primary']) !!}
+{!! Form::close() !!}
+</div>
+
 @if(!$ppos->count())
-<p>You have no ppo</p>
+<p>No PPO.</p>
 @else
 <table class="table">
     <thead>

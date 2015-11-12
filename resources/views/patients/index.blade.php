@@ -3,8 +3,17 @@
 @section('content')
 <h2>Patients</h2>
 <p>{!! link_to_route('patients.create', 'Create patient') !!}</p>
+
+<div class="search">
+{!! Form::model(null, ['route' => array('patients.index'), 'class' => 'form-inline']) !!}
+{!! Form::label('name','Patient name: ',['class' => 'control-label']) !!}
+{!! Form::text('name',null,['class'=>'form-control']) !!}
+{!! Form::submit('Search', ['class' => 'btn btn-xs btn-primary']) !!}
+{!! Form::close() !!}
+</div>
+
 @if(!$patients->count())
-<p>You have no patient</p>
+<p>No patient.</p>
 @else
 <table class="table">
     <thead>

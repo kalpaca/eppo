@@ -18,9 +18,19 @@ class MedicationsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $medications = Medication::select('id','name','created_at','updated_at')->paginate(10);
+        if($request->isMethod('post'))
+        {
+            if($request->name)
+            {
+                $medications = Medication::select('id','name','created_at','updated_at')
+                ->where('name', 'like', '%'.$request->name.'%')
+                ->paginate(10);
+            }
+        }
+        else
+            $medications = Medication::select('id','name','created_at','updated_at')->paginate(10);
         return view('medications.index', compact('medications'));
     }
 

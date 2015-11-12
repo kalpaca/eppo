@@ -3,8 +3,17 @@
 @section('content')
 <h2>Medications</h2>
 <p>{!! link_to_route('medications.create', 'Add a New Medication') !!}</p>
+
+<div class="search">
+{!! Form::model(null, ['route' => array('medications.index'), 'class' => 'form-inline']) !!}
+{!! Form::label('name','Medication Name: ',['class' => 'control-label']) !!}
+{!! Form::text('name',null,['class'=>'form-control']) !!}
+{!! Form::submit('Search', ['class' => 'btn btn-xs btn-primary']) !!}
+{!! Form::close() !!}
+</div>
+
 @if(!$medications->count())
-<p>No medication in database.</p>
+<p>No medication.</p>
 @else
 <table class="table">
     <thead>
