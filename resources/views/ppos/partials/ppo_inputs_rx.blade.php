@@ -1,4 +1,3 @@
-<p class="text-center"><a href="{{route('ppoitems.create',['ppoid'=>$ppo->id])}}">Add medication dosing schedule to this ppo</a></p>
 @if($rx->count()>0)
 <table class="table table-bordered ppo-rx">
 <tbody>
@@ -36,6 +35,7 @@
 </tbody>
 </table>
 @endif
+
 @if($supportiveRx->count()>0)
 <table class="table table-bordered ppo-rx">
 <tbody>

@@ -15,6 +15,7 @@
             <th>Created at</th>
             <th>Updated at</th>
             <th>View</th>
+            <th>New Prescription</th>
         </tr>
     </thead>
     <tbody>
@@ -27,6 +28,9 @@
         <td>{{ $patient->updated_at }}</td>
         <td>
         {!! link_to_route('patients.show', 'View', $patient->id, array('class' => 'btn btn-success')) !!}
+        </td>
+        <td>
+        {!! link_to_route('ppos.explore', 'Select', ['patientid' => $patient->id], array('class' => 'btn btn-primary')) !!}
         </td>
         </tr>
         @endforeach
