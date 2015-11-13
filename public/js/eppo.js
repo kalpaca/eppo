@@ -65,8 +65,8 @@ var ppoHelper = (function($){
 	toggleMedFieldsMandatary = function (box) {
 
 		var itemID = $(box).attr("id");
-
-		var ppoItemIndex = itemID.substring(0, 12);
+		var pos = itemID.indexOf('_');
+		var ppoItemIndex = itemID.substring(0, pos);
 		var ppoItem = $('#' + ppoItemIndex);
 		if ($(box).is(':checked')) {
 			ppoItem.addClass("item-is-selected");
@@ -85,11 +85,11 @@ var ppoHelper = (function($){
 	setupPreloadStates = function(){
 		//If allergies toggled 'yes', then show allergies textarea
 		toggleAllergiesInput();
-
 		//If ppo-item-checkbox is checked, then toggle its fields as mandatary
 		$('.ppo-item-checkbox').each(function() {
 			toggleMedFieldsMandatary(this);
 		});
+
 	},
 
 	/**
@@ -117,8 +117,7 @@ var ppoHelper = (function($){
 					alert("BSA value should be in the range of 0.5 to 3.0.");
 				}
 
-				$('#PrescriptionBsa').val(bsaValue);
-				$('#PrescriptionBsaText').text(bsaValue);
+				$('#bsa').val(bsaValue);
 				$('.bsa_dose_result').val('');
 			}
 		});
