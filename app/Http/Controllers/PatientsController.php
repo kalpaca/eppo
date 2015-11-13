@@ -57,6 +57,8 @@ class PatientsController extends Controller
         $this->validate($request, [
             'fullname' => 'required',
         ]);
+        $user = Auth::user();
+        $request->merge(array('user_id' => $user->id));
         $input = $request->all();
         Patient::create( $input );
 
