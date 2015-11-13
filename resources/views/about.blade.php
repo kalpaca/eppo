@@ -20,7 +20,13 @@
          and customize the combo of medications based on the actual situation, for the patient to
          take to a pharmacy to dispense medications. Also, This tool also simplify the process of choosing a PPO based on  diagnoses.</p>
         <hr>
-
+        <h3>Demo User name: </h3>
+        <p>For ordinary user as a physician, you can just create your own account. or use this one</p>
+        <p><code>username: test2@gmail.com</code></p>
+        <p><code>password: testtest</code></p>
+        <p>Admin demo account:</p>
+        <p><code>username: test@gmail.com</code></p>
+        <p><code>password: testtest</code></p>
         <h3>License</h3>
 
         <p>ePPO is open-sourced software licensed under the MIT license</p>
