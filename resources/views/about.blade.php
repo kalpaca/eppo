@@ -20,6 +20,7 @@
          and customize the combo of medications based on the actual situation, for the patient to
          take to a pharmacy to dispense medications. Also, This tool also simplify the process of choosing a PPO based on  diagnoses.</p>
         <hr>
+
         <h3>Demo User name: </h3>
         <p>For ordinary user as a physician, you can just create your own account. or use this one</p>
         <p><code>username: test2@gmail.com</code></p>
@@ -27,10 +28,19 @@
         <p>Admin demo account:</p>
         <p><code>username: test@gmail.com</code></p>
         <p><code>password: testtest</code></p>
-        <h3>License</h3>
+        <hr>
 
+        <h3>License</h3>
         <p>ePPO is open-sourced software licensed under the MIT license</p>
         <hr>
+
+        <h3>Disclaimer</h3>
+        <p>This application works on IE browser version >= 8, Safari version > 5.1 and other "evergreen" updated browsers.</p>
+        <p>This database is not endorsed or approved by the any organizations. </p>
+        <p>I cannot be held liable for any problems caused by its content.</p>
+        <p>Please refer to the CancerCare Ontario and related authorities for additional information.</p>
+        <hr>
+
         <h3>To Do List</h3>
         <ul class="list-group">
         <li class="list-group-item"><a href="{{route('ppos.create')}}">Use Case: build a ppo (done)</a></li>
@@ -49,9 +59,4 @@
 </div>
 @endsection
 
-@section('footer')
-<footer>
-<p class="text-center">This application works on IE browser version >= 8, Safari version > 5.1 and other "evergreen" updated browsers.</p>
-</footer>
-@endsection
 
