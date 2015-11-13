@@ -31,7 +31,7 @@ $itemLineClass = 'ppo-item-line col-md-12';
 	<!--end: ppo item hidden input-->
 	<div class="{{ $itemLineClass }}">
 		{!! Form::hidden($postDataIndex.'is_selected]', false) !!}
-		{!! Form::checkbox($postDataIndex.'is_selected]', null, null, ['id' => $ppoItemIndex.'-checkbox', 'class' => 'med-'.$item->medication->id . ' ppo-item-checkbox']) !!}
+		{!! Form::checkbox($postDataIndex.'is_selected]', null, null, ['id' => $ppoItemIndex.'_checkbox', 'class' => 'med-'.$item->medication->id . ' ppo-item-checkbox']) !!}
 		{!! Form::label($postDataIndex.'is_selected]', $item->medication->name, ['class'=>'control-label']) !!}
 
 		{{-- Formula for Percentage; Percentage and BSA --}}
