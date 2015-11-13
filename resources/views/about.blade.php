@@ -37,7 +37,7 @@
         <li class="list-group-item">Use Case: save a prescription (done)</li>
         <li class="list-group-item"><a href="{{route('prescriptions.show', ['id'=>19])}}">Use Case: view a prescription (done)</a></li>
         <li class="list-group-item">Use Case: print prescription</li>
-        <li class="list-group-item">Use Case: login and signup (doen)</li>
+        <li class="list-group-item">Use Case: login and signup (done)</li>
         </ul>
     </div>
 </div>
