@@ -1,3 +1,10 @@
+footer{
+    margin-top: 100px;
+    color: #767676;
+    padding-top: 40px;
+    border-top: 1px solid #e5e5e5;
+}
+
 /* StartL: For all forms */
 .width_100_percent {
     width: 100%;
@@ -86,3 +93,4 @@ select[multiple] {
   }
 
 }
+

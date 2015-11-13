@@ -43,3 +43,9 @@
 </div>
 @endsection
 
+@section('footer')
+<footer>
+<p class="text-center">This application works on IE browser version >= 8, Safari version > 5.1 and other "evergreen" updated browsers.</p>
+</footer>
+@endsection
+

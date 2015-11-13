@@ -35,7 +35,6 @@
             @include('partials.session_message')
             @yield('content')
         </div>
-        <footer>
-        <p class="text-center">This application works on IE browser version >= 8, Safari version > 5.1 and other "evergreen" updated browsers.</p></footer>
+        @yield('footer')
     </body>
 </html>
