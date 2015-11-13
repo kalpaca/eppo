@@ -2,7 +2,7 @@
 @section('title','Mitte Units')
 @section('content')
 <h2>Mitte Units</h2>
-<p>{!! link_to_route('mitteunits.create', 'Create Category') !!}</p>
+<p>{!! link_to_route('mitteunits.create', 'Create new unit') !!}</p>
 @if(!$units->count())
 <p>You have no mitte units.</p>
 @else
