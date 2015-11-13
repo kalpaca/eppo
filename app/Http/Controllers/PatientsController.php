@@ -55,7 +55,7 @@ class PatientsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'fullname' => 'required',
         ]);
         $input = $request->all();
         Patient::create( $input );
@@ -98,7 +98,7 @@ class PatientsController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'fullname' => 'required',
         ]);
         $input = $request->all();
         $patient = Patient::findOrFail($id);
