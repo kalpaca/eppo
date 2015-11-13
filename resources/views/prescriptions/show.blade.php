@@ -1,4 +1,4 @@
-<?php $patient = $prescription->patient; debug($patient);?>
+<?php $patient = $prescription->patient; ?>
 @extends('layouts.panel')
 @section('title','View prescription')
 @section('panelHeading','View prescription')
@@ -20,7 +20,7 @@
     @elseif($prescription->is_allergies_unknown)
         Unknown
     @elseif(!$prescription->is_allergies)
-        No allergies
+        No known allergies
     @endif
     </td>
 </tr>
@@ -35,7 +35,7 @@
         <p class="regimen-name">{{ $prescription->regimen->name }}</p>
 
         <p><strong>Diagnosis: </strong>
-        
+
         <span class="diagnosis-name"><strong>{{ $prescription->diagnosis->name }}</strong></span>
         </p>
     </td>
