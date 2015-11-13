@@ -29,7 +29,7 @@ if(isset($ppos))
 
 @if(isset($ppo))
 <div class="form-group col-md-6">
-    {!! Form::label('template','Schedule Template: ',['class' => 'control-label']) !!}
+    {!! Form::label('template','Copy Schedule From: ',['class' => 'control-label']) !!}
     {!! Form::select('template', $templates, $templateSelected, ['class'=>'form-control','data-post-url'=> "$postUri"]) !!}
     <img id="loading" src="{{ asset('img/icon_loading.gif') }}" alt="Updating ..." />
 </div>

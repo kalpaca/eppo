@@ -55,6 +55,7 @@
             <p>
                 {!! Form::label('bsa','Body Surface Area (BSA): ', ['class' => 'decimal-field control-label']) !!}
                 {!! Form::text('bsa', null, ['class' => 'form-control', 'size'=> 6]) !!} m<sup>2</sup>
+                <button type="button" class="btn btn-xs btn-primary get-bsa-btn">Calculate</button>
             </p>
         </div>
         @endif

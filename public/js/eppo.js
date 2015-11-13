@@ -109,7 +109,7 @@ var ppoHelper = (function($){
 	 */
 	setupBSACalculator = function() {
 
-		$('.get_bsa_btn').click(function() {
+		$('.get-bsa-btn').click(function() {
 			if($('#weight').val() && $('#height').val())
 			{
 				var bsaValue = Math.round(Math.sqrt($('#weight').val() * $('#height').val() / 3600) * 100) / 100;
@@ -122,10 +122,10 @@ var ppoHelper = (function($){
 			}
 		});
 		$('#height').change(function(e) {
-			$('.get_bsa_btn').click();
+			$('.get-bsa-btn').click();
 		});
 		$('#weight').change(function(e) {
-			$('.get_bsa_btn').click();
+			$('.get-bsa-btn').click();
 		});
 	},
 

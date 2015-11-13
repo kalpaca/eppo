@@ -94,6 +94,7 @@
 </tbody>
 </table>
 @endif
+
 @if($supportiveRx->count()>0)
 <table class="table table-bordered prescription-supportive-rx">
 <tbody>
@@ -116,4 +117,21 @@
 </table>
 @endif
 
+<table class="table table-bordered prescription-supportive-rx">
+<tbody>
+<tr>
+<td class="md-info">
+<div class="md-name col-md-4">
+<label>Physician Pint Name:</label> {{$prescription->author->name}}
+</div>
+<div class="md-sign col-md-4">
+<label>Signature:</label> _____________________
+</div>
+<div class="md-date col-md-4">
+<label>Date:</label> <?php echo date("F d, Y, g:i a");?>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
 @endsection
