@@ -94,7 +94,7 @@ class PposController extends Controller
         {
             $ppo->reasons()->sync($request->reasons);
         }
-        return redirect()->route('ppos.index')->with('message', 'PPO created');
+        return redirect()->route('ppos.show',$ppo->id)->with('message', 'PPO created');
     }
 
     /**
@@ -103,7 +103,7 @@ class PposController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {//'doseModificationReasons'
         $ppo = Ppo::with('diagnoses','regimen','author','ppoItems','reasons')->findOrFail($id);
         $ppo->ppoItems->load('doseUnit','mitteUnit','medication','lucodes');
@@ -118,6 +118,9 @@ class PposController extends Controller
         }
         $isAdminView = true;
         $patient = null;
+        //flash a back url
+        $request->session()->put('backUrl', $request->fullUrl());
+
         return view('ppos.show', compact('ppo','rx','supportiveRx','isAdminView','patient'));
     }
 

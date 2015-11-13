@@ -132,7 +132,7 @@ class PpoItemsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
         $item = PpoItem::with('lucodes')->findOrFail($id);
         //because detail is not a db field, so we have to get() first then lists()
@@ -175,7 +175,8 @@ class PpoItemsController extends Controller
         {
             $item->lucodes()->sync($request->lucodes);
         }
-        return redirect()->back()->with('success-message', 'Dose Schedule updated');
+        $request->session()->flash('success-message', 'Dose Schedule updated');
+        return ($url = $request->session()->pull('backUrl')) ? redirect()->to($url) : redirect()->back();
     }
 
     /**
@@ -188,7 +189,7 @@ class PpoItemsController extends Controller
     {
         $item = PpoItem::findOrFail($id);
         $item->delete();
-        $request->session()->put('success-message', 'Dose Schedule deleted.');
+        $request->session()->flash('success-message', 'Dose Schedule deleted.');
         return redirect()->back();
     }
 }

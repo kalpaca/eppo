@@ -67,12 +67,16 @@ class MedicationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
         $medication = Medication::select('id','name')->findOrFail($id);
         $items = PpoItem::where('medication_id',$medication->id)->paginate(10);
         $lucodes = Lucode::where('medication_id', $medication->id)->get();
         $isAdminView = true;
+
+         //flash a back url
+        $request->session()->put('backUrl', $request->fullUrl());
+
         return view('medications.show', compact('medication','items','lucodes','isAdminView'));
     }
 
