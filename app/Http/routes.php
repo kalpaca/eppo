@@ -38,7 +38,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('patients', array('uses' => 'PatientsController@index', 'as' => 'patients.index'));
     Route::get('patients/index', array('uses' => 'PatientsController@index', 'as' => 'patients.index'));
     Route::post('patients/index', array('uses' => 'PatientsController@index', 'as' => 'patients.index'));
-
+    Route::resource('patients', 'PatientsController');
     Route::get('prescriptions/create/{ppoid}/{diagnosisid}/{patientid}', array('uses' => 'PrescriptionsController@create', 'as' => 'prescriptions.create'));
     Route::resource('prescriptions', 'PrescriptionsController', array('except' => array('create')));
 
@@ -81,7 +81,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('medications', 'MedicationsController', array('except' => array('index')));
         Route::resource('ppos', 'PposController', array('except' => array('index')));
         Route::resource('lucodes', 'LucodesController', array('except' => array('create')));
-        Route::resource('patients', 'PatientsController');
+
         Route::resource('pposections', 'PpoSectionsController');
         Route::resource('prescriptionoperationrecords', 'PrescriptionOperationRecordsController');
         Route::resource('ppoitems', 'PpoItemsController', array('except' => array('create')));
