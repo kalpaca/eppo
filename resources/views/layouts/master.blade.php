@@ -14,19 +14,15 @@
             yepnope({
                 test: Modernizr.mq('only all'),
                 nope: [
-                    "{{ asset('bower_components/es5-shim/es5-shim.min.js') }}",
-                    "{{ asset('bower_components/es5-shim/es5-sham.min.js') }}",
                     "{{ asset('bower_components/console-polyfill/index.js') }}",
                     "{{ asset('bower_components/html5shiv/dist/html5shiv.js') }}",
                     "{{ asset('bower_components/respond/dest/respond.min.js') }}",
-                    "{{ asset('js/selectivizr.min.js') }}"
                     ],
                 both: ["{{ asset('bower_components/jquery/dist/jquery.min.js')}}",
                     "{{ asset('js/bootstrap.min.js') }}",
                     "{{ asset('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}",
                     "{{ asset('js/jquery.shuffle.modernizr.min.js') }}",
-                    "{{ asset('js/ppoExplorer.js') }}",
-                    "{{ asset('js/ppoHelper.js') }}"
+                    "{{ asset('js/eppo.js') }}",
                     ]
             });
         </script>
@@ -34,9 +30,12 @@
     <body>
         @include('partials.navbar')
         <div class="container">
+            <noscript>Your browser does not support JavaScript!</noscript>
             @include('partials.errors')
             @include('partials.session_message')
             @yield('content')
         </div>
+        <footer>
+        <p class="text-center">This application works on IE browser version >= 8, Safari version > 5.1 and other "evergreen" updated browsers.</p></footer>
     </body>
 </html>

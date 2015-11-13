@@ -6,20 +6,20 @@ var ppoExplorer = (function($){
 	var $ppoContainer = $('#ppo-container'),
 
 	init = function() {
-		$('.ppo').removeClass('hidden');
+
 		setupPrimaryCategories();
 		setupSecondrayCategories();
+		$('.ppo').removeClass('hidden');
 
 		// Setup ShuffleJS, Show nothing at beginning
 		$ppoContainer.shuffle({
-		    itemSelector: '.ppo',    
-		    speed: 10,
+		    itemSelector: '.ppo',
 		    columnThreshold: 0.01,
 		    delimeter: ',',
 		});
 		filterAndDisplay ('nothing');
 	},
-	// Setup button clicks	
+	// Setup button clicks
 	setupPrimaryCategories = function() {
 
 		$('.pri-cat-btn-group').on( 'click', 'button', function() {
@@ -30,24 +30,24 @@ var ppoExplorer = (function($){
 
 			$('#sec-cat-heading').removeClass('hidden');
 			$('#ppo-lead').removeClass('hidden');
-			
+
 			var filter = $(this).attr('data-filter');
 
 			//toggle on secondary cats under current primary cat
 			$('.sec-cat-btn-group').addClass('hidden');
 			$('#'+filter+'-group').removeClass('hidden');
-				
+
 			if(filter == 'all')
-			{	
+			{
 				var numItems = $('.ppo').length;
 				var currentCat = 'All Categories';
 			}
 			else
 			{
 				var numItems = $('a.'+filter).length;
-				var currentCat = filter.replace(/-/g,' ');		
+				var currentCat = filter.replace(/-/g,' ');
 			}
-			
+
 			filterAndDisplay (filter,currentCat,numItems);
 		});
 
@@ -58,11 +58,11 @@ var ppoExplorer = (function($){
 		$('.sec-cat-btn-group').on( 'click', 'button', function() {
 			$('.sec-cat-btn').removeClass('btn-primary').addClass('btn-default');
 			$(this).addClass('btn-primary').removeClass('btn-default');
-			
-			var filter = $(this).attr('data-filter');				
+
+			var filter = $(this).attr('data-filter');
 			var numItems = $('a.'+filter).length;
-			var currentCat = filter.replace(/-/g,' ');	
-				
+			var currentCat = filter.replace(/-/g,' ');
+
 			filterAndDisplay (filter,currentCat,numItems);
 		});
 	},
@@ -72,8 +72,8 @@ var ppoExplorer = (function($){
 	filterAndDisplay = function (filterValue,currentCat,numItems){
 		$('#current-cat').html('current category');
 		$('#number-of-available').html(numItems);
-		
-		$ppoContainer.shuffle('shuffle', filterValue);	
+
+		$ppoContainer.shuffle('shuffle', filterValue);
 	};
 	return {
 		init: init
@@ -86,7 +86,7 @@ $(document).ready(function() {
 
 /* was trying to use isotopeJS before
 
-$ppoContainer.isotope({ 
+$ppoContainer.isotope({
 	filter: filterValue,
     itemSelector : '.ppo-item',
     percentPosition: true,
