@@ -9,11 +9,24 @@ $itemLineClass = 'ppo-item-line col-md-12';
 
         @if($item->dose_calculation_type_id == 1) {{-- Percentage --}}
             {{ $item->dose_base }} {{ $item->doseUnit->name }} x {{ $item->dose_percentage }} % * =
+            {{ $item->dose_result }} {{ $item->doseUnit->name }} {{ $item->instruction }}
+
         @elseif($item->dose_calculation_type_id == 2) {{-- Percentage and BSA --}}
             {{ $item->dose_base }} {{ $item->doseUnit->name }}/m<sup>2</sup> x <span class='bsa_value'>BSA</span> x {{ $item->dose_percentage }} % * =
+            {{ $item->dose_result }} {{ $item->doseUnit->name }} {{ $item->instruction }}
+
+        @elseif($item->dose_calculation_type_id == 3) {{-- Fill in blank --}}
+            {{ $item->dose_result }} {{ $item->doseUnit->name }} {{ $item->instruction }}
+
+        @elseif($item->dose_calculation_type_id == 4) {{-- Fixed --}}
+            {{ $item->instruction }}
+
+        @elseif($item->dose_calculation_type_id == 5) {{-- Base and Percentage --}}
+            {{ $item->dose_base }} {{ $item->doseUnit->name }} x {{ $item->dose_percentage }} % * =
+            {{ $item->dose_result }} {{ $item->doseUnit->name }} {{ $item->instruction }}
         @endif
         {{-- Fixed dose or MD input dose --}}
-        {{ $item->dose_result }} {{ $item->doseUnit->name }} {{ $item->instruction }}
+
 
         @if($item->is_frequency_input)
             {{ $item->frequency }}

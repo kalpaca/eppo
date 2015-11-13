@@ -13,7 +13,6 @@ $itemLineClass = 'ppo-item-line col-md-12';
 	{!! Form::hidden($postDataIndex.'id]', null) !!}
 	{!! Form::hidden($postDataIndex.'ppo_section_id]', $item->ppo_section_id) !!}
 	{!! Form::hidden($postDataIndex.'ppo_item_id]', $item->id) !!}
-	{!! Form::hidden($postDataIndex.'dose_base]', $item->dose_base) !!}
 	{!! Form::hidden($postDataIndex.'dose_unit_id]', $item->dose_unit_id) !!}
 	{!! Form::hidden($postDataIndex.'mitte_unit_id]', $item->mitte_unit_id) !!}
 	{!! Form::hidden($postDataIndex.'dose_calculation_type_id]', $item->dose_calculation_type_id) !!}
@@ -36,23 +35,31 @@ $itemLineClass = 'ppo-item-line col-md-12';
 
 		{{-- Formula for Percentage; Percentage and BSA --}}
 		@if($item->dose_calculation_type_id == 1) {{-- Percentage --}}
+			{!! Form::hidden($postDataIndex.'dose_base]', $item->dose_base) !!}
 			{{ $item->dose_base . $item->doseUnit->name }} x
 			{!! Form::text($postDataIndex.'dose_percentage]', null, ['class'=>$ppoItemInput.'integer-field', 'size' => 2]) !!}
 			 % * =
 		@elseif($item->dose_calculation_type_id == 2) {{-- Percentage and BSA --}}
+			{!! Form::hidden($postDataIndex.'dose_base]', $item->dose_base) !!}
 			{{ $item->dose_base . $item->doseUnit->name }}
 			/m<sup>2</sup> x <span class='bsa_value'>BSA</span> x
+			{!! Form::text($postDataIndex.'dose_percentage]', null, ['class'=>$ppoItemInput.'integer-field', 'size' => 2]) !!}
+			 % * =
+		@elseif($item->dose_calculation_type_id == 5) {{-- Base dose and then Percentage --}}
+			{!! Form::text($postDataIndex.'dose_base]', null, ['class'=>$ppoItemInput.'integer-field', 'size' => 2]) !!}
+			{{ $item->doseUnit->name }} x
 			{!! Form::text($postDataIndex.'dose_percentage]', null, ['class'=>$ppoItemInput.'integer-field', 'size' => 2]) !!}
 			 % * =
 		@endif
 
 		{{-- Percentage; Percentage and BSA; MD dose input--}}
-		@if($item->dose_calculation_type_id < 4)
+		@if($item->dose_calculation_type_id != 4)
 		{!! Form::text($postDataIndex.'dose_result]', null, ['class'=>$ppoItemInput.'decimal-field', 'size' => 6 ]) !!}
 		 {{ $item->doseUnit->name }}
 
 		{{-- Fixed dose --}}
 		@elseif($item->dose_calculation_type_id == 4)
+			{!! Form::hidden($postDataIndex.'dose_base]', 0) !!}
 			{!! Form::hidden ( $postDataIndex.'dose_result]', $item->dose_result) !!}
 		@endif
 
