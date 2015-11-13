@@ -26,6 +26,7 @@ $itemLineClass = 'ppo-item-line col-md-12';
 	{!! Form::hidden($postDataIndex.'is_mitte_input]', $item->is_mitte_input) !!}
 	{!! Form::hidden($postDataIndex.'is_repeat_input]', $item->is_repeat_input) !!}
 	{!! Form::hidden($postDataIndex.'is_start_date]', $item->is_start_input) !!}
+	{!! Form::hidden($postDataIndex.'note_to_md]', $item->note_to_md) !!}
 	{!! Form::hidden($postDataIndex.'is_instruction_input]', $item->is_instruction_input) !!}
 	<!--end: ppo item hidden input-->
 	<div class="{{ $itemLineClass }}">
@@ -66,11 +67,12 @@ $itemLineClass = 'ppo-item-line col-md-12';
 		 {{$item->instruction}}
 
 		@if($item->is_frequency_input)
+		Frequency:
 		 {!! Form::text($postDataIndex.'frequency]', null, ['class'=>$ppoItemInput, 'size' => 6]) !!}
 		@endif
 
 		@if($item->is_duration_input)
-		 {!! Form::text($postDataIndex.'duration]', null, ['class'=>$ppoItemInput, 'size' => 6]) !!} days
+		 for {!! Form::text($postDataIndex.'duration]', null, ['class'=>$ppoItemInput, 'size' => 6]) !!} days
 		@endif
 
 		@if($item->medication->instruction)
@@ -81,11 +83,16 @@ $itemLineClass = 'ppo-item-line col-md-12';
 		 {!! Form::text($postDataIndex.'instruction_input]', null, ['class'=>$ppoItemInput]) !!}
 		@endif
 	</div>
+	@if($item->is_start_date)
 	<div class="{{ $itemLineClass }}">
-		@if($item->is_start_date)
 			{!! Form::text($postDataIndex.'start_date]', null, ['class'=>$ppoItemInput.'datepicker']) !!}
-		@endif
 	</div>
+	@endif
+	@if($item->note_to_md)
+	<div class="{{ $itemLineClass }}">
+		<label>Note to MD: </label> {{$item->note_to_md}}
+	</div>
+	@endif
 	<div class="{{ $itemLineClass }}">
 		@if($item->is_mitte_input)
 			{!! Form::label($postDataIndex.'mitte]', 'Mitte: ', ['class'=>'control-label']) !!}

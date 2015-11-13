@@ -29,6 +29,7 @@ class Prescription extends Model
     'is_final',
     'is_cycle',
     'cycle_days',
+    'note_to_md',
     ];
     public function patient()
 	{

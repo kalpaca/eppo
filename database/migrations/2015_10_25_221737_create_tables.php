@@ -129,6 +129,7 @@ class CreateTables extends Migration
             $table->integer('ppo_section_id');
             $table->decimal('fixed_dose_result',7,2);
             $table->string('instruction');
+            $table->string('note_to_md');
             $table->boolean('is_instruction_input');
             $table->boolean('is_start_date')->default(false);
             $table->boolean('is_duration_input')->default(false);
@@ -215,6 +216,7 @@ class CreateTables extends Migration
             $table->decimal('dose_percentage',5,2)->nullable();
             $table->decimal('dose_result',7,2);
             $table->string('instruction')->nullable();
+            $table->string('note_to_md')->nullable();
             $table->boolean('is_instruction_input')->default(false);
             $table->string('instruction_input')->nullable();
             $table->boolean('is_duration_input')->default(false);

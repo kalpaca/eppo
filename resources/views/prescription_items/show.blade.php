@@ -44,11 +44,14 @@ $itemLineClass = 'ppo-item-line col-md-12';
             {{ $item->instruction_input }}
         @endif
     </div>
+    @if($item->note_to_md)
     <div class="{{ $itemLineClass }}">
-        @if($item->is_start_date)
-            Start date: {{ $item->start_date }}
-        @endif
+        <strong>Note to MD: </strong> {{ $item->note_to_md }}
     </div>
+    <div class="{{ $itemLineClass }}">
+            Start date: {{ $item->start_date }}
+    </div>
+    @endif
     <div class="{{ $itemLineClass }}">
         @if($item->is_mitte_input)
             Mitte: {{ $item->mitte }} {{ $item->mitteUnit->name }}

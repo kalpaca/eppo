@@ -25,6 +25,7 @@ class PpoItem extends Model
     'is_mitte_input',
     'is_repeat_input',
     'mitte_unit_id',
+    'note_to_md',
     ];
 	public function ppo()
 	{

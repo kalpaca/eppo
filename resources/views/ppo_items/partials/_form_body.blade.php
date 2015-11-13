@@ -87,6 +87,11 @@ if(isset($ppos))
     {!! Form::label('instruction','Fixed Instruction: ',['class' => 'control-label width_100_percent']) !!}
     {!! Form::textarea('instruction', null, ['class'=>'form-control width_100_percent', 'rows'=>"3"]) !!}
 </div>
+
+<div class="form-group width_100_percent">
+    {!! Form::label('note_to_md','Note to MD: ',['class' => 'control-label width_100_percent']) !!}
+    {!! Form::textarea('note_to_md', null, ['class'=>'form-control width_100_percent', 'rows'=>"3"]) !!}
+</div>
 </div>
 
 <div class="form-group col-md-6">
