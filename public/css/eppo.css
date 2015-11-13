@@ -4,6 +4,10 @@ footer{
     padding-top: 40px;
     border-top: 1px solid #e5e5e5;
 }
+.jumbotron{
+    background-color: #6f5499;
+    color: white;
+}
 
 /* StartL: For all forms */
 .width_100_percent {
