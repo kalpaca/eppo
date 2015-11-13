@@ -1,7 +1,6 @@
-@extends('layouts.master')
-@section('title','Patients')
-@section('content')
-<h2>{{$patient->name}}</h2>
+@extends('layouts.panel')
+@section('panelHeading',$patient->fullname)
+@section('panelBody')
 <p class ="lead">Date of Birth: {{$patient->dob}}</h2>
 <p>{!! link_to_route('ppos.explore', 'Create new Prescription', ['patientid' => $patient->id]) !!}</p>
 @if(!$patient->prescriptions->count())
