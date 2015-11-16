@@ -29,7 +29,7 @@
             {!! Form::label('other_reason',$reason->name, ['class' => 'control-label']) !!}
         @endforeach
         {!! Form::label('other_dose_modification_reason',"Other: ", ['class' => 'control-label']) !!}
-        {!! Form::text('other_dose_modification_reason',null, ['class' => 'control-label']) !!}
+        {!! Form::text('other_dose_modification_reason',null, ['class' => 'form-control']) !!}
     </div>
     @endif
 </td>
