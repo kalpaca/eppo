@@ -16,6 +16,8 @@ class CreateTables extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->string('instruction')->default('');
+            $table->boolean('is_rev_aid')->default(false);
+            $table->boolean('is_eap')->default(false);
             $table->timestamps();
         });
         Schema::create('ppo_sections', function (Blueprint $table) {
@@ -231,6 +233,8 @@ class CreateTables extends Migration
             $table->integer('repeat')->nullable();
             $table->boolean('is_dose_notation')->default(false);
             $table->boolean('is_frequency_notation')->default(false);
+            $table->boolean('is_rev_aid_enrolled')->default(false);
+            $table->boolean('is_eap_approved')->default(false);
             $table->timestamps();
         });
     }
