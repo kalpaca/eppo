@@ -3,15 +3,20 @@
 
 @section('panelHeading',$medication->name)
 @section('panelBody')
+{!! link_to_route('medications.edit', 'Click to edit common information', $medication->id, array('class' => 'btn btn-xs btn-primary')) !!}
 <!-- Basic information section -->
 <h3>Common Instruction</h3>
 @if($medication->instruction)
-{{$medication->instruction}}
+<p>{{$medication->instruction}}</p>
 @else
-none
+<p>none</p>
 @endif
-{!! link_to_route('medications.edit', 'Edit', $medication->id, array('class' => 'btn btn-xs btn-primary')) !!}
-</p>
+@if($medication->is_eap)
+<p>This medication has EAP approval input.</p>
+@endif
+@if($medication->is_rev_aid)
+<p>This medication has RevAid enrollment input.</p>
+@endif
 <hr>
 <!-- LU codes section -->
 <h3>Lucodes</h3>

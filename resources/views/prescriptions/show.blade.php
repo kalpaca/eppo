@@ -87,6 +87,9 @@
         @foreach($prescription->reasons as $reason)
             <span class="unicode-checkbox">&#x2611;</span> {{ $reason->name }}&nbsp;&nbsp;&nbsp;&nbsp;
         @endforeach
+        @if($prescription->other_dose_modification_reason)
+            <span class="unicode-checkbox">&#x2611;</span> Other: {{ $prescription->other_dose_modification_reason }}&nbsp;&nbsp;&nbsp;&nbsp;
+        @endif
     </div>
     @endif
 </td>

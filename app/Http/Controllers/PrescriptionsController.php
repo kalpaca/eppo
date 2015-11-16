@@ -96,7 +96,7 @@ class PrescriptionsController extends Controller
     public function show($id)
     {
         $prescription = Prescription::with('diagnosis','regimen','author','prescriptionItems','reasons','patient')->findOrFail($id);
-        $prescription->prescriptionItems->load('doseUnit','mitteUnit','medication','lucode');
+        $prescription->prescriptionItems->load('doseUnit','mitteUnit','lucode');
         $rx = new Collection();
         $supportiveRx = new Collection();
         foreach($prescription->prescriptionItems as $item)
@@ -141,9 +141,9 @@ class PrescriptionsController extends Controller
         {
             $temp->put($item->ppo_item_id, $item);
         }
-        
+
         $prescription->prescriptionItems = $temp;
-        
+
         return view('prescriptions.edit', compact('patient','diagnosis','prescription','ppo','rx','supportiveRx'));
     }
 

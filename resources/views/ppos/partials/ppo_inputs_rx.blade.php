@@ -26,8 +26,10 @@
         <h6><strong>*Dose modification reason</strong></h6>
         @foreach($ppo->reasons as $reason)
             {!! Form::checkbox('reasons[]', $reason->id, null) !!}
-            {!! Form::label('is_reason',$reason->name, ['class' => 'control-label']) !!}
+            {!! Form::label('other_reason',$reason->name, ['class' => 'control-label']) !!}
         @endforeach
+        {!! Form::label('other_dose_modification_reason',"Other: ", ['class' => 'control-label']) !!}
+        {!! Form::text('other_dose_modification_reason',null, ['class' => 'control-label']) !!}
     </div>
     @endif
 </td>

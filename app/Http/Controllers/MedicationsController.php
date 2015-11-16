@@ -69,7 +69,7 @@ class MedicationsController extends Controller
      */
     public function show($id, Request $request)
     {
-        $medication = Medication::select('id','name')->findOrFail($id);
+        $medication = Medication::findOrFail($id);
         $items = PpoItem::where('medication_id',$medication->id)->paginate(10);
         $lucodes = Lucode::where('medication_id', $medication->id)->get();
         $isAdminView = true;
@@ -102,7 +102,7 @@ class MedicationsController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required|unique:medications',
+            'name' => 'required',
         ]);
         $input = $request->all();
         $medication = Medication::findOrFail($id);

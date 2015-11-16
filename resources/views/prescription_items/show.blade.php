@@ -36,8 +36,8 @@ $itemLineClass = 'ppo-item-line col-md-12';
             {{ $item->duration }} days
         @endif
 
-        @if($item->medication->instruction)
-            {{ $item->medication->instruction }}
+        @if($item->medication_common_instruction)
+            {{ $item->medication_common_instruction }}
         @endif
 
         @if($item->is_instruction_input)
@@ -62,6 +62,20 @@ $itemLineClass = 'ppo-item-line col-md-12';
             Repeat: {{ $item->repeat }}
         @endif
     </div>
+    @if($item->is_eap_approval)
+    <div class="{{ $itemLineClass }}">
+        @if($item->is_eap_approval)
+            <span class="unicode-checkbox">&#x2611;</span>EAP Approved
+        @endif
+    </div>
+    @endif
+    @if($item->is_rev_aid_enrolled)
+    <div class="{{ $itemLineClass }}">
+        @if($item->is_rev_aid_enrolled)
+            <span class="unicode-checkbox">&#x2611;</span>Enrolled in RevAid
+        @endif
+    </div>
+    @endif
     <div class="{{ $itemLineClass }}">
         @if($item->lucode_id)
             LU Code: {{$item->lucode->code}} {{$item->lucode->name}}

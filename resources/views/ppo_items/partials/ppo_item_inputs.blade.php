@@ -105,6 +105,20 @@ $itemLineClass = 'ppo-item-line col-md-12';
 			{!! Form::text($postDataIndex.'repeat]', null, ['class'=>$ppoItemInput.'integer-field', 'size' => 4]) !!}
 		@endif
 	</div>
+	@if($item->medication->is_eap)
+	<div class="{{ $itemLineClass }}">
+	    {!! Form::hidden($postDataIndex.'is_eap_approval]', false) !!}
+	    {!! Form::checkbox($postDataIndex.'is_eap_approval]', null) !!}
+	    {!! Form::label($postDataIndex.'is_eap_approval]','EAP approval ', ['class' => 'control-label']) !!}
+	</div>
+	@endif
+	@if($item->medication->is_rev_aid)
+	<div class="{{ $itemLineClass }}">
+	    {!! Form::hidden($postDataIndex.'is_rev_aid_enrolled]', false) !!}
+	    {!! Form::checkbox($postDataIndex.'is_rev_aid_enrolled]', null) !!}
+	    {!! Form::label($postDataIndex.'is_rev_aid_enrolled]','Enrolled in RevAid program ', ['class' => 'control-label']) !!}
+	</div>
+	@endif
 	<div class="{{ $itemLineClass }}">
 	<?php $lucodes = $item->lucodes->lists('detail','id'); ?>
 		@if(count($lucodes)>0)

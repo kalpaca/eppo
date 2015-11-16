@@ -40,6 +40,11 @@ $isStartDate = isset($ppo->is_start_date) ? $ppo->is_start_date : true;
 </div>
 
 <div class="form-group">
+    {!! Form::label('cycle_days','Cycle Days: ',['class' => 'control-label']) !!}
+    {!! Form::text('cycle_days', null, ['class'=>'form-control']) !!}
+</div>
+
+<div class="form-group">
     {!! Form::hidden('is_start_date', false) !!}
     {!! Form::checkbox('is_start_date', null, $isStartDate) !!}
     {!! Form::label('is_start_date','Show start date input ', ['class' => 'control-label']) !!}
@@ -58,7 +63,7 @@ $isStartDate = isset($ppo->is_start_date) ? $ppo->is_start_date : true;
 </div>
 
 <div class="form-group">
-    {!! Form::label('reasons[]','Reasons: ',['class' => 'control-label']) !!}
+    {!! Form::label('reasons[]','Reasons: (use Ctrl to select multiple)',['class' => 'control-label']) !!}
     {!! Form::select('reasons[]',$reasons, $reasonsSelected, ['class'=>'form-control','multiple'=>'multiple']) !!}
 </div>
 {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}

@@ -37,7 +37,7 @@ class PpoItem extends Model
     }
     public function medication()
     {
-        return $this->belongsTo('eppo\Medication')->select(['id','name','instruction']);
+        return $this->belongsTo('eppo\Medication')->select(['id','name','instruction','is_rev_aid','is_eap']);
     }
     public function doseRoute()
     {

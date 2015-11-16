@@ -49,7 +49,7 @@ class RegimensController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|unique:regimens',
         ]);
         $input = $request->all();
         Regimen::create( $input );

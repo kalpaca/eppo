@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Medication extends Model
 {
     protected $fillable = [
-        'name','instruction'
+        'name','instruction','is_rev_aid','is_eap',
     ];
     public function ppoItems()
 	{

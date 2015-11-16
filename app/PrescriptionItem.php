@@ -13,6 +13,8 @@ class PrescriptionItem extends Model
     'medication_id',
     'medication_name',
     'medication_common_instruction',
+    'is_rev_aid_enrolled',
+    'is_eap_approval',
     'dose_base',
     'dose_percentage',
     'dose_calculation_type_id',
@@ -32,6 +34,8 @@ class PrescriptionItem extends Model
     'is_frequency_notation',
     'is_mitte_input',
     'is_repeat_input',
+    'is_rev_aid_enrolled',
+    'is_eap_approval',
     'mitte',
     'repeat',
     'mitte_unit_id',
@@ -42,7 +46,7 @@ class PrescriptionItem extends Model
     }
     public function medication()
     {
-        return $this->belongsTo('eppo\Medication')->select(['id','name','instruction']);
+        return $this->belongsTo('eppo\Medication')->select(['id','name','instruction','is_eap','is_rev_aid']);
     }
      public function lucode()
     {
