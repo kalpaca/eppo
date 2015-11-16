@@ -183,7 +183,7 @@ yepnope({
             //get lucodes for new drug selection
             var lucodeRequest = $.ajax({
                 type: 'POST',
-                url: '/lucodes/ajaxListByMed/',
+                url: '/lucodes/ajaxListByMed',
                 data: 'medid='+medId,
                 dataType: 'json',
 
@@ -204,7 +204,7 @@ yepnope({
             //get new ppo item templates for new drug selection
             var templateRequest = $.ajax({
                 type: 'POST',
-                url: "/ppoitems/ajaxListByMed/",
+                url: "/ppoitems/ajaxListByMed",
                 data: 'medid='+medId,
                 dataType: 'json',
 
