@@ -101,6 +101,7 @@ var ppoHelper = (function($){
 			showTodayButton : true,
 			showClose: true,
 			format : 'MM d, yyyy',
+			autoclose: true,
 		})
 	},
 
