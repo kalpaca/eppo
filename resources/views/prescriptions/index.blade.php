@@ -17,7 +17,6 @@
             <th>Created at</th>
             <th>Updated at</th>
             <th>View</th>
-            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -40,11 +39,6 @@
         <td>{{ $prescription->updated_at }}</td>
         <td>
         {!! link_to_route('prescriptions.show', 'View', $prescription->id, array('class' => 'btn btn-success')) !!}
-        </td>
-        <td>
-        {!! Form::open(array('class' => 'form-inline', 'method' => 'DELETE', 'route' => array('prescriptions.destroy', $prescription->id))) !!}
-            {!! Form::submit('Delete', array('class' => 'btn btn-danger')) !!}
-        {!! Form::close() !!}
         </td>
         </tr>
         @endforeach
