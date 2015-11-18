@@ -13,8 +13,16 @@
 <!-- Patient information -->
 @include('patients/partials/patient_info_table')
 <!-- Watermark -->
-<div id="background" class="col-md-offset-3">
-  <p id="bg-text"></p>
+<div id="background">
+    <p id="bg-text" class="text-center">
+    @if($prescription->is_void)
+    Void
+    @elseif(!$prescription->is_final){{--if NOT finalized--}}
+    Draft
+    @elseif($prescription->is_final)
+    Final
+    @endif
+    </p>
 </div>
 <!-- Allergies -->
 <table class="table table-bordered prescription-allergies">
@@ -149,7 +157,6 @@
     <div class="status-date col-md-12">
         <label>Void Datetime:</label> {{ $prescription->final_date }}
     </div>
-    <script>document.getElementById('bg-text').innerHTML = 'Void';</script>
 
     @elseif(!$prescription->is_final){{--if NOT finalized--}}
 
@@ -158,23 +165,23 @@
         <button class="btn btn-success">Finalize</button>
         {!! Form::close() !!}
     </div>
-    <div class="status-date col-md-6">
-        <label>Current Datetime:</label> <?php echo date("F d, Y, g:i a");?>
-    </div>
-    <script>document.getElementById('bg-text').innerHTML = 'Draft';</script>
+
 
     @elseif($prescription->is_final)
 
-    <div class="final-btn col-md-6">
-        {!! Form::open(array('class' => 'form-inline', 'method' => 'post', 'route' => array('prescriptions.void', $prescription->id))) !!}
+    <div class="col-md-6 inline">
+        {!! Form::open(array('class'=>'inline', 'method' => 'post', 'route' => array('prescriptions.finalize', $prescription->id))) !!}
+        <button class="btn btn-primary">Print</button>
+        {!! Form::close() !!}
+    </div>
+    <div class="status-date col-md-5">
+        <label>Final Datetime:</label> {{ $prescription->final_date }}
+    </div>
+    <div class="col-md-1 inline">
+        {!! Form::open(array('class'=>'inline', 'method' => 'post', 'route' => array('prescriptions.void', $prescription->id))) !!}
         <button class="btn btn-danger">Void</button>
         {!! Form::close() !!}
     </div>
-    <div class="status-date col-md-6">
-        <label>Final Datetime:</label> {{ $prescription->final_date }}
-    </div>
-    <script>document.getElementById('bg-text').innerHTML = 'Final';</script>
-
     @endif
 </td>
 </tr>

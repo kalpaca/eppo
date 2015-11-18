@@ -12,7 +12,7 @@ use eppo\PrescriptionItem;
 use eppo\Ppo;
 use eppo\Diagnosis;
 use eppo\Patient;
-
+use PDF;
 class PrescriptionsController extends Controller
 {
     public function index()
@@ -95,11 +95,42 @@ class PrescriptionsController extends Controller
      */
     public function finalize(Request $request, $id)
     {
-        $prescription = Prescription::findOrFail($id);
-        $prescription->is_final = true;
-        $prescription->final_date = date("F d, Y, g:i a");
-        $prescription->save();
-        return redirect()->back()->with("success-message","Prescription finalized");
+
+        $prescription = Prescription::with('diagnosis','regimen','author','prescriptionItems','reasons','patient')->findOrFail($id);
+        $prescription->prescriptionItems->load('doseUnit','mitteUnit','lucode');
+
+        if($prescription->is_void)
+        {
+            return redirect()->back()->with("warning-message","Prescription void");
+        }
+        //set to final status
+        if(!$prescription->is_final)
+        {
+            $prescription->is_final = true;
+            $prescription->final_date = date("F d, Y, g:i a");
+            $prescription->save();
+        }
+
+
+        $rx = new Collection();
+        $supportiveRx = new Collection();
+        foreach($prescription->prescriptionItems as $item)
+        {
+            if($item->ppo_section_id == 1)
+                $rx->push($item);
+            elseif($item->ppo_section_id == 2)
+                $supportiveRx->push($item);
+        }
+        $pdf = PDF::loadView('prescriptions.show', compact('prescription','rx','supportiveRx'));
+        $pdf->setOption('header-left', "eppo prescription");
+        $pdf->setOption('header-line', true);
+        $pdf->setOption('header-font-size', 24);
+        $pdf->setOption('footer-center', "Genarated by eppo");
+        $pdf->setOption('footer-line', true);
+        $pdf->setOption('margin-top', '24mm');
+        $pdf->setOption('margin-bottom', '24mm');
+        $pdf->setOption('print-media-type', true);
+        return $pdf->download('eppo_prescription_'.$prescription->id.'.pdf');
     }
 
     /**

@@ -8,13 +8,17 @@ footer{
     background-color: #6f5499;
     color: white;
 }
-
+.inline{
+    display: inline;
+}
 /** Prescription text view starts */
 #background{
     position:absolute;
     display:block;
     min-height:30%;
     min-width:20%;
+    margin-left:200px;
+    z-index : 0;
 }
 #bg-text
 {
@@ -109,9 +113,11 @@ select[multiple] {
 /** End: PPO explorer */
 
 @media print {
-  a, button, .btn, .lead{
-    display: none;
-  }
-
+    a, button, .btn, .lead, .panel-heading, nav, #background, #bg-text{
+        display: none;
+    }
+    .panel-primary{
+        border: 0;
+    }
 }
 
