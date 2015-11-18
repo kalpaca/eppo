@@ -40,7 +40,7 @@
         @if($ppo->is_cycle)
         <div class="ppo-cycle">
             {!! Form::label('cycle_id','Cycle #: ', ['class' => 'control-label']) !!}
-            {!! Form::text('cycle_id', null, ['class' => 'integer-field form-control', 'size'=> 2]) !!}
+            {!! Form::text('cycle_id', null, ['class' => 'integer-field form-control mandatory-field', 'size'=> 2]) !!}
              Cycle repeats every {{ $ppo->cycle_days }} days
         </div>
         @endif
@@ -48,12 +48,12 @@
         <div class="ppo-bsa">
             <p>
                 {!! Form::label('height','Height: ', ['class' => 'control-label']) !!}
-                {!! Form::text('height', null, ['class' => 'decimal-field form-control', 'size'=> 6]) !!} cm&nbsp;&nbsp;&nbsp;&nbsp;
+                {!! Form::text('height', null, ['class' => 'decimal-field form-control mandatory-field', 'size'=> 6]) !!} cm&nbsp;&nbsp;&nbsp;&nbsp;
                 {!! Form::label('weight','Weight: ', ['class' => 'control-label']) !!}
-                {!! Form::text('weight', null, ['class' => 'decimal-field form-control', 'size'=> 6]) !!} kg
+                {!! Form::text('weight', null, ['class' => 'decimal-field form-control mandatory-field', 'size'=> 6]) !!} kg
             </p>
             <p>
-                {!! Form::label('bsa','Body Surface Area (BSA): ', ['class' => 'decimal-field control-label']) !!}
+                {!! Form::label('bsa','Body Surface Area (BSA): ', ['class' => 'decimal-field control-label mandatory-field']) !!}
                 {!! Form::text('bsa', null, ['class' => 'form-control', 'size'=> 6]) !!} m<sup>2</sup>
                 <button type="button" class="btn btn-xs btn-primary get-bsa-btn">Calculate</button>
             </p>

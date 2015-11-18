@@ -27,6 +27,7 @@ class Prescription extends Model
     'is_dose_reason',
     'other_dose_modification_reason',
     'is_final',
+    'is_void',
     'is_cycle',
     'cycle_days',
     'note_to_md',

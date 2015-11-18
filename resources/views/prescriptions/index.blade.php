@@ -12,11 +12,11 @@
             <th>#</th>
             <th>Regimen</th>
             <th>Diagnosis</th>
+            <th>Status</th>
             <th>Created by</th>
             <th>Created at</th>
             <th>Updated at</th>
             <th>View</th>
-            <th>Update</th>
             <th>Delete</th>
         </tr>
     </thead>
@@ -26,14 +26,20 @@
         <td>{{ $prescription->id }}</td>
         <td>{{ $prescription->regimen->code }}</td>
         <td>{{ $prescription->diagnosis->name }}</td>
+        <td>
+        @if( $prescription->is_void )
+        <button class="btn btn-xs btn-danger" type="button">Void</button>
+        @elseif( $prescription->is_final )
+        <button class="btn btn-xs btn-success" type="button">Final</button>
+        @elseif( !$prescription->is_final )
+        <button class="btn btn-xs btn-primary" type="button">Draft</button>
+        @endif
+        </td>
         <td>{{ $prescription->author->name }}</td>
         <td>{{ $prescription->created_at }}</td>
         <td>{{ $prescription->updated_at }}</td>
         <td>
         {!! link_to_route('prescriptions.show', 'View', $prescription->id, array('class' => 'btn btn-success')) !!}
-        </td>
-        <td>
-        {!! link_to_route('prescriptions.edit', 'Update', $prescription->id, array('class' => 'btn btn-info')) !!}
         </td>
         <td>
         {!! Form::open(array('class' => 'form-inline', 'method' => 'DELETE', 'route' => array('prescriptions.destroy', $prescription->id))) !!}

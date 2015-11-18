@@ -88,6 +88,37 @@ class PrescriptionsController extends Controller
     }
 
     /**
+     * Finalize a prescription, lock it to prevent editing.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function finalize(Request $request, $id)
+    {
+        $prescription = Prescription::findOrFail($id);
+        $prescription->is_final = true;
+        $prescription->final_date = date("F d, Y, g:i a");
+        $prescription->save();
+        return redirect()->back()->with("success-message","Prescription finalized");
+    }
+
+    /**
+     * Finalize a prescription, lock it to prevent editing.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function void(Request $request, $id)
+    {
+        $prescription = Prescription::findOrFail($id);
+        $prescription->is_final = true;
+        $prescription->is_void = true;
+        $prescription->final_date = date("F d, Y, g:i a");
+        $prescription->save();
+        return redirect()->back()->with("success-message","Prescription void");
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -118,6 +149,8 @@ class PrescriptionsController extends Controller
     public function edit($id)
     {
         $prescription = Prescription::with('diagnosis','ppo.ppoItems','author','prescriptionItems','reasons','patient')->findOrFail($id);
+        if($prescription->is_final)
+            return redirect()->back();
         $patient = $prescription->patient;
         $ppo = $prescription->ppo;
         $ppo->ppoItems->load('doseUnit','mitteUnit','medication','lucodes');
@@ -183,7 +216,7 @@ class PrescriptionsController extends Controller
         {
             $prescription->reasons()->sync($request->reasons);
         }
-        return redirect()->route('prescriptions.show', [$prescription->id])->with('message', 'Prescription created');
+        return redirect()->route('prescriptions.show', [$prescription->id])->with('success-message', 'Prescription created');
     }
 
     /**

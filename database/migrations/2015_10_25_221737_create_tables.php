@@ -173,6 +173,7 @@ class CreateTables extends Migration
             $table->boolean('is_allergies_unknown')->default(false);
             $table->boolean('is_allergies')->default(false);
             $table->boolean('is_final')->default(false);
+            $table->boolean('is_void')->default(false);
             $table->timestamps();
         });
         Schema::create('prescription_operation_records', function (Blueprint $table) {

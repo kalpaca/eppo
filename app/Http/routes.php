@@ -40,6 +40,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('patients/index', array('uses' => 'PatientsController@index', 'as' => 'patients.index'));
     Route::resource('patients', 'PatientsController');
     Route::get('prescriptions/create/{ppoid}/{diagnosisid}/{patientid}', array('uses' => 'PrescriptionsController@create', 'as' => 'prescriptions.create'));
+    Route::post('prescriptions/finalize/{id}', array('uses' => 'PrescriptionsController@finalize', 'as' => 'prescriptions.finalize'));
+    Route::post('prescriptions/void/{id}', array('uses' => 'PrescriptionsController@void', 'as' => 'prescriptions.void'));
     Route::resource('prescriptions', 'PrescriptionsController', array('except' => array('create')));
 
     Route::get('auth/logout', array('uses' => 'Auth\AuthController@getLogout', 'as' => 'auth.logout'));

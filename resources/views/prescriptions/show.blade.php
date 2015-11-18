@@ -3,13 +3,20 @@
 @section('title','View prescription')
 @section('panelHeading','View prescription')
 @section('panelTopBar')
+@if(!$prescription->is_void || !$prescription->is_final)
 {!! link_to_route('prescriptions.edit', 'Edit', $prescription->id, array('class' => 'btn btn-default')) !!}
-{!! link_to_route('patients.show', 'Back to patient', $prescription->patient_id, array('class' => 'btn btn-default')) !!}
+@endif
+{!! link_to_route('prescriptions.index', 'Back to Worklist', $prescription->author->id, array('class' => 'btn btn-default')) !!}
+{!! link_to_route('patients.show', 'Back to Patient', $prescription->patient_id, array('class' => 'btn btn-default')) !!}
 @endsection
 @section('panelBody')
-
+<!-- Patient information -->
 @include('patients/partials/patient_info_table')
-
+<!-- Watermark -->
+<div id="background" class="col-md-offset-3">
+  <p id="bg-text"></p>
+</div>
+<!-- Allergies -->
 <table class="table table-bordered prescription-allergies">
 <tbody>
 <tr>
@@ -26,7 +33,7 @@
 </tr>
 </tbody>
 </table>
-
+<!-- Regimen and diagnosis and cycle information -->
 <table class="table table-bordered prescription-protocol">
 <tbody>
 <tr>
@@ -57,7 +64,7 @@
 </tr>
 </tbody>
 </table>
-
+<!-- chemotherapy medicaiton protocol -->
 <?php $index = 0;?>
 @if($rx->count()>0)
 <table class="table table-bordered prescription-rx">
@@ -97,7 +104,7 @@
 </tbody>
 </table>
 @endif
-
+<!-- supportive medications protocol -->
 @if($supportiveRx->count()>0)
 <table class="table table-bordered prescription-supportive-rx">
 <tbody>
@@ -122,19 +129,56 @@
 
 <table class="table table-bordered prescription-supportive-rx">
 <tbody>
+<!-- Doctor information -->
 <tr>
 <td class="md-info">
-<div class="md-name col-md-4">
+<div class="md-name col-md-6">
 <label>Physician Pint Name:</label> {{$prescription->author->name}}
 </div>
-<div class="md-sign col-md-4">
+<div class="md-sign col-md-6">
 <label>Signature:</label> _____________________
-</div>
-<div class="md-date col-md-4">
-<label>Date:</label> <?php echo date("F d, Y, g:i a");?>
 </div>
 </td>
 </tr>
+
+<tr>
+<!-- Prescripiton status -->
+<td class="status-info">
+    @if($prescription->is_void)
+
+    <div class="status-date col-md-12">
+        <label>Void Datetime:</label> {{ $prescription->final_date }}
+    </div>
+    <script>document.getElementById('bg-text').innerHTML = 'Void';</script>
+
+    @elseif(!$prescription->is_final){{--if NOT finalized--}}
+
+    <div class="final-btn col-md-6">
+        {!! Form::open(array('class' => 'form-inline', 'method' => 'post', 'route' => array('prescriptions.finalize', $prescription->id))) !!}
+        <button class="btn btn-success">Finalize</button>
+        {!! Form::close() !!}
+    </div>
+    <div class="status-date col-md-6">
+        <label>Current Datetime:</label> <?php echo date("F d, Y, g:i a");?>
+    </div>
+    <script>document.getElementById('bg-text').innerHTML = 'Draft';</script>
+
+    @elseif($prescription->is_final)
+
+    <div class="final-btn col-md-6">
+        {!! Form::open(array('class' => 'form-inline', 'method' => 'post', 'route' => array('prescriptions.void', $prescription->id))) !!}
+        <button class="btn btn-danger">Void</button>
+        {!! Form::close() !!}
+    </div>
+    <div class="status-date col-md-6">
+        <label>Final Datetime:</label> {{ $prescription->final_date }}
+    </div>
+    <script>document.getElementById('bg-text').innerHTML = 'Final';</script>
+
+    @endif
+</td>
+</tr>
+
 </tbody>
 </table>
 @endsection

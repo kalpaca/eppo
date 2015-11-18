@@ -9,7 +9,24 @@ footer{
     color: white;
 }
 
-/* StartL: For all forms */
+/** Prescription text view starts */
+#background{
+    position:absolute;
+    display:block;
+    min-height:30%;
+    min-width:20%;
+}
+#bg-text
+{
+    color:lightgrey;
+    outline: 0;
+    font-size:100px;
+    -ms-transform:rotate(315deg);
+    -webkit-transform:rotate(315deg);
+}
+/** Prescription text view ends */
+
+/* Start: For all forms */
 .width_100_percent {
     width: 100%;
     display: block;
