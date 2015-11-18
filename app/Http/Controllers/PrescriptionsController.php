@@ -80,11 +80,12 @@ class PrescriptionsController extends Controller
                     $prescription->prescriptionItems()->create($item);
             }
         }
+        //dose modification reasons
         if(isset($request->reasons))
         {
             $prescription->reasons()->sync($request->reasons);
         }
-        return redirect()->route('prescriptions.show', [$prescription->id])->with('message', 'Prescription created');
+        return redirect()->route('prescriptions.show', [$prescription->id])->with('success-message', 'Prescription created');
     }
 
     /**
