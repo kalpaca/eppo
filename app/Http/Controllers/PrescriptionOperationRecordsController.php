@@ -3,6 +3,7 @@
 namespace eppo\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use eppo\Http\Requests;
 use eppo\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;

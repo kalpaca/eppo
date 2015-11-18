@@ -4,6 +4,7 @@ namespace eppo\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Collection;
 use eppo\Http\Requests;
 use eppo\Http\Controllers\Controller;
 
@@ -21,6 +22,7 @@ class PatientsController extends Controller
         $userId = Auth::user()->id;
         if($request->isMethod('post'))
         {
+            $patients = new Collection();
             if($request->name)
             {
                 $patients = Patient::where('fullname', 'like', '%'.$request->name.'%')

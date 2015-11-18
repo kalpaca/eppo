@@ -64,4 +64,8 @@ class Prescription extends Model
 	{
 		return $this->hasMany('eppo\PrescriptionOperationRecord');
 	}
+    public function isAuthor($user)
+    {
+        return $this->author->id == $user->id;
+    }
 }

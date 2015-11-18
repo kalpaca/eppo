@@ -12,7 +12,7 @@
 {!! Form::close() !!}
 </div>
 
-@if(!$patients->count())
+@if(!$patients || !$patients->count())
 <p>No patient.</p>
 @else
 <table class="table">

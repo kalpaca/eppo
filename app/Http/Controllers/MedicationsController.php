@@ -3,7 +3,7 @@
 namespace eppo\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Collection;
 use eppo\Http\Requests;
 use eppo\Http\Controllers\Controller;
 
@@ -22,6 +22,7 @@ class MedicationsController extends Controller
     {
         if($request->isMethod('post'))
         {
+            $medications = new Collection();
             if($request->name)
             {
                 $medications = Medication::select('id','name','created_at','updated_at')

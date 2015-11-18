@@ -51,7 +51,7 @@
         <li class="list-group-item"><a href="{{route('prescriptions.create', ['ppoId'=>1,'diagnosisId'=>1,'patientId'=>1])}}">Use Case: fill a ppo (almost done)</a></li>
         <li class="list-group-item">Use Case: validate a prescription input (in progress)</li>
         <li class="list-group-item">Use Case: save a prescription (done)</li>
-        <li class="list-group-item"><a href="{{route('prescriptions.show', ['id'=>19])}}">Use Case: view a prescription (done)</a></li>
+        <li class="list-group-item"><a href="{{route('prescriptions.show', ['id'=>26])}}">Use Case: view a prescription (done)</a></li>
         <li class="list-group-item">Use Case: print prescription (done, use wkhtmltopdf, default set for linux amd64 server)</li>
         <li class="list-group-item">Use Case: login and signup (done)</li>
         </ul>
