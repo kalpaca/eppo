@@ -100,7 +100,7 @@ class PrescriptionsController extends Controller
         $prescription->prescriptionItems->load('doseUnit','mitteUnit','lucode');
         if(!$prescription->isAuthor(Auth::user()))
         {
-            return redirect()->back()->with("warning-message","Unauthorized action");
+            return redirect()->back()->with("warning-message","Unauthorized action, it is not your prescription");
         }
         if($prescription->is_void)
         {
@@ -147,7 +147,7 @@ class PrescriptionsController extends Controller
         $prescription = Prescription::findOrFail($id);
         if(!$prescription->isAuthor(Auth::user()))
         {
-            return redirect()->back()->with("warning-message","Unauthorized action");
+            return redirect()->back()->with("warning-message","Unauthorized action, it is not your prescription");
         }
 
         $prescription->is_final = true;
@@ -168,9 +168,8 @@ class PrescriptionsController extends Controller
         $prescription = Prescription::with('diagnosis','regimen','author','prescriptionItems','reasons','patient')->findOrFail($id);
         if(!$prescription->isAuthor(Auth::user()))
         {
-            return redirect()->back()->with("warning-message","Unauthorized action");
+            return redirect()->back()->with("warning-message","Unauthorized action, it is not your prescription");
         }
-
         $prescription->prescriptionItems->load('doseUnit','mitteUnit','lucode');
         $rx = new Collection();
         $supportiveRx = new Collection();
@@ -195,7 +194,7 @@ class PrescriptionsController extends Controller
         $prescription = Prescription::with('diagnosis','ppo.ppoItems','author','prescriptionItems','reasons','patient')->findOrFail($id);
         if(!$prescription->isAuthor(Auth::user()))
         {
-            return redirect()->back()->with("warning-message","Unauthorized action");
+            return redirect()->back()->with("warning-message","Unauthorized action, it is not your prescription");
         }
         if($prescription->is_final)
         {
@@ -245,7 +244,7 @@ class PrescriptionsController extends Controller
         $user = Auth::user();
         if(!$prescription->isAuthor(Auth::user()))
         {
-            return redirect()->back()->with("warning-message","Unauthorized action");
+            return redirect()->back()->with("warning-message","Unauthorized action, it is not your prescription");
         }
         $request->merge(array('user_id' => $user->id));
 
