@@ -10,6 +10,6 @@ class Patient extends Model
 
     public function prescriptions()
     {
-        return $this->hasMany('eppo\Prescription')->select(['patient_id','id','diagnosis_id','regimen_id','user_id','created_at','updated_at']);
+        return $this->hasMany('eppo\Prescription')->select(['is_void','is_final','patient_id','id','diagnosis_id','regimen_id','user_id','created_at','updated_at']);
     }
 }
