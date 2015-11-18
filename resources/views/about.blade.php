@@ -52,7 +52,7 @@
         <li class="list-group-item">Use Case: validate a prescription input (in progress)</li>
         <li class="list-group-item">Use Case: save a prescription (done)</li>
         <li class="list-group-item"><a href="{{route('prescriptions.show', ['id'=>19])}}">Use Case: view a prescription (done)</a></li>
-        <li class="list-group-item">Use Case: print prescription</li>
+        <li class="list-group-item">Use Case: print prescription (done, use wkhtmltopdf, default set for linux amd64 server)</li>
         <li class="list-group-item">Use Case: login and signup (done)</li>
         </ul>
     </div>
