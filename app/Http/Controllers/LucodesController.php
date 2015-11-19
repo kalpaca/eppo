@@ -119,7 +119,6 @@ class LucodesController extends Controller
     {
         $lucode = Lucode::findOrFail($id);
         $lucode->delete();
-        $request->session()->put('success-message', 'Lucode deleted.');
-        return redirect()->back();
+        return redirect()->back()->with('success-message', 'Lucode deleted.');
     }
 }

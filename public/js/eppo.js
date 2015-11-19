@@ -412,13 +412,12 @@ var ppoExplorer = (function($){
 		init: init
 	};
 }( jQuery ));
-$(document).ready(function() {
-  ppoHelper.init();
-  ppoExplorer.init();
-});
 
 $(document).ready(function() {
-	//respond to click event on anything with 'overlay' class
+  	ppoHelper.init();
+  	ppoExplorer.init();
+
+  	//respond to click event on anything with 'overlay' class
 	$(".ajax-modal-link").click(function(event){
 		event.preventDefault();
 		//load content from href of link
@@ -428,6 +427,6 @@ $(document).ready(function() {
 			}
 		});
 	});
-
 });
+
 
