@@ -25,6 +25,7 @@ if(isset($ppos))
     @if($item->medication_id)
         {!!link_to_route('medications.show', 'Go to medication page', ['medid'=>$item->medication_id])!!}
     @endif
+    {!! link_to_route('ppoitems.addMedicationAjax', 'Add new med', $parameters = array(), array('class' => 'ajax-modal-link')) !!}
 </div>
 
 @if(isset($ppo))
@@ -138,7 +139,7 @@ if(isset($ppos))
 
 <div class="form-group col-md-12">
     {!! Form::label('lucodes[]','Use "Ctrl" key to select mutiple LU Codes (if applicable): ',['class' => 'control-label']) !!}
-     {!!link_to_route('lucodes.create', 'Add New LU code')!!}
+    {!! link_to_route('ppoitems.addLucodeAjax', 'Add new LU code', $parameters = array(), array('class' => 'ajax-modal-link')) !!}
     {!! Form::select('lucodes[]', $lucodes, $lucodesSelected, ['class'=>'form-control width_100_percent','multiple'=>'multiple','id'=>'lucodes']) !!}
 </div>
 
@@ -146,6 +147,8 @@ if(isset($ppos))
 {!! Form::submit('Submit', ['class' => 'btn btn-primary pull-right']) !!}
 </div>
 </div>
+
+@include('partials.add_inventory_modal')
 <script>
 yepnope({
     load: ["{{ asset('bower_components/jquery/dist/jquery.min.js')}}",

@@ -16,4 +16,4 @@
     {!! Form::checkbox('is_eap', null) !!}
     {!! Form::label('is_eap','Show EAP approval input ', ['class' => 'control-label']) !!}
 </div>
-{!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
+{!! Form::submit('Submit', ['class' => 'btn btn-primary', 'id' => 'med_sbt_btn']) !!}

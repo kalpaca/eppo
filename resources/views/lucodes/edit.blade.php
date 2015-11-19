@@ -4,6 +4,7 @@
 @section('panelBody')
 {!! Form::model($lucode, [
         'method' => 'PATCH',
+        'role'=>'form',
         'route'=>['lucodes.update',
         $lucode->id],
         'class'=>'col-md-6'

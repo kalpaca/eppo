@@ -4,6 +4,7 @@
 @section('panelBody')
 {!! Form::model($diagnosis, [
         'method' => 'PATCH',
+        'role'=>'form',
         'route'=>['diagnoses.update',
         $diagnosis->id],
         'class'=>'col-md-6'

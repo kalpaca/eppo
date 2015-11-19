@@ -6,6 +6,7 @@
         'method' => 'PATCH',
         'route'=>['medications.update',
         $medication->id],
+        'role'=>'form',
         'class'=>'col-md-6'
     ]) !!}
     @include('medications/partials/_form_body')

@@ -31,15 +31,7 @@ class RegimensController extends Controller
     {
         return view('regimens.create');
     }
-    /**
-     * Show the form for creating a new resource in ajax form.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function createAjax()
-    {
-        return view('regimens.create_ajax');
-    }
+
     /**
      * Store a newly created resource in storage.
      *

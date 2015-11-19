@@ -6,6 +6,7 @@
         'method' => 'PATCH',
         'route'=>['mitteunits.update',
         $unit->id],
+        'role'=>'form',
         'class'=>'col-md-6'
     ]) !!}
     @include('mitte_units/partials/_form_body')

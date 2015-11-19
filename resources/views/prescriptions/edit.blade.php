@@ -9,6 +9,7 @@
 {!! Form::model($prescription, [
     'method' => 'PATCH',
         'route'=>['prescriptions.update',$prescription->id],
+        'role'=>'form',
         'class'=>'form-inline'
     ]) !!}
 @include('patients/partials/patient_info_table')

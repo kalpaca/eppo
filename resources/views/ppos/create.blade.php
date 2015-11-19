@@ -4,6 +4,7 @@
 @section('panelBody')
 {!! Form::model(new eppo\Ppo, [
     'route'=>'ppos.store',
+    'role'=>'form',
     'class'=>'col-md-6'])
     !!}
     @include('ppos/partials/_form_body')

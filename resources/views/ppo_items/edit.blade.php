@@ -4,6 +4,7 @@
 @section('panelBody')
 {!! Form::model($item, [
         'method' => 'PATCH',
+        'role'=>'form',
         'route'=>['ppoitems.update',
         $item->id],
         'class'=>'form-inline'

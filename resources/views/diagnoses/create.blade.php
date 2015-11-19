@@ -5,6 +5,7 @@
 
 {!! Form::model(new eppo\Diagnosis, [
     'route'=>'diagnoses.store',
+    'role'=>'form',
     'class'=>'col-md-6'])
     !!}
 @include('diagnoses/partials/_form_body')

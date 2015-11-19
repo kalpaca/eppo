@@ -417,3 +417,17 @@ $(document).ready(function() {
   ppoExplorer.init();
 });
 
+$(document).ready(function() {
+	//respond to click event on anything with 'overlay' class
+	$(".ajax-modal-link").click(function(event){
+		event.preventDefault();
+		//load content from href of link
+		$('.modal-body').load($(this).attr("href"),function( response, status, xhr ){
+			if ( status == "success" ) {
+				$('#myModal').modal();
+			}
+		});
+	});
+
+});
+

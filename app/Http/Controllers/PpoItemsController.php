@@ -192,4 +192,42 @@ class PpoItemsController extends Controller
         $request->session()->flash('success-message', 'Dose Schedule deleted.');
         return redirect()->back();
     }
+
+    /**
+     * Show the form for creating a new resource in ajax modal.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function addMedicationAjax(Request $request)
+    {
+        if($request->isMethod('post')){
+            $this->validate($request, [
+                'name' => 'required|unique:medications',
+            ]);
+
+            $input = $request->all();
+            Medication::create( $input );
+            return redirect()->back()->with('success-message', 'Medication list updated');
+        }
+        return view('ppo_items.add_medication_ajax');
+    }
+
+    /**
+     * Show the form for creating a new resource in ajax modal.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function addLucodeAjax(Request $request)
+    {
+        $medication = null;
+        $medications = Medication::lists('name','id');
+
+        if($request->isMethod('post')){
+
+            $input = $request->all();
+            Lucode::create( $input );
+            return redirect()->back()->with('success-message', 'LU code list updated');
+        }
+        return view('ppo_items.add_lucode_ajax', compact('medication','medications'));
+    }
 }

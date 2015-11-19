@@ -4,6 +4,7 @@
 @section('panelBody')
 {!! Form::model(new eppo\Prescription, [
         'route'=>'prescriptions.store',
+        'role'=>'form',
         'class'=>'form-inline'
     ]) !!}
 @include('patients/partials/patient_info_table')

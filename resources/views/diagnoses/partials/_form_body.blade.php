@@ -8,4 +8,4 @@
     {!! Form::select('diagnosis_secondary_category_id',$cats,['class'=>'form-control']) !!}
 </div>
 
-{!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
+{!! Form::submit('Submit', ['class' => 'btn btn-primary', 'id' => 'diagnosis-sbt-btn']) !!}

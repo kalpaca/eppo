@@ -49,9 +49,20 @@ Route::group(['middleware' => 'auth'], function () {
     //Routes need to be admin to access
     Route::group(['middleware' => 'eppo\Http\Middleware\AdminMiddleware'], function()
     {
-        Route::get('diagnoses/createAjax', array('uses' => 'DiagnosesController@createAjax', 'as' => 'diagnoses.createAjax'));
-        Route::get('regimens/createAjax', array('uses' => 'RegimensController@createAjax', 'as' => 'regimens.createAjax'));
+        Route::post('ppo/addDignosisAjax', array('uses' => 'PposController@addDignosisAjax', 'as' => 'ppos.addDiagnosisAjax'));
+        Route::get('ppo/addDignosisAjax', array('uses' => 'PposController@addDignosisAjax', 'as' => 'ppos.addDiagnosisAjax'));
 
+        Route::post('ppo/addRegimenAjax', array('uses' => 'PposController@addRegimenAjax', 'as' => 'ppos.addRegimenAjax'));
+        Route::get('ppo/addRegimenAjax', array('uses' => 'PposController@addRegimenAjax', 'as' => 'ppos.addRegimenAjax'));
+
+        Route::post('ppo/addReasonAjax', array('uses' => 'PposController@addReasonAjax', 'as' => 'ppos.addReasonAjax'));
+        Route::get('ppo/addReasonAjax', array('uses' => 'PposController@addReasonAjax', 'as' => 'ppos.addReasonAjax'));
+
+        Route::post('ppoitems/addLucodeAjax', array('uses' => 'PpoItemsController@addLucodeAjax', 'as' => 'ppoitems.addLucodeAjax'));
+        Route::get('ppoitems/addLucodeAjax', array('uses' => 'PpoItemsController@addLucodeAjax', 'as' => 'ppoitems.addLucodeAjax'));
+
+        Route::post('ppoitems/addMedicationAjax', array('uses' => 'PpoItemsController@addMedicationAjax', 'as' => 'ppoitems.addMedicationAjax'));
+        Route::get('ppoitems/addMedicationAjax', array('uses' => 'PpoItemsController@addMedicationAjax', 'as' => 'ppoitems.addMedicationAjax'));
 
         Route::post('lucodes/ajaxListByMed/', array('uses' => 'LucodesController@ajaxListByMed','as' => 'lucodes.ajaxListByMed'));
         Route::get('lucodes/ajaxListByMed/', function()

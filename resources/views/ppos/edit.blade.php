@@ -4,6 +4,7 @@
 @section('panelBody')
 {!! Form::model($ppo, [
         'method' => 'PATCH',
+        'role'=>'form',
         'route'=>['ppos.update',
         $ppo->id],
         'class'=>'col-md-6'

@@ -188,4 +188,63 @@ class PposController extends Controller
 
         return redirect()->route('ppos.index')->with('success-message', 'PPO deleted.');
     }
+
+
+    /**
+     * Show the form for creating a new resource in ajax modal.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function addDiagnosisAjax(Request $request)
+    {
+        $cats = DiagnosisSecondaryCategory::lists('name', 'id');
+        if($request->isMethod('post')){
+            $this->validate($request, [
+                'name' => 'required',
+            ]);
+
+            $input = $request->all();
+            Diagnosis::create( $input );
+            return redirect()->route('ppos.create')->with('success-message', 'Diagnosis list updated');
+        }
+        return view('ppos.add_diagnosis_ajax', compact('cats'));
+    }
+
+    /**
+     * Show the form for creating a new resource in ajax modal.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function addRegimenAjax(Request $request)
+    {
+        if($request->isMethod('post')){
+            $this->validate($request, [
+                'name' => 'required',
+            ]);
+
+            $input = $request->all();
+            Regimen::create( $input );
+            return redirect()->route('ppos.create')->with('success-message', 'Regimen list updated');
+        }
+        return view('ppos.add_regimen_ajax');
+    }
+
+    /**
+     * Show the form for creating a new resource in ajax modal.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function addReasonAjax(Request $request)
+    {
+        if($request->isMethod('post')){
+            $this->validate($request, [
+                'name' => 'required',
+            ]);
+
+            $input = $request->all();
+            DoseModificationReason::create( $input );
+            return redirect()->route('ppos.create')->with('success-message', 'Regimen list updated');
+        }
+        return view('ppos.add_reason_ajax');
+    }
 }
