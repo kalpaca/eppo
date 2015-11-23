@@ -18,7 +18,7 @@
         <p>Health information administrators can use this tool to build such PPOs, which allow end users like
          Oncologists/Hematologists and Nurse Practitioners to make chemotherapy regimen prescriptions
          and customize the combo of medications based on the actual situation, for the patient to
-         take to a pharmacy to dispense medications. This tool also simplify the process of choosing a PPO based on  diagnoses.</p>
+         take to a pharmacy to dispense medications. This tool also simplifies the process of choosing a PPO based on  diagnoses.</p>
         <hr>
 
         <h3>Demo User name: </h3>
