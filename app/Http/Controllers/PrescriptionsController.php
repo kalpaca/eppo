@@ -94,54 +94,6 @@ class PrescriptionsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function finalize(Request $request, $id)
-    {
-        $prescription = Prescription::with('diagnosis','regimen','author','prescriptionItems','reasons','patient')->findOrFail($id);
-        $prescription->prescriptionItems->load('doseUnit','mitteUnit','lucode');
-        if(!$prescription->isAuthor(Auth::user()))
-        {
-            return redirect()->back()->with("warning-message","Unauthorized action, it is not your prescription");
-        }
-        if($prescription->is_void)
-        {
-            return redirect()->back()->with("warning-message","Prescription void");
-        }
-        //set to final status
-        if(!$prescription->is_final)
-        {
-            $prescription->is_final = true;
-            $prescription->final_date = date("F d, Y, g:i a");
-            $prescription->save();
-        }
-
-
-        $rx = new Collection();
-        $supportiveRx = new Collection();
-        foreach($prescription->prescriptionItems as $item)
-        {
-            if($item->ppo_section_id == 1)
-                $rx->push($item);
-            elseif($item->ppo_section_id == 2)
-                $supportiveRx->push($item);
-        }
-        $pdf = PDF::loadView('prescriptions.show', compact('prescription','rx','supportiveRx'));
-        $pdf->setOption('header-left', "eppo prescription");
-        $pdf->setOption('header-line', true);
-        $pdf->setOption('header-font-size', 24);
-        $pdf->setOption('footer-center', "Genarated by eppo");
-        $pdf->setOption('footer-line', true);
-        $pdf->setOption('margin-top', '24mm');
-        $pdf->setOption('margin-bottom', '24mm');
-        $pdf->setOption('print-media-type', true);
-        return $pdf->download('eppo_prescription_'.$prescription->id.'.pdf');
-    }
-
-    /**
-     * Finalize a prescription, lock it to prevent editing.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function void(Request $request, $id)
     {
         $prescription = Prescription::findOrFail($id);
@@ -163,7 +115,7 @@ class PrescriptionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $prescription = Prescription::with('diagnosis','regimen','author','prescriptionItems','reasons','patient')->findOrFail($id);
         if(!$prescription->isAuthor(Auth::user()))
@@ -180,9 +132,55 @@ class PrescriptionsController extends Controller
             elseif($item->ppo_section_id == 2)
                 $supportiveRx->push($item);
         }
+
+        if($request->isMethod('post'))
+        {
+            //set to final status
+            if(!$prescription->is_final)
+            {
+                $prescription->is_final = true;
+                $prescription->final_date = date("F d, Y, g:i a");
+                $prescription->save();
+            }
+        }
+
         return view('prescriptions.show', compact('prescription','rx','supportiveRx'));
     }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function generatePdf(Request $request, $id){
 
+        $prescription = Prescription::with('diagnosis','regimen','author','prescriptionItems','reasons','patient')->findOrFail($id);
+        if(!$prescription->isAuthor(Auth::user()))
+        {
+            return redirect()->back()->with("warning-message","Unauthorized action, it is not your prescription");
+        }
+        $prescription->prescriptionItems->load('doseUnit','mitteUnit','lucode');
+        $rx = new Collection();
+        $supportiveRx = new Collection();
+        foreach($prescription->prescriptionItems as $item)
+        {
+            if($item->ppo_section_id == 1)
+                $rx->push($item);
+            elseif($item->ppo_section_id == 2)
+                $supportiveRx->push($item);
+        }
+
+        $pdf = PDF::loadView('prescriptions.show', compact('prescription','rx','supportiveRx'));
+        $pdf->setOption('header-left', "eppo prescription");
+        $pdf->setOption('header-line', true);
+        $pdf->setOption('header-font-size', 24);
+        $pdf->setOption('footer-center', "Genarated by eppo");
+        $pdf->setOption('footer-line', true);
+        $pdf->setOption('margin-top', '24mm');
+        $pdf->setOption('margin-bottom', '24mm');
+        $pdf->setOption('print-media-type', true);
+        return $pdf->download('eppo_prescription_'.$prescription->id.'.pdf');
+    }
     /**
      * Show the form for editing the specified resource.
      *

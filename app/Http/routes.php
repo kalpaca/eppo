@@ -39,10 +39,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('patients/index', array('uses' => 'PatientsController@index', 'as' => 'patients.index'));
     Route::post('patients/index', array('uses' => 'PatientsController@index', 'as' => 'patients.index'));
     Route::resource('patients', 'PatientsController');
+
     Route::get('prescriptions/create/{ppoid}/{diagnosisid}/{patientid}', array('uses' => 'PrescriptionsController@create', 'as' => 'prescriptions.create'));
-    Route::post('prescriptions/finalize/{id}', array('uses' => 'PrescriptionsController@finalize', 'as' => 'prescriptions.finalize'));
+
+    Route::get('prescriptions/{id}', array('uses' => 'PrescriptionsController@show', 'as' => 'prescriptions.show'));
+    Route::post('prescriptions/{id}', array('uses' => 'PrescriptionsController@show', 'as' => 'prescriptions.show'));
+    Route::post('prescriptions/generatePdf/{id}', array('uses' => 'PrescriptionsController@generatePdf', 'as' => 'prescriptions.generatePdf'));
     Route::post('prescriptions/void/{id}', array('uses' => 'PrescriptionsController@void', 'as' => 'prescriptions.void'));
-    Route::resource('prescriptions', 'PrescriptionsController', array('except' => array('create')));
+    Route::resource('prescriptions', 'PrescriptionsController', array('except' => array('create','show')));
 
     Route::get('auth/logout', array('uses' => 'Auth\AuthController@getLogout', 'as' => 'auth.logout'));
 

@@ -161,7 +161,7 @@
     @elseif(!$prescription->is_final){{--if NOT finalized--}}
 
     <div class="final-btn col-md-6">
-        {!! Form::open(array('class' => 'form-inline', 'method' => 'post', 'route' => array('prescriptions.finalize', $prescription->id))) !!}
+        {!! Form::open(array('class' => 'form-inline', 'method' => 'post', 'route' => array('prescriptions.show', $prescription->id))) !!}
         <button class="btn btn-success">Finalize</button>
         {!! Form::close() !!}
     </div>
@@ -170,7 +170,7 @@
     @elseif($prescription->is_final)
 
     <div class="col-md-6 inline">
-        {!! Form::open(array('class'=>'inline', 'method' => 'post', 'route' => array('prescriptions.finalize', $prescription->id))) !!}
+        {!! Form::open(array('class'=>'inline', 'method' => 'post', 'route' => array('prescriptions.generatePdf', $prescription->id))) !!}
         <button class="btn btn-primary">Print</button>
         {!! Form::close() !!}
     </div>
