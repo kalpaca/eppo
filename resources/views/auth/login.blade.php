@@ -6,12 +6,12 @@
     {!! csrf_field() !!}
 
     <div class="form-group">
-        Email
+        Email (demo admin: test2@gmail.com)
         <input type="email" name="email" value="{{ old('email') }}" class="form-control">
     </div>
 
     <div class="form-group">
-        Password
+        Password (demo password: testtest)
         <input type="password" name="password" id="password" class="form-control">
     </div>
 
