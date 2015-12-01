@@ -12,6 +12,20 @@ https://www.cancercare.on.ca/cms/one.aspx?portalId=1377&pageId=322076
 ### Live demo of current development stage
 
 http://eppo.herokuapp.com/
+http://eppo.elasticbeanstalk.com/
+
+Demo User name:
+For ordinary user as a physician, you can just create your own account. or use this one
+
+username: test2@gmail.com
+
+password: testtest
+
+Admin demo account:
+
+username: test@gmail.com
+
+password: testtest
 
 ### License
 
