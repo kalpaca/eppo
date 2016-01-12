@@ -13,7 +13,7 @@ https://www.cancercare.on.ca/cms/one.aspx?portalId=1377&pageId=322076
 
 http://eppo.herokuapp.com/
 
-http://eppo.elasticbeanstalk.com/
+
 
 Demo User name:
 For ordinary user as a physician, you can just create your own account. or use this one
